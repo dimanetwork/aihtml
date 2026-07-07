@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گهر کالا | فروشگاه اینترنتی حرفه‌ای</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'sans': ['Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        'primary': '#ef4056',
+                        'primary-dark': '#d63649',
+                        'secondary': '#00bfd8',
+                        'dark': '#0c5460',
+                        'gold': '#f9a825',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                        'fade-in-down': 'fadeInDown 0.4s ease-out forwards',
+                        'slide-in-right': 'slideInRight 0.3s ease-out forwards',
+                        'bounce-in': 'bounceIn 0.5s ease-out forwards',
+                        'float': 'float 3s ease-in-out infinite',
+                        'shine': 'shine 2s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * { font-family: 'Vazirmatn', sans-serif; }
+        body { background-color: #f5f5f7; }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #00bfd8, #ef4056); border-radius: 4px; }
+        
+        /* Owl RTL */
+        .owl-carousel { direction: ltr; }
+        .owl-carousel .owl-item { direction: rtl; }
+        .owl-nav button { 
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 44px; height: 44px; background: white !important;
+            border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            color: #333 !important; font-size: 18px !important;
+            transition: all 0.3s;
+        }
+        .owl-nav button:hover { background: #ef4056 !important; color: white !important; transform: translateY(-50%) scale(1.1); }
+        .owl-nav .owl-prev { right: -20px; }
+        .owl-nav .owl-next { left: -20px; }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes shine {
+            from { background-position: -200% center; }
+            to { background-position: 200% center; }
+        }
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 64, 86, 0.7); }
+            50% { box-shadow: 0 0 0 15px rgba(239, 64, 86, 0); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        .pulse-animation { animation: pulse-red 2s infinite; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        
+        /* Scroll Animation */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* Product Card */
+        .product-card { transition: all 0.3s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .product-card:hover .product-actions { opacity: 1; transform: translateY(0); }
+        .product-actions { opacity: 0; transform: translateY(10px); transition: all 0.3s; }
+        .product-card:hover img { transform: scale(1.05); }
+        .product-card img { transition: transform 0.4s; }
+        
+        /* Mega Menu */
+        .mega-menu { 
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        .has-mega:hover .mega-menu,
+        .has-mega.active .mega-menu { 
+            opacity: 1; visibility: visible; transform: translateY(0);
+        }
+        .mega-category:hover { background: #fef2f2; color: #ef4056; }
+        .mega-category:hover i { transform: translateX(-5px); }
+        .mega-category i { transition: transform 0.3s; }
+        
+        /* Dropdown */
+        .dropdown-menu {
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1; visibility: visible; transform: translateY(0);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
+        .mobile-menu.active { transform: translateX(0); }
+        
+        /* Bottom Nav */
+        .bottom-nav-item.active { color: #ef4056; }
+        .bottom-nav-item.active .bottom-nav-icon {
+            background: linear-gradient(135deg, #ef4056, #d63649);
+            color: white;
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(239, 64, 86, 0.4);
+        }
+        .bottom-nav-icon { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        /* Badge */
+        .badge-count {
+            position: absolute; top: -5px; right: -5px;
+            background: linear-gradient(135deg, #ef4056, #d63649);
+            color: white; border-radius: 50%;
+            min-width: 20px; height: 20px; padding: 0 5px;
+            font-size: 11px; display: flex; align-items: center; justify-content: center;
+            font-weight: bold;
+            animation: bounceIn 0.5s;
+        }
+        
+        /* Gradient */
+        .gradient-primary { background: linear-gradient(135deg, #ef4056 0%, #d63649 100%); }
+        .gradient-secondary { background: linear-gradient(135deg, #00bfd8 0%, #0c5460 100%); }
+        .gradient-gold { background: linear-gradient(135deg, #f9a825 0%, #f57c00 100%); }
+        
+        /* Shine Effect */
+        .shine-effect {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background-size: 200% 100%;
+            animation: shine 2s linear infinite;
+        }
+        
+        /* Countdown */
+        .countdown-box {
+            background: white; color: #ef4056;
+            border-radius: 8px; padding: 6px 10px;
+            font-weight: bold; min-width: 40px; text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Search Suggestions */
+        .search-suggestions {
+            opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.3s;
+        }
+        .search-box:focus-within .search-suggestions {
+            opacity: 1; visibility: visible; transform: translateY(0);
+        }
+        
+        /* Accordion */
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .accordion-content.open { max-height: 500px; }
+        .accordion-icon { transition: transform 0.3s; }
+        .accordion-header.open .accordion-icon { transform: rotate(180deg); }
+        
+        /* Toast */
+        .toast {
+            animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-in 2.7s forwards;
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateX(100%); }
+        }
+        
+        /* Category Item Hover */
+        .category-item:hover { transform: translateY(-8px); }
+        .category-item { transition: all 0.3s; }
+        .category-item:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .category-icon { transition: all 0.4s; }
+        
+        /* Scroll to Top */
+        .scroll-top {
+            opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: all 0.3s;
+        }
+        .scroll-top.visible {
+            opacity: 1; visibility: visible; transform: translateY(0);
+        }
+        
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Hide scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Mobile bottom padding */
+        @media (max-width: 768px) {
+            body { padding-bottom: 70px; }
+        }
+        
+        /* Modal animation */
+        .modal-content { animation: fadeInUp 0.3s ease-out; }
+        
+        /* Tab */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeInUp 0.4s; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+<!-- ============ TOP BAR ============ -->
+<div class="bg-gray-900 text-gray-300 text-xs py-2 hidden md:block">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <span><i class="fas fa-phone-alt ml-1 text-secondary"></i> ۰۲۱-۹۱۰۰۰۰۰۰</span>
+            <span><i class="fas fa-envelope ml-1 text-secondary"></i> info@gaharkala.ir</span>
+            <span class="flex items-center gap-1"><i class="fas fa-clock text-gold"></i> پشتیبانی ۲۴ ساعته</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <!-- Dropdown: پیگیری سفارش -->
+            <div class="dropdown relative">
+                <button class="hover:text-white flex items-center gap-1">
+                    <i class="fas fa-truck"></i> پیگیری سفارش <i class="fas fa-chevron-down text-[10px]"></i>
+                </button>
+                <div class="dropdown-menu absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-2xl p-4 z-50">
+                    <h4 class="font-bold text-gray-800 mb-3 text-sm">پیگیری وضعیت سفارش</h4>
+                    <input type="text" placeholder="کد پیگیری را وارد کنید" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm mb-2 focus:border-primary focus:outline-none">
+                    <input type="text" placeholder="شماره موبایل" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm mb-3 focus:border-primary focus:outline-none">
+                    <button class="w-full gradient-primary text-white py-2 rounded-lg text-sm font-bold">پیگیری</button>
+                </div>
+            </div>
+            
+            <!-- Dropdown: فروشنده شوید -->
+            <div class="dropdown relative">
+                <button class="hover:text-white flex items-center gap-1">
+                    <i class="fas fa-store"></i> فروشنده شوید <i class="fas fa-chevron-down text-[10px]"></i>
+                </button>
+                <div class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl p-4 z-50">
+                    <h4 class="font-bold text-gray-800 mb-3 text-sm">فرصت‌های فروش در گهر کالا</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="flex items-center gap-2 hover:text-primary"><i class="fas fa-angle-left text-primary"></i> ثبت نام فروشندگان</a></li>
+                        <li><a href="#" class="flex items-center gap-2 hover:text-primary"><i class="fas fa-angle-left text-primary"></i> پنل فروشندگان</a></li>
+                        <li><a href="#" class="flex items-center gap-2 hover:text-primary"><i class="fas fa-angle-left text-primary"></i> قوانین و مقررات</a></li>
+                        <li><a href="#" class="flex items-center gap-2 hover:text-primary"><i class="fas fa-angle-left text-primary"></i> آموزش فروش</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <a href="#" class="hover:text-white"><i class="fas fa-question-circle ml-1"></i> سوالات متداول</a>
+            
+            <!-- Language Selector -->
+            <div class="dropdown relative">
+                <button class="hover:text-white flex items-center gap-1">
+                    <i class="fas fa-globe"></i> فارسی <i class="fas fa-chevron-down text-[10px]"></i>
+                </button>
+                <div class="dropdown-menu absolute top-full left-0 mt-2 w-40 bg-white rounded-xl shadow-2xl p-2 z-50">
+                    <a href="#" class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded text-gray-800"><span>🇮🇷</span> فارسی</a>
+                    <a href="#" class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded text-gray-800"><span>🇬🇧</span> English</a>
+                    <a href="#" class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded text-gray-800"><span>🇸🇦</span> العربية</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center gap-4 py-4">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 flex-shrink-0">
+                <div class="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center animate-float">
+                    <i class="fas fa-gem text-white text-2xl"></i>
+                </div>
+                <div class="hidden sm:block">
+                    <h1 class="text-xl font-bold text-gray-800">گهر کالا</h1>
+                    <p class="text-xs text-gray-500">فروشگاه اینترنتی</p>
+                </div>
+            </a>
+            
+            <!-- Search -->
+            <div class="flex-1 hidden md:block search-box relative">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="جستجو در گهر کالا ..." 
+                        class="w-full bg-gray-100 rounded-xl py-3 pr-12 pl-4 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition">
+                    <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <!-- Search Suggestions -->
+                <div class="search-suggestions absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl p-4 z-50">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs text-gray-500">جستجوهای پرطرفدار</span>
+                        <button class="text-xs text-primary">مشاهده همه</button>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#" class="bg-gray-100 hover:bg-primary hover:text-white px-3 py-1 rounded-full text-xs transition">گوشی سامسونگ</a>
+                        <a href="#" class="bg-gray-100 hover:bg-primary hover:text-white px-3 py-1 rounded-full text-xs transition">لپ تاپ ایسوس</a>
+                        <a href="#" class="bg-gray-100 hover:bg-primary hover:text-white px-3 py-1 rounded-full text-xs transition">ایرپاد پرو</a>
+                        <a href="#" class="bg-gray-100 hover:bg-primary hover:text-white px-3 py-1 rounded-full text-xs transition">ساعت هوشمند</a>
+                        <a href="#" class="bg-gray-100 hover:bg-primary hover:text-white px-3 py-1 rounded-full text-xs transition">کنسول PS5</a>
+                    </div>
+                    <div class="mt-4 pt-4 border-t">
+                        <p class="text-xs text-gray-500 mb-2">جستجوهای اخیر</p>
+                        <div class="space-y-2">
+                            <a href="#" class="flex items-center gap-2 text-sm hover:text-primary"><i class="fas fa-history text-gray-400"></i> گوشی آیفون ۱۵</a>
+                            <a href="#" class="flex items-center gap-2 text-sm hover:text-primary"><i class="fas fa-history text-gray-400"></i> هدفون سونی</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="flex items-center gap-2 md:gap-4">
+                <a href="#" class="hidden md:flex items-center gap-2 border-r pr-4 hover:opacity-80">
+                    <i class="fas fa-user-circle text-2xl text-gray-600"></i>
+                    <div class="text-sm">
+                        <p class="text-xs text-gray-500">سلام کاربر</p>
+                        <p class="font-bold">ورود | ثبت نام</p>
+                    </div>
+                </a>
+                
+                <button onclick="openModal('compareModal')" class="relative p-2 hover:bg-gray-100 rounded-lg hidden md:block transition" title="مقایسه">
+                    <i class="fas fa-exchange-alt text-xl text-gray-600"></i>
+                    <span class="badge-count" id="compareCount">0</span>
+                </button>
+                
+                <button onclick="openModal('wishlistModal')" class="relative p-2 hover:bg-gray-100 rounded-lg transition" title="علاقه‌مندی">
+                    <i class="fas fa-heart text-xl text-gray-600"></i>
+                    <span class="badge-count" id="wishlistCount">3</span>
+                </button>
+                
+                <button onclick="openModal('cartModal')" class="relative p-2 hover:bg-gray-100 rounded-lg transition" title="سبد خرید">
+                    <i class="fas fa-shopping-bag text-xl text-gray-600"></i>
+                    <span class="badge-count" id="cartCount">2</span>
+                </button>
+                
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 hover:bg-gray-100 rounded-lg">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Desktop Navigation with Mega Menu -->
+        <nav class="hidden md:flex items-center gap-1 py-3 border-t text-sm relative">
+            <!-- Category Button with Mega Menu -->
+            <div class="has-mega relative">
+                <button class="flex items-center gap-2 font-bold hover:text-primary px-4 py-2 rounded-lg hover:bg-gray-50 transition">
+                    <i class="fas fa-bars"></i>
+                    <span>دسته‌بندی کالاها</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                
+                <!-- Mega Menu -->
+                <div class="mega-menu absolute top-full right-0 mt-2 w-[900px] bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden">
+                    <div class="grid grid-cols-4">
+                        <!-- Categories List -->
+                        <div class="bg-gray-50 p-3 space-y-1 border-l">
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-mobile-screen text-red-500"></i> کالای دیجیتال</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-shirt text-purple-500"></i> مد و پوشاک</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-spa text-pink-500"></i> آرایشی بهداشتی</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-blender text-yellow-600"></i> خانه و آشپزخانه</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-shopping-basket text-green-500"></i> سوپرمارکت</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-futbol text-orange-500"></i> ورزش و سفر</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-book text-teal-500"></i> کتاب و لوازم تحریر</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-baby text-blue-500"></i> کودک و نوزاد</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-tools text-gray-600"></i> ابزارآلات</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                            <a href="#" class="mega-category flex items-center justify-between p-3 rounded-lg text-sm">
+                                <span class="flex items-center gap-2"><i class="fas fa-car text-indigo-500"></i> خودرو</span>
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Subcategories -->
+                        <div class="col-span-3 p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="font-bold text-lg">کالای دیجیتال</h3>
+                                    <p class="text-xs text-gray-500 mt-1">بهترین محصولات دیجیتال با گارانتی اصل</p>
+                                </div>
+                                <a href="#" class="text-xs text-primary hover:underline">مشاهده همه <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                            
+                            <div class="grid grid-cols-3 gap-6">
+                                <div>
+                                    <h4 class="font-bold text-sm mb-3 flex items-center gap-2">
+                                        <i class="fas fa-mobile-screen text-red-500"></i> موبایل و تبلت
+                                    </h4>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">گوشی موبایل</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">تبلت</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">گوشی دست دوم</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">لوازم جانبی موبایل</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">قاب و کاور</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">شارژر و کابل</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm mb-3 flex items-center gap-2">
+                                        <i class="fas fa-laptop text-blue-500"></i> لپ‌تاپ و کامپیوتر
+                                    </h4>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">لپ‌تاپ</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">کامپیوتر رومیزی</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">مانیتور</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">قطعات کامپیوتر</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">تجهیزات گیمینگ</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">پرینتر و اسکنر</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm mb-3 flex items-center gap-2">
+                                        <i class="fas fa-tv text-green-500"></i> صوتی و تصویری
+                                    </h4>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">تلویزیون</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">ساندبار و سیستم صوتی</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">هدفون و هندزفری</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">اسپیکر</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">دوربین عکاسی</a></li>
+                                        <li><a href="#" class="hover:text-primary hover:pr-1 transition-all">دوربین فیلمبرداری</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Featured Products in Mega Menu -->
+                            <div class="mt-6 pt-6 border-t">
+                                <h4 class="font-bold text-sm mb-3">پیشنهاد ویژه</h4>
+                                <div class="grid grid-cols-4 gap-3">
+                                    <a href="#" class="group">
+                                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=150" class="w-full h-24 object-contain rounded-lg bg-gray-50 group-hover:scale-105 transition">
+                                        <p class="text-xs mt-1 line-clamp-1">گوشی سامسونگ</p>
+                                        <p class="text-xs text-primary font-bold">۴۵,۰۰۰,۰۰۰ ت</p>
+                                    </a>
+                                    <a href="#" class="group">
+                                        <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=150" class="w-full h-24 object-contain rounded-lg bg-gray-50 group-hover:scale-105 transition">
+                                        <p class="text-xs mt-1 line-clamp-1">ایرپاد پرو ۲</p>
+                                        <p class="text-xs text-primary font-bold">۷,۲۰۰,۰۰۰ ت</p>
+                                    </a>
+                                    <a href="#" class="group">
+                                        <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=150" class="w-full h-24 object-contain rounded-lg bg-gray-50 group-hover:scale-105 transition">
+                                        <p class="text-xs mt-1 line-clamp-1">لپ تاپ گیمینگ</p>
+                                        <p class="text-xs text-primary font-bold">۵۸,۰۰۰,۰۰۰ ت</p>
+                                    </a>
+                                    <a href="#" class="group">
+                                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6b196f?w=150" class="w-full h-24 object-contain rounded-lg bg-gray-50 group-hover:scale-105 transition">
+                                        <p class="text-xs mt-1 line-clamp-1">اپل واچ سری ۹</p>
+                                        <p class="text-xs text-primary font-bold">۱۵,۰۰۰,۰۰۰ ت</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="h-4 w-px bg-gray-300"></div>
+            
+            <a href="#" class="flex items-center gap-1 hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition">
+                <i class="fas fa-fire text-primary"></i>
+                <span class="font-bold">پیشنهاد شگفت‌انگیز</span>
+            </a>
+            <a href="#" class="hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition">سوپرمارکت</a>
+            <a href="#" class="hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition">کارت هدیه</a>
+            <a href="#" class="hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition">پرفروش‌ترین‌ها</a>
+            <a href="#" class="hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition relative">
+                تخفیف‌ها
+                <span class="absolute -top-1 -left-1 bg-primary text-white text-[10px] px-1.5 py-0.5 rounded-full">داغ</span>
+            </a>
+            <a href="#" class="hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition">بلاگ</a>
+            <a href="#" class="hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition">تماس با ما</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ============ MOBILE MENU ============ -->
+<div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 max-w-[85%] h-full bg-white z-50 shadow-2xl overflow-y-auto">
+    <div class="gradient-primary p-6 text-white">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-lg">منو</h3>
+            <button onclick="toggleMobileMenu()" class="text-white w-8 h-8 rounded-full bg-white/20 hover:bg-white/30">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex items-center gap-3 bg-white/20 rounded-xl p-3">
+            <i class="fas fa-user-circle text-3xl"></i>
+            <div>
+                <p class="text-sm">کاربر مهمان</p>
+                <a href="#" class="text-xs underline">ورود | ثبت نام</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="p-4">
+        <div class="relative">
+            <input type="text" placeholder="جستجو ..." class="w-full bg-gray-100 rounded-xl py-3 pr-10 pl-4 focus:outline-none">
+            <i class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        </div>
+    </div>
+    
+    <!-- Accordion Menu -->
+    <div class="divide-y">
+        <a href="#" class="flex items-center gap-3 p-4 hover:bg-gray-50">
+            <i class="fas fa-fire text-primary w-6"></i> پیشنهاد شگفت‌انگیز
+        </a>
+        
+        <!-- Accordion: Categories -->
+        <div>
+            <button onclick="toggleAccordion(this)" class="accordion-header w-full flex items-center justify-between p-4 hover:bg-gray-50">
+                <span class="flex items-center gap-3">
+                    <i class="fas fa-th-large text-secondary w-6"></i> دسته‌بندی کالاها
+                </span>
+                <i class="fas fa-chevron-down accordion-icon text-xs"></i>
+            </button>
+            <div class="accordion-content bg-gray-50">
+                <a href="#" class="flex items-center gap-3 p-3 pr-12 text-sm hover:text-primary"><i class="fas fa-mobile-screen text-red-500 w-5"></i> کالای دیجیتال</a>
+                <a href="#" class="flex items-center gap-3 p-3 pr-12 text-sm hover:text-primary"><i class="fas fa-shirt text-purple-500 w-5"></i> مد و پوشاک</a>
+                <a href="#" class="flex items-center gap-3 p-3 pr-12 text-sm hover:text-primary"><i class="fas fa-spa text-pink-500 w-5"></i> آرایشی بهداشتی</a>
+                <a href="#" class="flex items-center gap-3 p-3 pr-12 text-sm hover:text-primary"><i class="fas fa-blender text-yellow-600 w-5"></i> خانه و آشپزخانه</a>
+                <a href="#" class="flex items-center gap-3 p-3 pr-12 text-sm hover:text-primary"><i class="fas fa-shopping-basket text-green-500 w-5"></i> سوپرمارکت</a>
+                <a href="#" class="flex items-center gap-3 p-3 pr-12 text-sm hover:text-primary"><i class="fas fa-futbol text-orange-500 w-5"></i> ورزش و سفر</a>
+                <a href="#" class="flex items-center gap-3 p-3 pr-12 text-sm hover:text-primary"><i class="fas fa-book text-teal-500 w-5"></i> کتاب</a>
+                <a href="#" class="flex items-center gap-3 p-3 pr-12 text-sm hover:text-primary"><i class="fas fa-baby text-blue-500 w-5"></i> کودک و نوزاد</a>
+            </div>
+        </div>
+        
+        <a href="#" class="flex items-center gap-3 p-4 hover:bg-gray-50"><i class="fas fa-shopping-basket text-green-500 w-6"></i> سوپرمارکت</a>
+        <a href="#" class="flex items-center gap-3 p-4 hover:bg-gray-50"><i class="fas fa-gift text-gold w-6"></i> کارت هدیه</a>
+        <a href="#" class="flex items-center gap-3 p-4 hover:bg-gray-50"><i class="fas fa-fire-flame-curved text-orange-500 w-6"></i> پرفروش‌ترین‌ها</a>
+        <a href="#" class="flex items-center gap-3 p-4 hover:bg-gray-50"><i class="fas fa-percent text-pink-500 w-6"></i> تخفیف‌ها</a>
+        <a href="#" class="flex items-center gap-3 p-4 hover:bg-gray-50"><i class="fas fa-blog text-purple-500 w-6"></i> بلاگ</a>
+        <a href="#" class="flex items-center gap-3 p-4 hover:bg-gray-50"><i class="fas fa-phone text-blue-500 w-6"></i> تماس با ما</a>
+        
+        <div class="bg-gray-50 p-4 mt-4">
+            <p class="text-xs text-gray-500 mb-2">دانلود اپلیکیشن</p>
+            <div class="flex gap-2">
+                <a href="#" class="flex-1 bg-black text-white py-2 rounded-lg text-center text-xs"><i class="fab fa-google-play ml-1"></i> Google Play</a>
+                <a href="#" class="flex-1 bg-black text-white py-2 rounded-lg text-center text-xs"><i class="fab fa-apple ml-1"></i> App Store</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mobileMenuOverlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+
+<!-- ============ HERO SLIDER ============ -->
+<section class="container mx-auto px-4 mt-4 reveal">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <div class="lg:col-span-3 rounded-2xl overflow-hidden shadow-lg">
+            <div class="owl-carousel hero-slider">
+                <div class="relative h-64 md:h-96 gradient-primary flex items-center overflow-hidden">
+                    <div class="absolute inset-0 opacity-10">
+                        <i class="fas fa-gem text-[300px] absolute -left-20 -bottom-20"></i>
+                    </div>
+                    <div class="container mx-auto px-8 text-white relative z-10">
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm backdrop-blur">پیشنهاد ویژه</span>
+                        <h2 class="text-3xl md:text-5xl font-bold mt-4">جشنواره تابستانه گهر کالا</h2>
+                        <p class="mt-4 text-lg opacity-90">تا ۷۰٪ تخفیف روی هزاران کالا</p>
+                        <button class="mt-6 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition transform hover:scale-105">
+                            مشاهده محصولات <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative h-64 md:h-96 gradient-secondary flex items-center overflow-hidden">
+                    <div class="absolute inset-0 opacity-10">
+                        <i class="fas fa-mobile-screen text-[300px] absolute -left-20 -bottom-20"></i>
+                    </div>
+                    <div class="container mx-auto px-8 text-white relative z-10">
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm backdrop-blur">جدیدترین‌ها</span>
+                        <h2 class="text-3xl md:text-5xl font-bold mt-4">گوشی‌های هوشمند ۲۰۲۶</h2>
+                        <p class="mt-4 text-lg opacity-90">با بهترین قیمت و گارانتی اصل</p>
+                        <button class="mt-6 bg-white text-dark px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition transform hover:scale-105">
+                            خرید کنید <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative h-64 md:h-96 bg-gradient-to-l from-purple-600 to-pink-500 flex items-center overflow-hidden">
+                    <div class="absolute inset-0 opacity-10">
+                        <i class="fas fa-laptop text-[300px] absolute -left-20 -bottom-20"></i>
+                    </div>
+                    <div class="container mx-auto px-8 text-white relative z-10">
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm backdrop-blur">فروش ویژه</span>
+                        <h2 class="text-3xl md:text-5xl font-bold mt-4">لپ‌تاپ و کامپیوتر</h2>
+                        <p class="mt-4 text-lg opacity-90">ارسال رایگان + ۲۴ ماه گارانتی</p>
+                        <button class="mt-6 bg-white text-purple-600 px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition transform hover:scale-105">
+                            مشاهده <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hidden lg:flex flex-col gap-4">
+            <div class="flex-1 rounded-2xl overflow-hidden bg-gradient-to-br from-orange-400 to-red-500 p-5 text-white relative hover:shadow-xl transition cursor-pointer group">
+                <i class="fas fa-percent text-6xl opacity-20 absolute bottom-2 left-2 group-hover:rotate-12 transition"></i>
+                <h3 class="font-bold text-lg">تخفیف ویژه</h3>
+                <p class="text-sm mt-2">لوازم خانگی</p>
+                <button class="mt-3 text-sm bg-white/20 px-3 py-1 rounded-lg backdrop-blur hover:bg-white/30">خرید</button>
+            </div>
+            <div class="flex-1 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 p-5 text-white relative hover:shadow-xl transition cursor-pointer group">
+                <i class="fas fa-mobile-alt text-6xl opacity-20 absolute bottom-2 left-2 group-hover:rotate-12 transition"></i>
+                <h3 class="font-bold text-lg">موبایل</h3>
+                <p class="text-sm mt-2">جدیدترین مدل‌ها</p>
+                <button class="mt-3 text-sm bg-white/20 px-3 py-1 rounded-lg backdrop-blur hover:bg-white/30">مشاهده</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Feature Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+        <div class="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer">
+            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-truck-fast text-primary text-xl"></i>
+            </div>
+            <div>
+                <p class="font-bold text-sm">ارسال سریع</p>
+                <p class="text-xs text-gray-500">به سراسر کشور</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-shield-halved text-green-600 text-xl"></i>
+            </div>
+            <div>
+                <p class="font-bold text-sm">ضمانت اصالت</p>
+                <p class="text-xs text-gray-500">۷ روز بازگشت</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-credit-card text-blue-600 text-xl"></i>
+            </div>
+            <div>
+                <p class="font-bold text-sm">پرداخت امن</p>
+                <p class="text-xs text-gray-500">درگاه معتبر</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer">
+            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-headset text-purple-600 text-xl"></i>
+            </div>
+            <div>
+                <p class="font-bold text-sm">پشتیبانی ۲۴/۷</p>
+                <p class="text-xs text-gray-500">در تمام روزها</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CATEGORIES ============ -->
+<section class="container mx-auto px-4 mt-8 reveal">
+    <div class="bg-white rounded-2xl p-6 shadow-sm">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold flex items-center gap-2">
+                <i class="fas fa-th-large text-primary"></i>
+                دسته‌بندی محصولات
+            </h2>
+            <a href="#" class="text-sm text-secondary hover:underline">مشاهده همه</a>
+        </div>
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+            <a href="#" class="category-item flex flex-col items-center gap-2 group">
+                <div class="category-icon w-16 h-16 md:w-20 md:h-20 bg-red-50 rounded-2xl flex items-center justify-center shadow-sm">
+                    <i class="fas fa-mobile-screen text-2xl md:text-3xl text-red-500"></i>
+                </div>
+                <span class="text-xs md:text-sm text-center font-medium">موبایل</span>
+            </a>
+            <a href="#" class="category-item flex flex-col items-center gap-2 group">
+                <div class="category-icon w-16 h-16 md:w-20 md:h-20 bg-blue-50 rounded-2xl flex items-center justify-center shadow-sm">
+                    <i class="fas fa-laptop text-2xl md:text-3xl text-blue-500"></i>
+                </div>
+                <span class="text-xs md:text-sm text-center font-medium">لپ‌تاپ</span>
+            </a>
+            <a href="#" class="category-item flex flex-col items-center gap-2 group">
+                <div class="category-icon w-16 h-16 md:w-20 md:h-20 bg-green-50 rounded-2xl flex items-center justify-center shadow-sm">
+                    <i class="fas fa-tv text-2xl md:text-3xl text-green-500"></i>
+                </div>
+                <span class="text-xs md:text-sm text-center font-medium">تلویزیون</span>
+            </a>
+            <a href="#" class="category-item flex flex-col items-center gap-2 group">
+                <div class="category-icon w-16 h-16 md:w-20 md:h-20 bg-purple-50 rounded-2xl flex items-center justify-center shadow-sm">
+                    <i class="fas fa-shirt text-2xl md:text-3xl text-purple-500"></i>
+                </div>
+                <span class="text-xs md:text-sm text-center font-medium">پوشاک</span>
+            </a>
+            <a href="#" class="category-item flex flex-col items-center gap-2 group">
+                <div class="category-icon w-16 h-16 md:w-20 md:h-20 bg-yellow-50 rounded-2xl flex items-center justify-center shadow-sm">
+                    <i class="fas fa-blender text-2xl md:text-3xl text-yellow-600"></i>
+                </div>
+                <span class="text-xs md:text-sm text-center font-medium">خانگی</span>
+            </a>
+            <a href="#" class="category-item flex flex-col items-center gap-2 group">
+                <div class="category-icon w-16 h-16 md:w-20 md:h-20 bg-pink-50 rounded-2xl flex items-center justify-center shadow-sm">
+                    <i class="fas fa-spa text-2xl md:text-3xl text-pink-500"></i>
+                </div>
+                <span class="text-xs md:text-sm text-center font-medium">زیبایی</span>
+            </a>
+            <a href="#" class="category-item flex flex-col items-center gap-2 group">
+                <div class="category-icon w-16 h-16 md:w-20 md:h-20 bg-orange-50 rounded-2xl flex items-center justify-center shadow-sm">
+                    <i class="fas fa-futbol text-2xl md:text-3xl text-orange-500"></i>
+                </div>
+                <span class="text-xs md:text-sm text-center font-medium">ورزشی</span>
+            </a>
+            <a href="#" class="category-item flex flex-col items-center gap-2 group">
+                <div class="category-icon w-16 h-16 md:w-20 md:h-20 bg-teal-50 rounded-2xl flex items-center justify-center shadow-sm">
+                    <i class="fas fa-book text-2xl md:text-3xl text-teal-500"></i>
+                </div>
+                <span class="text-xs md:text-sm text-center font-medium">کتاب</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ AMAZING OFFERS ============ -->
+<section class="container mx-auto px-4 mt-8 reveal">
+    <div class="bg-primary rounded-2xl p-6 shadow-lg relative overflow-hidden">
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-white/10 rounded-full"></div>
+        <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-white/5 rounded-full"></div>
+        
+        <div class="flex flex-col md:flex-row gap-6 relative">
+            <div class="md:w-64 flex flex-col items-center md:items-start justify-center text-white">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-bolt text-gold text-3xl pulse-animation"></i>
+                    <h2 class="text-2xl font-bold">شگفت‌انگیز</h2>
+                </div>
+                <p class="text-sm opacity-90 text-center md:text-right mb-4">تخفیف‌های ویژه امروز</p>
+                
+                <div class="flex gap-2 text-center">
+                    <div>
+                        <div class="countdown-box" id="hours">۱۲</div>
+                        <p class="text-xs mt-1">ساعت</p>
+                    </div>
+                    <div class="text-2xl font-bold">:</div>
+                    <div>
+                        <div class="countdown-box" id="minutes">۴۵</div>
+                        <p class="text-xs mt-1">دقیقه</p>
+                    </div>
+                    <div class="text-2xl font-bold">:</div>
+                    <div>
+                        <div class="countdown-box" id="seconds">۳۰</div>
+                        <p class="text-xs mt-1">ثانیه</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="mt-4 text-sm flex items-center gap-1 hover:underline">
+                    مشاهده همه <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+            
+            <div class="flex-1">
+                <div class="owl-carousel amazing-slider">
+                    <!-- Amazing Products -->
+                    <div class="bg-white rounded-xl p-4 mx-2">
+                        <div class="relative">
+                            <span class="absolute top-0 right-0 gradient-primary text-white text-xs px-2 py-1 rounded-lg">۳۰٪</span>
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300" class="w-full h-40 object-contain" alt="">
+                            <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                                <i class="far fa-heart text-gray-400"></i>
+                            </button>
+                        </div>
+                        <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">گوشی سامسونگ Galaxy A54</h3>
+                        <div class="flex items-center gap-1 mt-2">
+                            <i class="fas fa-star text-gold text-xs"></i>
+                            <span class="text-xs text-gray-500">۴.۵ (۱۲۰)</span>
+                        </div>
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs text-gray-400 line-through">۱۸,۵۰۰,۰۰۰</div>
+                                <div class="font-bold text-primary">۱۲,۹۵۰,۰۰۰ <span class="text-xs">ت</span></div>
+                            </div>
+                            <div class="gradient-primary text-white text-xs font-bold px-2 py-1 rounded">۳۰٪</div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="gradient-primary h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">فقط ۳ عدد باقی مانده</p>
+                        </div>
+                        <button onclick="addToCart('گوشی سامسونگ A54', 12950000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                            <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-4 mx-2">
+                        <div class="relative">
+                            <span class="absolute top-0 right-0 gradient-primary text-white text-xs px-2 py-1 rounded-lg">۲۵٪</span>
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" class="w-full h-40 object-contain" alt="">
+                            <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                                <i class="far fa-heart text-gray-400"></i>
+                            </button>
+                        </div>
+                        <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">هدفون سونی WH-1000XM5</h3>
+                        <div class="flex items-center gap-1 mt-2">
+                            <i class="fas fa-star text-gold text-xs"></i>
+                            <span class="text-xs text-gray-500">۴.۸ (۳۴۰)</span>
+                        </div>
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs text-gray-400 line-through">۱۲,۰۰۰,۰۰۰</div>
+                                <div class="font-bold text-primary">۹,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                            </div>
+                            <div class="gradient-primary text-white text-xs font-bold px-2 py-1 rounded">۲۵٪</div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="gradient-primary h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">فقط ۸ عدد باقی مانده</p>
+                        </div>
+                        <button onclick="addToCart('هدفون سونی', 9000000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                            <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-4 mx-2">
+                        <div class="relative">
+                            <span class="absolute top-0 right-0 gradient-primary text-white text-xs px-2 py-1 rounded-lg">۴۰٪</span>
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6b196f?w=300" class="w-full h-40 object-contain" alt="">
+                            <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                                <i class="far fa-heart text-gray-400"></i>
+                            </button>
+                        </div>
+                        <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">اپل واچ سری ۹</h3>
+                        <div class="flex items-center gap-1 mt-2">
+                            <i class="fas fa-star text-gold text-xs"></i>
+                            <span class="text-xs text-gray-500">۴.۷ (۵۶۰)</span>
+                        </div>
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs text-gray-400 line-through">۲۵,۰۰۰,۰۰۰</div>
+                                <div class="font-bold text-primary">۱۵,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                            </div>
+                            <div class="gradient-primary text-white text-xs font-bold px-2 py-1 rounded">۴۰٪</div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="gradient-primary h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">فقط ۲ عدد باقی مانده</p>
+                        </div>
+                        <button onclick="addToCart('اپل واچ', 15000000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                            <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-4 mx-2">
+                        <div class="relative">
+                            <span class="absolute top-0 right-0 gradient-primary text-white text-xs px-2 py-1 rounded-lg">۲۰٪</span>
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" class="w-full h-40 object-contain" alt="">
+                            <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                                <i class="far fa-heart text-gray-400"></i>
+                            </button>
+                        </div>
+                        <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">کفش نایک Air Max</h3>
+                        <div class="flex items-center gap-1 mt-2">
+                            <i class="fas fa-star text-gold text-xs"></i>
+                            <span class="text-xs text-gray-500">۴.۶ (۲۱۰)</span>
+                        </div>
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs text-gray-400 line-through">۵,۰۰۰,۰۰۰</div>
+                                <div class="font-bold text-primary">۴,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                            </div>
+                            <div class="gradient-primary text-white text-xs font-bold px-2 py-1 rounded">۲۰٪</div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="gradient-primary h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">فقط ۵ عدد باقی مانده</p>
+                        </div>
+                        <button onclick="addToCart('کفش نایک', 4000000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                            <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-4 mx-2">
+                        <div class="relative">
+                            <span class="absolute top-0 right-0 gradient-primary text-white text-xs px-2 py-1 rounded-lg">۳۵٪</span>
+                            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=300" class="w-full h-40 object-contain" alt="">
+                            <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                                <i class="far fa-heart text-gray-400"></i>
+                            </button>
+                        </div>
+                        <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">دوربین کانن EOS R6</h3>
+                        <div class="flex items-center gap-1 mt-2">
+                            <i class="fas fa-star text-gold text-xs"></i>
+                            <span class="text-xs text-gray-500">۴.۹ (۸۹)</span>
+                        </div>
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs text-gray-400 line-through">۸۰,۰۰۰,۰۰۰</div>
+                                <div class="font-bold text-primary">۵۲,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                            </div>
+                            <div class="gradient-primary text-white text-xs font-bold px-2 py-1 rounded">۳۵٪</div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="gradient-primary h-2 rounded-full" style="width: 30%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">فقط ۱۰ عدد باقی مانده</p>
+                        </div>
+                        <button onclick="addToCart('دوربین کانن', 52000000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                            <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ BEST SELLERS ============ -->
+<section class="container mx-auto px-4 mt-8 reveal">
+    <div class="bg-white rounded-2xl p-6 shadow-sm">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold flex items-center gap-2">
+                <i class="fas fa-fire text-orange-500"></i>
+                پرفروش‌ترین محصولات
+            </h2>
+            <a href="#" class="text-sm text-secondary hover:underline">مشاهده همه <i class="fas fa-arrow-left"></i></a>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <!-- Product Card Template -->
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3 relative">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300" class="w-full h-40 object-contain" alt="">
+                    <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                        <i class="far fa-heart text-gray-400"></i>
+                    </button>
+                    <div class="product-actions absolute bottom-2 left-2 right-2 flex gap-1">
+                        <button onclick="addToCompare('ایرپاد پرو ۲')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-blue-50">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                        <button onclick="openModal('quickViewModal')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-purple-50">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">ایرپاد پرو ۲ اپل</h3>
+                <div class="flex items-center gap-1 mt-2">
+                    <i class="fas fa-star text-gold text-xs"></i>
+                    <span class="text-xs text-gray-500">۴.۸ (۲۳۴)</span>
+                </div>
+                <div class="mt-3 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-gray-400 line-through">۸,۵۰۰,۰۰۰</div>
+                        <div class="font-bold text-gray-800">۷,۲۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    </div>
+                    <div class="bg-red-100 text-primary text-xs font-bold px-2 py-1 rounded">۱۵٪</div>
+                </div>
+                <button onclick="addToCart('ایرپاد پرو ۲', 7200000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                </button>
+            </div>
+            
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3 relative">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" class="w-full h-40 object-contain" alt="">
+                    <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                        <i class="far fa-heart text-gray-400"></i>
+                    </button>
+                    <div class="product-actions absolute bottom-2 left-2 right-2 flex gap-1">
+                        <button onclick="addToCompare('کفش آدیداس')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-blue-50">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                        <button onclick="openModal('quickViewModal')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-purple-50">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">کفش آدیداس Ultraboost</h3>
+                <div class="flex items-center gap-1 mt-2">
+                    <i class="fas fa-star text-gold text-xs"></i>
+                    <span class="text-xs text-gray-500">۴.۶ (۱۸۹)</span>
+                </div>
+                <div class="mt-3">
+                    <div class="font-bold text-gray-800">۴,۵۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                </div>
+                <button onclick="addToCart('کفش آدیداس', 4500000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                </button>
+            </div>
+            
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3 relative">
+                <div class="relative">
+                    <span class="absolute top-2 right-2 gradient-primary text-white text-xs px-2 py-1 rounded-lg z-10">ویژه</span>
+                    <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=300" class="w-full h-40 object-contain" alt="">
+                    <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                        <i class="far fa-heart text-gray-400"></i>
+                    </button>
+                    <div class="product-actions absolute bottom-2 left-2 right-2 flex gap-1">
+                        <button onclick="addToCompare('لپ تاپ ایسوس')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-blue-50">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                        <button onclick="openModal('quickViewModal')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-purple-50">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">لپ تاپ ایسوس ROG Strix</h3>
+                <div class="flex items-center gap-1 mt-2">
+                    <i class="fas fa-star text-gold text-xs"></i>
+                    <span class="text-xs text-gray-500">۴.۹ (۴۵۶)</span>
+                </div>
+                <div class="mt-3 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-gray-400 line-through">۶۵,۰۰۰,۰۰۰</div>
+                        <div class="font-bold text-gray-800">۵۸,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    </div>
+                    <div class="bg-red-100 text-primary text-xs font-bold px-2 py-1 rounded">۱۰٪</div>
+                </div>
+                <button onclick="addToCart('لپ تاپ ایسوس', 58000000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                </button>
+            </div>
+            
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3 relative">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=300" class="w-full h-40 object-contain" alt="">
+                    <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                        <i class="far fa-heart text-gray-400"></i>
+                    </button>
+                    <div class="product-actions absolute bottom-2 left-2 right-2 flex gap-1">
+                        <button onclick="addToCompare('عینک ری بن')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-blue-50">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                        <button onclick="openModal('quickViewModal')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-purple-50">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">عینک ری بن Wayfarer</h3>
+                <div class="flex items-center gap-1 mt-2">
+                    <i class="fas fa-star text-gold text-xs"></i>
+                    <span class="text-xs text-gray-500">۴.۵ (۱۲۰)</span>
+                </div>
+                <div class="mt-3">
+                    <div class="font-bold text-gray-800">۳,۲۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                </div>
+                <button onclick="addToCart('عینک ری بن', 3200000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                </button>
+            </div>
+            
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3 relative">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=300" class="w-full h-40 object-contain" alt="">
+                    <button onclick="toggleWishlistBtn(this)" class="absolute top-2 left-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center hover:bg-red-50">
+                        <i class="far fa-heart text-gray-400"></i>
+                    </button>
+                    <div class="product-actions absolute bottom-2 left-2 right-2 flex gap-1">
+                        <button onclick="addToCompare('ساعت کاسیو')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-blue-50">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                        <button onclick="openModal('quickViewModal')" class="flex-1 bg-white shadow py-2 rounded-lg text-xs hover:bg-purple-50">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">ساعت کاسیو G-Shock</h3>
+                <div class="flex items-center gap-1 mt-2">
+                    <i class="fas fa-star text-gold text-xs"></i>
+                    <span class="text-xs text-gray-500">۴.۷ (۳۴۵)</span>
+                </div>
+                <div class="mt-3 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-gray-400 line-through">۶,۰۰۰,۰۰۰</div>
+                        <div class="font-bold text-gray-800">۴,۸۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    </div>
+                    <div class="bg-red-100 text-primary text-xs font-bold px-2 py-1 rounded">۲۰٪</div>
+                </div>
+                <button onclick="addToCart('ساعت کاسیو', 4800000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ BANNERS ============ -->
+<section class="container mx-auto px-4 mt-8 reveal">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="relative rounded-2xl overflow-hidden h-48 md:h-64 bg-gradient-to-l from-indigo-600 to-purple-600 p-8 text-white flex items-center cursor-pointer group hover:shadow-2xl transition">
+            <div>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm backdrop-blur">جدید</span>
+                <h3 class="text-2xl md:text-3xl font-bold mt-3">گوشی‌های هوشمند</h3>
+                <p class="mt-2 opacity-90">بهترین برندها با قیمت استثنایی</p>
+                <button class="mt-4 bg-white text-indigo-600 px-5 py-2 rounded-lg font-bold text-sm group-hover:scale-105 transition">
+                    خرید کنید <i class="fas fa-arrow-left mr-1"></i>
+                </button>
+            </div>
+            <i class="fas fa-mobile-screen text-9xl opacity-20 absolute bottom-4 left-4 group-hover:scale-110 transition"></i>
+        </div>
+        <div class="relative rounded-2xl overflow-hidden h-48 md:h-64 bg-gradient-to-l from-green-600 to-teal-600 p-8 text-white flex items-center cursor-pointer group hover:shadow-2xl transition">
+            <div>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm backdrop-blur">ویژه</span>
+                <h3 class="text-2xl md:text-3xl font-bold mt-3">لوازم خانگی</h3>
+                <p class="mt-2 opacity-90">تا ۵۰٪ تخفیف ویژه</p>
+                <button class="mt-4 bg-white text-green-600 px-5 py-2 rounded-lg font-bold text-sm group-hover:scale-105 transition">
+                    مشاهده <i class="fas fa-arrow-left mr-1"></i>
+                </button>
+            </div>
+            <i class="fas fa-blender text-9xl opacity-20 absolute bottom-4 left-4 group-hover:scale-110 transition"></i>
+        </div>
+    </div>
+</section>
+
+<!-- ============ NEWEST ============ -->
+<section class="container mx-auto px-4 mt-8 reveal">
+    <div class="bg-white rounded-2xl p-6 shadow-sm">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold flex items-center gap-2">
+                <i class="fas fa-sparkles text-purple-500"></i>
+                جدیدترین محصولات
+            </h2>
+            <a href="#" class="text-sm text-secondary hover:underline">مشاهده همه <i class="fas fa-arrow-left"></i></a>
+        </div>
+        
+        <div class="owl-carousel newest-slider">
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=300" class="w-full h-40 object-contain" alt="">
+                    <span class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-lg">جدید</span>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">دوربین پولاروید Now+</h3>
+                <div class="mt-3">
+                    <div class="font-bold text-gray-800">۶,۵۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                </div>
+                <button onclick="addToCart('دوربین پولاروید', 6500000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن
+                </button>
+            </div>
+            
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300" class="w-full h-40 object-contain" alt="">
+                    <span class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-lg">جدید</span>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">کنسول PS5 اسلیم</h3>
+                <div class="mt-3">
+                    <div class="font-bold text-gray-800">۳۲,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                </div>
+                <button onclick="addToCart('PS5 اسلیم', 32000000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن
+                </button>
+            </div>
+            
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=300" class="w-full h-40 object-contain" alt="">
+                    <span class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-lg">جدید</span>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">اسپیکر JBL Charge 5</h3>
+                <div class="mt-3 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-gray-400 line-through">۴,۵۰۰,۰۰۰</div>
+                        <div class="font-bold text-gray-800">۳,۸۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    </div>
+                    <div class="bg-red-100 text-primary text-xs font-bold px-2 py-1 rounded">۱۵٪</div>
+                </div>
+                <button onclick="addToCart('اسپیکر JBL', 3800000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن
+                </button>
+            </div>
+            
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1600003014755-ba31aa59c4b4?w=300" class="w-full h-40 object-contain" alt="">
+                    <span class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-lg">جدید</span>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">تبلت Galaxy Tab S9</h3>
+                <div class="mt-3">
+                    <div class="font-bold text-gray-800">۲۸,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                </div>
+                <button onclick="addToCart('تبلت سامسونگ', 28000000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن
+                </button>
+            </div>
+            
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=300" class="w-full h-40 object-contain" alt="">
+                    <span class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-lg">جدید</span>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">دوربین کانن R6 II</h3>
+                <div class="mt-3">
+                    <div class="font-bold text-gray-800">۹۵,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                </div>
+                <button onclick="addToCart('دوربین کانن', 95000000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن
+                </button>
+            </div>
+            
+            <div class="product-card bg-white border border-gray-100 rounded-xl p-3">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=300" class="w-full h-40 object-contain" alt="">
+                    <span class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-lg">جدید</span>
+                </div>
+                <h3 class="text-sm font-bold mt-3 line-clamp-2 h-10">ساعت گارمن Fenix 7</h3>
+                <div class="mt-3 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-gray-400 line-through">۲۵,۰۰۰,۰۰۰</div>
+                        <div class="font-bold text-gray-800">۲۱,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    </div>
+                    <div class="bg-red-100 text-primary text-xs font-bold px-2 py-1 rounded">۱۶٪</div>
+                </div>
+                <button onclick="addToCart('ساعت گارمن', 21000000)" class="w-full mt-3 gradient-primary text-white py-2 rounded-lg text-sm hover:opacity-90">
+                    <i class="fas fa-cart-plus ml-1"></i> افزودن
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section class="container mx-auto px-4 mt-8 reveal">
+    <div class="bg-white rounded-2xl p-6 shadow-sm">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold flex items-center gap-2">
+                <i class="fas fa-newspaper text-blue-500"></i>
+                مجله گهر کالا
+            </h2>
+            <a href="#" class="text-sm text-secondary hover:underline">مشاهده همه مقالات</a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <article class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-xl transition group cursor-pointer">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1512499615919-1450cb39f494?w=500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-4">
+                    <span class="text-xs text-primary bg-red-50 px-2 py-1 rounded">تکنولوژی</span>
+                    <h3 class="font-bold mt-3 line-clamp-2 group-hover:text-primary transition">بررسی کامل Galaxy S24 Ultra</h3>
+                    <p class="text-sm text-gray-500 mt-2 line-clamp-2">در این مقاله به بررسی کامل ویژگی‌ها و مشخصات فنی جدیدترین پرچمدار سامسونگ می‌پردازیم...</p>
+                    <div class="flex items-center justify-between mt-4 text-xs text-gray-400">
+                        <span><i class="far fa-calendar ml-1"></i> ۱۵ تیر ۱۴۰۵</span>
+                        <a href="#" class="text-secondary hover:underline">ادامه مطلب</a>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-xl transition group cursor-pointer">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-4">
+                    <span class="text-xs text-blue-500 bg-blue-50 px-2 py-1 rounded">راهنمای خرید</span>
+                    <h3 class="font-bold mt-3 line-clamp-2 group-hover:text-primary transition">راهنمای انتخاب لپ‌تاپ دانشجویی</h3>
+                    <p class="text-sm text-gray-500 mt-2 line-clamp-2">نکات مهمی که قبل از خرید لپ‌تاپ باید به آن‌ها توجه کنید تا بهترین انتخاب را داشته باشید...</p>
+                    <div class="flex items-center justify-between mt-4 text-xs text-gray-400">
+                        <span><i class="far fa-calendar ml-1"></i> ۱۲ تیر ۱۴۰۵</span>
+                        <a href="#" class="text-secondary hover:underline">ادامه مطلب</a>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-xl transition group cursor-pointer">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-4">
+                    <span class="text-xs text-green-500 bg-green-50 px-2 py-1 rounded">گیمینگ</span>
+                    <h3 class="font-bold mt-3 line-clamp-2 group-hover:text-primary transition">مقایسه PS5 با Xbox Series X</h3>
+                    <p class="text-sm text-gray-500 mt-2 line-clamp-2">کدام کنسول بازی برای شما مناسب‌تر است؟ مقایسه کامل دو کنسول نسل جدید...</p>
+                    <div class="flex items-center justify-between mt-4 text-xs text-gray-400">
+                        <span><i class="far fa-calendar ml-1"></i> ۱۰ تیر ۱۴۰۵</span>
+                        <a href="#" class="text-secondary hover:underline">ادامه مطلب</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============ BRANDS ============ -->
+<section class="container mx-auto px-4 mt-8 mb-8 reveal">
+    <div class="bg-white rounded-2xl p-6 shadow-sm">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold flex items-center gap-2">
+                <i class="fas fa-award text-gold"></i>
+                برندهای محبوب
+            </h2>
+        </div>
+        <div class="owl-carousel brands-slider">
+            <div class="flex items-center justify-center h-20 bg-gray-50 rounded-xl hover:bg-gray-100 hover:shadow transition mx-2 cursor-pointer">
+                <span class="text-2xl font-bold text-gray-400 hover:text-primary transition">Samsung</span>
+            </div>
+            <div class="flex items-center justify-center h-20 bg-gray-50 rounded-xl hover:bg-gray-100 hover:shadow transition mx-2 cursor-pointer">
+                <span class="text-2xl font-bold text-gray-400 hover:text-primary transition">Apple</span>
+            </div>
+            <div class="flex items-center justify-center h-20 bg-gray-50 rounded-xl hover:bg-gray-100 hover:shadow transition mx-2 cursor-pointer">
+                <span class="text-2xl font-bold text-gray-400 hover:text-primary transition">Sony</span>
+            </div>
+            <div class="flex items-center justify-center h-20 bg-gray-50 rounded-xl hover:bg-gray-100 hover:shadow transition mx-2 cursor-pointer">
+                <span class="text-2xl font-bold text-gray-400 hover:text-primary transition">LG</span>
+            </div>
+            <div class="flex items-center justify-center h-20 bg-gray-50 rounded-xl hover:bg-gray-100 hover:shadow transition mx-2 cursor-pointer">
+                <span class="text-2xl font-bold text-gray-400 hover:text-primary transition">Xiaomi</span>
+            </div>
+            <div class="flex items-center justify-center h-20 bg-gray-50 rounded-xl hover:bg-gray-100 hover:shadow transition mx-2 cursor-pointer">
+                <span class="text-2xl font-bold text-gray-400 hover:text-primary transition">Asus</span>
+            </div>
+            <div class="flex items-center justify-center h-20 bg-gray-50 rounded-xl hover:bg-gray-100 hover:shadow transition mx-2 cursor-pointer">
+                <span class="text-2xl font-bold text-gray-400 hover:text-primary transition">Nike</span>
+            </div>
+            <div class="flex items-center justify-center h-20 bg-gray-50 rounded-xl hover:bg-gray-100 hover:shadow transition mx-2 cursor-pointer">
+                <span class="text-2xl font-bold text-gray-400 hover:text-primary transition">Adidas</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-white border-t mt-8">
+    <div class="gradient-primary text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-envelope text-3xl"></i>
+                    <div>
+                        <h3 class="font-bold text-lg">عضویت در خبرنامه</h3>
+                        <p class="text-sm opacity-90">از جدیدترین تخفیف‌ها باخبر شوید</p>
+                    </div>
+                </div>
+                <div class="flex w-full md:w-auto gap-2">
+                    <input type="email" placeholder="ایمیل خود را وارد کنید" class="flex-1 md:w-80 px-4 py-3 rounded-xl text-gray-800 focus:outline-none">
+                    <button class="bg-gray-900 hover:bg-gray-800 px-6 py-3 rounded-xl font-bold transition">عضویت</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center">
+                        <i class="fas fa-gem text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">گهر کالا</h3>
+                </div>
+                <p class="text-sm text-gray-600 leading-7">فروشگاه اینترنتی گهر کالا با ارائه هزاران کالا در دسته‌بندی‌های مختلف، تجربه خریدی لذت‌بخش را برای شما فراهم می‌کند.</p>
+                <div class="flex gap-2 mt-4">
+                    <a href="#" class="w-9 h-9 bg-blue-500 text-white rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="w-9 h-9 bg-pink-500 text-white rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-9 h-9 bg-blue-700 text-white rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-9 h-9 bg-red-500 text-white rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4">خدمات مشتریان</h4>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> پرسش‌های متداول</a></li>
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> بازگرداندن کالا</a></li>
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> شرایط استفاده</a></li>
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> حریم خصوصی</a></li>
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> گزارش باگ</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4">راهنمای خرید</h4>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> نحوه ثبت سفارش</a></li>
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> رویه ارسال</a></li>
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> شیوه‌های پرداخت</a></li>
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> فرصت‌های شغلی</a></li>
+                    <li><a href="#" class="hover:text-primary hover:pr-1 transition-all"><i class="fas fa-angle-left ml-1"></i> تماس با ما</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4">ارتباط با ما</h4>
+                <ul class="space-y-3 text-sm text-gray-600">
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-map-marker-alt text-primary mt-1"></i>
+                        <span>تهران، خیابان ولیعصر، پلاک ۱۲۳۴</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-phone text-primary"></i>
+                        <span>۰۲۱-۹۱۰۰۰۰۰۰</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-envelope text-primary"></i>
+                        <span>info@gaharkala.ir</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-clock text-primary"></i>
+                        <span>۲۴ ساعته، ۷ روز هفته</span>
+                    </li>
+                </ul>
+                
+                <div class="grid grid-cols-3 gap-2 mt-4">
+                    <div class="border border-gray-200 rounded-lg p-2 flex items-center justify-center hover:shadow transition cursor-pointer">
+                        <i class="fas fa-shield-halved text-2xl text-green-500"></i>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-2 flex items-center justify-center hover:shadow transition cursor-pointer">
+                        <i class="fas fa-certificate text-2xl text-blue-500"></i>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-2 flex items-center justify-center hover:shadow transition cursor-pointer">
+                        <i class="fas fa-award text-2xl text-gold"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="border-t py-4 bg-gray-50">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 gap-2">
+            <p>© ۱۴۰۵ کلیه حقوق متعلق به <strong class="text-primary">گهر کالا</strong> می‌باشد.</p>
+            <div class="flex items-center gap-3">
+                <span>پرداخت امن:</span>
+                <i class="fab fa-cc-visa text-2xl text-blue-700"></i>
+                <i class="fab fa-cc-mastercard text-2xl text-red-500"></i>
+                <i class="fas fa-money-check text-2xl text-green-600"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ============ BOTTOM NAVIGATION (MOBILE) ============ -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-2xl z-40">
+    <div class="grid grid-cols-5 h-16">
+        <button onclick="setActiveNav(this)" class="bottom-nav-item active flex flex-col items-center justify-center gap-1 relative">
+            <div class="bottom-nav-icon w-10 h-10 rounded-full flex items-center justify-center">
+                <i class="fas fa-home text-lg"></i>
+            </div>
+            <span class="text-[10px] font-bold">خانه</span>
+        </button>
+        
+        <button onclick="setActiveNav(this); openMobileCategories()" class="bottom-nav-item flex flex-col items-center justify-center gap-1 relative text-gray-500">
+            <div class="bottom-nav-icon w-10 h-10 rounded-full flex items-center justify-center">
+                <i class="fas fa-th-large text-lg"></i>
+            </div>
+            <span class="text-[10px] font-bold">دسته‌بندی</span>
+        </button>
+        
+        <button onclick="setActiveNav(this); openModal('cartModal')" class="bottom-nav-item flex flex-col items-center justify-center gap-1 relative text-gray-500">
+            <div class="bottom-nav-icon w-12 h-12 -mt-6 rounded-full gradient-primary text-white flex items-center justify-center shadow-lg">
+                <i class="fas fa-shopping-bag text-xl"></i>
+            </div>
+            <span class="badge-count" id="cartCountMobile">2</span>
+            <span class="text-[10px] font-bold -mt-1">سبد خرید</span>
+        </button>
+        
+        <button onclick="setActiveNav(this); openModal('wishlistModal')" class="bottom-nav-item flex flex-col items-center justify-center gap-1 relative text-gray-500">
+            <div class="bottom-nav-icon w-10 h-10 rounded-full flex items-center justify-center">
+                <i class="fas fa-heart text-lg"></i>
+            </div>
+            <span class="badge-count" id="wishlistCountMobile">3</span>
+            <span class="text-[10px] font-bold">علاقه‌مندی</span>
+        </button>
+        
+        <button onclick="setActiveNav(this); openModal('userModal')" class="bottom-nav-item flex flex-col items-center justify-center gap-1 relative text-gray-500">
+            <div class="bottom-nav-icon w-10 h-10 rounded-full flex items-center justify-center">
+                <i class="fas fa-user text-lg"></i>
+            </div>
+            <span class="text-[10px] font-bold">حساب من</span>
+        </button>
+    </div>
+</nav>
+
+<!-- ============ SCROLL TO TOP ============ -->
+<button id="scrollTop" onclick="scrollToTop()" class="scroll-top fixed bottom-24 md:bottom-8 left-4 w-12 h-12 gradient-primary text-white rounded-full shadow-2xl z-30 flex items-center justify-center hover:scale-110 transition">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ============ CART MODAL ============ -->
+<div id="cartModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50" onclick="closeModal('cartModal')"></div>
+    <div class="modal-content absolute top-0 left-0 w-full md:w-96 h-full bg-white shadow-2xl overflow-y-auto">
+        <div class="sticky top-0 bg-white border-b p-4 flex justify-between items-center z-10">
+            <h3 class="font-bold text-lg flex items-center gap-2">
+                <i class="fas fa-shopping-bag text-primary"></i>
+                سبد خرید <span class="text-sm text-gray-500">(<span id="cartItemsCount">2</span> کالا)</span>
+            </h3>
+            <button onclick="closeModal('cartModal')" class="w-8 h-8 rounded-full hover:bg-gray-100">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="p-4 space-y-3" id="cartItems">
+            <div class="flex gap-3 border border-gray-100 rounded-xl p-3">
+                <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=100" class="w-20 h-20 object-contain rounded-lg bg-gray-50" alt="">
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold line-clamp-2">ایرپاد پرو ۲ اپل</h4>
+                    <div class="text-xs text-gray-500 mt-1">رنگ: سفید</div>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center gap-2 bg-gray-100 rounded-lg">
+                            <button onclick="changeQty(this, 1)" class="w-7 h-7 hover:bg-gray-200 rounded-lg"><i class="fas fa-plus text-xs"></i></button>
+                            <span class="text-sm font-bold qty">۱</span>
+                            <button onclick="changeQty(this, -1)" class="w-7 h-7 hover:bg-gray-200 rounded-lg"><i class="fas fa-minus text-xs"></i></button>
+                        </div>
+                        <div class="font-bold text-sm">۷,۲۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    </div>
+                </div>
+                <button onclick="removeCartItem(this)" class="text-red-500 hover:bg-red-50 w-8 h-8 rounded-full self-start">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+            
+            <div class="flex gap-3 border border-gray-100 rounded-xl p-3">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" class="w-20 h-20 object-contain rounded-lg bg-gray-50" alt="">
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold line-clamp-2">کفش ورزشی آدیداس</h4>
+                    <div class="text-xs text-gray-500 mt-1">سایز: ۴۲</div>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center gap-2 bg-gray-100 rounded-lg">
+                            <button onclick="changeQty(this, 1)" class="w-7 h-7 hover:bg-gray-200 rounded-lg"><i class="fas fa-plus text-xs"></i></button>
+                            <span class="text-sm font-bold qty">۱</span>
+                            <button onclick="changeQty(this, -1)" class="w-7 h-7 hover:bg-gray-200 rounded-lg"><i class="fas fa-minus text-xs"></i></button>
+                        </div>
+                        <div class="font-bold text-sm">۴,۵۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    </div>
+                </div>
+                <button onclick="removeCartItem(this)" class="text-red-500 hover:bg-red-50 w-8 h-8 rounded-full self-start">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="p-4 border-t">
+            <div class="flex gap-2">
+                <input type="text" placeholder="کد تخفیف" class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary">
+                <button class="gradient-primary text-white px-4 py-2 rounded-lg text-sm">اعمال</button>
+            </div>
+        </div>
+        
+        <div class="sticky bottom-0 bg-white border-t p-4 space-y-2">
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600">جمع سبد:</span>
+                <span class="font-bold">۱۱,۷۰۰,۰۰۰ تومان</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600">تخفیف:</span>
+                <span class="text-primary font-bold">۰ تومان</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600">ارسال:</span>
+                <span class="text-green-600 font-bold">رایگان</span>
+            </div>
+            <div class="flex justify-between pt-2 border-t">
+                <span class="font-bold">مبلغ پرداخت:</span>
+                <span class="font-bold text-primary text-lg">۱۱,۷۰۰,۰۰۰ ت</span>
+            </div>
+            <button class="w-full gradient-primary text-white py-3 rounded-xl font-bold mt-3 hover:opacity-90 transition">
+                <i class="fas fa-credit-card ml-2"></i> ادامه و پرداخت
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============ WISHLIST MODAL ============ -->
+<div id="wishlistModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50" onclick="closeModal('wishlistModal')"></div>
+    <div class="modal-content absolute top-0 left-0 w-full md:w-96 h-full bg-white shadow-2xl overflow-y-auto">
+        <div class="sticky top-0 bg-white border-b p-4 flex justify-between items-center z-10">
+            <h3 class="font-bold text-lg flex items-center gap-2">
+                <i class="fas fa-heart text-red-500"></i>
+                علاقه‌مندی‌ها <span class="text-sm text-gray-500">(۳ کالا)</span>
+            </h3>
+            <button onclick="closeModal('wishlistModal')" class="w-8 h-8 rounded-full hover:bg-gray-100">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="p-4 space-y-3">
+            <div class="flex gap-3 border border-gray-100 rounded-xl p-3">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6b196f?w=100" class="w-20 h-20 object-contain rounded-lg bg-gray-50" alt="">
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold line-clamp-2">اپل واچ سری ۹</h4>
+                    <div class="font-bold text-primary mt-2">۱۵,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="addToCart('اپل واچ', 15000000)" class="flex-1 gradient-primary text-white py-1 rounded-lg text-xs">
+                            <i class="fas fa-cart-plus ml-1"></i> افزودن
+                        </button>
+                        <button class="w-8 h-8 border border-gray-200 rounded-lg hover:bg-red-50 text-red-500">
+                            <i class="fas fa-trash-alt text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-3 border border-gray-100 rounded-xl p-3">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100" class="w-20 h-20 object-contain rounded-lg bg-gray-50" alt="">
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold line-clamp-2">هدفون سونی WH-1000XM5</h4>
+                    <div class="font-bold text-primary mt-2">۹,۰۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="addToCart('هدفون سونی', 9000000)" class="flex-1 gradient-primary text-white py-1 rounded-lg text-xs">
+                            <i class="fas fa-cart-plus ml-1"></i> افزودن
+                        </button>
+                        <button class="w-8 h-8 border border-gray-200 rounded-lg hover:bg-red-50 text-red-500">
+                            <i class="fas fa-trash-alt text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-3 border border-gray-100 rounded-xl p-3">
+                <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=100" class="w-20 h-20 object-contain rounded-lg bg-gray-50" alt="">
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold line-clamp-2">ساعت کاسیو G-Shock</h4>
+                    <div class="font-bold text-primary mt-2">۴,۸۰۰,۰۰۰ <span class="text-xs">ت</span></div>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="addToCart('کاسیو', 4800000)" class="flex-1 gradient-primary text-white py-1 rounded-lg text-xs">
+                            <i class="fas fa-cart-plus ml-1"></i> افزودن
+                        </button>
+                        <button class="w-8 h-8 border border-gray-200 rounded-lg hover:bg-red-50 text-red-500">
+                            <i class="fas fa-trash-alt text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-4 border-t">
+            <button class="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-200">
+                انتقال همه به سبد خرید
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============ COMPARE MODAL ============ -->
+<div id="compareModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50" onclick="closeModal('compareModal')"></div>
+    <div class="modal-content absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-4xl max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+        <div class="border-b p-4 flex justify-between items-center">
+            <h3 class="font-bold text-lg flex items-center gap-2">
+                <i class="fas fa-exchange-alt text-blue-500"></i>
+                مقایسه محصولات
+            </h3>
+            <button onclick="closeModal('compareModal')" class="w-8 h-8 rounded-full hover:bg-gray-100">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="overflow-auto flex-1">
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-gray-50">
+                        <th class="p-4 text-right w-32 font-bold">مشخصات</th>
+                        <th class="p-4">
+                            <div class="flex flex-col items-center">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=150" class="w-24 h-24 object-contain">
+                                <h4 class="text-sm font-bold mt-2 text-center">Galaxy S24</h4>
+                                <button class="text-red-500 text-xs mt-1 hover:underline">حذف</button>
+                            </div>
+                        </th>
+                        <th class="p-4">
+                            <div class="flex flex-col items-center">
+                                <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=150" class="w-24 h-24 object-contain">
+                                <h4 class="text-sm font-bold mt-2 text-center">آیفون ۱۵ پرو</h4>
+                                <button class="text-red-500 text-xs mt-1 hover:underline">حذف</button>
+                            </div>
+                        </th>
+                        <th class="p-4">
+                            <div class="flex flex-col items-center text-gray-400">
+                                <div class="w-24 h-24 border-2 border-dashed rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-plus text-2xl"></i>
+                                </div>
+                                <p class="text-xs mt-2">افزودن محصول</p>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y">
+                    <tr>
+                        <td class="p-4 font-bold text-sm bg-gray-50">قیمت</td>
+                        <td class="p-4 text-center text-primary font-bold">۴۵,۰۰۰,۰۰۰ ت</td>
+                        <td class="p-4 text-center text-primary font-bold">۶۸,۰۰۰,۰۰۰ ت</td>
+                        <td class="p-4 text-center text-gray-400">-</td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-bold text-sm bg-gray-50">امتیاز</td>
+                        <td class="p-4 text-center"><i class="fas fa-star text-gold"></i> ۴.۷</td>
+                        <td class="p-4 text-center"><i class="fas fa-star text-gold"></i> ۴.۹</td>
+                        <td class="p-4 text-center text-gray-400">-</td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-bold text-sm bg-gray-50">حافظه</td>
+                        <td class="p-4 text-center">۲۵۶ گیگ</td>
+                        <td class="p-4 text-center">۲۵۶ گیگ</td>
+                        <td class="p-4 text-center text-gray-400">-</td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-bold text-sm bg-gray-50">رم</td>
+                        <td class="p-4 text-center">۸ گیگ</td>
+                        <td class="p-4 text-center">۸ گیگ</td>
+                        <td class="p-4 text-center text-gray-400">-</td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-bold text-sm bg-gray-50">دوربین</td>
+                        <td class="p-4 text-center">۲۰۰ مگاپیکسل</td>
+                        <td class="p-4 text-center">۴۸ مگاپیکسل</td>
+                        <td class="p-4 text-center text-gray-400">-</td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-bold text-sm bg-gray-50">باتری</td>
+                        <td class="p-4 text-center">۴۰۰۰ mAh</td>
+                        <td class="p-4 text-center">۳۲۷۴ mAh</td>
+                        <td class="p-4 text-center text-gray-400">-</td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-bold text-sm bg-gray-50">سیستم عامل</td>
+                        <td class="p-4 text-center">Android 14</td>
+                        <td class="p-4 text-center">iOS 17</td>
+                        <td class="p-4 text-center text-gray-400">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="border-t p-4 flex justify-end gap-2">
+            <button onclick="closeModal('compareModal')" class="px-6 py-2 border border-gray-200 rounded-lg hover:bg-gray-50">بستن</button>
+            <button class="px-6 py-2 gradient-primary text-white rounded-lg hover:opacity-90">
+                <i class="fas fa-shopping-cart ml-1"></i> افزودن به سبد
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============ QUICK VIEW MODAL ============ -->
+<div id="quickViewModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50" onclick="closeModal('quickViewModal')"></div>
+    <div class="modal-content absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-3xl max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-y-auto">
+        <button onclick="closeModal('quickViewModal')" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-white shadow hover:bg-gray-100 z-10">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+            <div>
+                <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=500" class="w-full rounded-xl" alt="">
+                <div class="grid grid-cols-4 gap-2 mt-3">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=100" class="w-full rounded-lg border-2 border-primary cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=100" class="w-full rounded-lg border border-gray-200 cursor-pointer hover:border-primary">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=100" class="w-full rounded-lg border border-gray-200 cursor-pointer hover:border-primary">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=100" class="w-full rounded-lg border border-gray-200 cursor-pointer hover:border-primary">
+                </div>
+            </div>
+            
+            <div>
+                <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">موجود در انبار</span>
+                <h2 class="text-xl font-bold mt-3">ایرپاد پرو ۲ اپل با قاب MagSafe</h2>
+                <div class="flex items-center gap-2 mt-3">
+                    <div class="flex">
+                        <i class="fas fa-star text-gold"></i>
+                        <i class="fas fa-star text-gold"></i>
+                        <i class="fas fa-star text-gold"></i>
+                        <i class="fas fa-star text-gold"></i>
+                        <i class="fas fa-star-half-alt text-gold"></i>
+                    </div>
+                    <span class="text-sm text-gray-500">(۲۳۴ نظر)</span>
+                </div>
+                
+                <div class="mt-4 pb-4 border-b">
+                    <div class="text-sm text-gray-400 line-through">۸,۵۰۰,۰۰۰ تومان</div>
+                    <div class="text-2xl font-bold text-primary mt-1">۷,۲۰۰,۰۰۰ <span class="text-sm">تومان</span></div>
+                    <span class="bg-red-100 text-primary text-xs font-bold px-2 py-1 rounded">۱۵٪ تخفیف</span>
+                </div>
+                
+                <div class="mt-4 space-y-3">
+                    <div>
+                        <p class="text-sm font-bold mb-2">رنگ:</p>
+                        <div class="flex gap-2">
+                            <button class="w-8 h-8 rounded-full bg-white border-2 border-primary"></button>
+                            <button class="w-8 h-8 rounded-full bg-black border-2 border-transparent"></button>
+                            <button class="w-8 h-8 rounded-full bg-blue-500 border-2 border-transparent"></button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p class="text-sm font-bold mb-2">تعداد:</p>
+                        <div class="inline-flex items-center gap-3 bg-gray-100 rounded-lg px-2">
+                            <button class="w-8 h-8 hover:bg-gray-200 rounded-lg"><i class="fas fa-plus"></i></button>
+                            <span class="font-bold">۱</span>
+                            <button class="w-8 h-8 hover:bg-gray-200 rounded-lg"><i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex gap-2 mt-6">
+                    <button onclick="addToCart('ایرپاد پرو', 7200000); closeModal('quickViewModal')" class="flex-1 gradient-primary text-white py-3 rounded-xl font-bold hover:opacity-90">
+                        <i class="fas fa-cart-plus ml-1"></i> افزودن به سبد
+                    </button>
+                    <button class="w-12 h-12 border border-gray-200 rounded-xl hover:bg-red-50 text-gray-500 hover:text-red-500">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="w-12 h-12 border border-gray-200 rounded-xl hover:bg-blue-50 text-gray-500 hover:text-blue-500">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                </div>
+                
+                <div class="mt-6 space-y-2 text-sm text-gray-600">
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> گارانتی ۱۸ ماهه</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> ارسال رایگان</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> ۷ روز ضمانت بازگشت</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ USER MODAL ============ -->
+<div id="userModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50" onclick="closeModal('userModal')"></div>
+    <div class="modal-content absolute top-0 left-0 w-full md:w-96 h-full bg-white shadow-2xl overflow-y-auto">
+        <div class="gradient-primary p-6 text-white">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-lg">حساب کاربری</h3>
+                <button onclick="closeModal('userModal')" class="text-white w-8 h-8 rounded-full bg-white/20">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl"></i>
+                </div>
+                <div>
+                    <p class="font-bold">کاربر مهمان</p>
+                    <p class="text-sm opacity-90">برای دسترسی کامل وارد شوید</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-4">
+            <button class="w-full gradient-primary text-white py-3 rounded-xl font-bold mb-4">
+                <i class="fas fa-sign-in-alt ml-2"></i> ورود / ثبت نام
+            </button>
+            
+            <div class="space-y-1">
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                    <i class="fas fa-box text-primary w-6"></i> سفارش‌های من
+                </a>
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                    <i class="fas fa-heart text-red-500 w-6"></i> علاقه‌مندی‌ها
+                </a>
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                    <i class="fas fa-map-marker-alt text-green-500 w-6"></i> آدرس‌های من
+                </a>
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                    <i class="fas fa-comment text-blue-500 w-6"></i> نظرات من
+                </a>
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                    <i class="fas fa-bell text-gold w-6"></i> اطلاعیه‌ها
+                </a>
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                    <i class="fas fa-wallet text-purple-500 w-6"></i> کیف پول
+                </a>
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                    <i class="fas fa-cog text-gray-500 w-6"></i> تنظیمات
+                </a>
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg text-red-500">
+                    <i class="fas fa-sign-out-alt w-6"></i> خروج
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ MOBILE CATEGORIES MODAL ============ -->
+<div id="mobileCategoriesModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50" onclick="closeModal('mobileCategoriesModal')"></div>
+    <div class="modal-content absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl max-h-[80vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white border-b p-4 flex justify-between items-center z-10">
+            <h3 class="font-bold text-lg">دسته‌بندی‌ها</h3>
+            <button onclick="closeModal('mobileCategoriesModal')" class="w-8 h-8 rounded-full hover:bg-gray-100">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="p-4 grid grid-cols-3 gap-4">
+            <a href="#" class="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl">
+                <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-mobile-screen text-2xl text-red-500"></i>
+                </div>
+                <span class="text-xs">موبایل</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl">
+                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-laptop text-2xl text-blue-500"></i>
+                </div>
+                <span class="text-xs">لپ‌تاپ</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl">
+                <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-tv text-2xl text-green-500"></i>
+                </div>
+                <span class="text-xs">تلویزیون</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl">
+                <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-shirt text-2xl text-purple-500"></i>
+                </div>
+                <span class="text-xs">پوشاک</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl">
+                <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-blender text-2xl text-yellow-600"></i>
+                </div>
+                <span class="text-xs">خانگی</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl">
+                <div class="w-14 h-14 bg-pink-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-spa text-2xl text-pink-500"></i>
+                </div>
+                <span class="text-xs">زیبایی</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl">
+                <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-futbol text-2xl text-orange-500"></i>
+                </div>
+                <span class="text-xs">ورزشی</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl">
+                <div class="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-book text-2xl text-teal-500"></i>
+                </div>
+                <span class="text-xs">کتاب</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl">
+                <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-shopping-basket text-2xl text-green-500"></i>
+                </div>
+                <span class="text-xs">سوپرمارکت</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TOAST CONTAINER ============ -->
+<div id="toastContainer" class="fixed top-20 left-4 z-50 space-y-2"></div>
+
+<!-- ============ SCRIPTS ============ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script>
+    // Initialize Owl Carousels
+    $(document).ready(function(){
+        $(".hero-slider").owlCarousel({
+            items: 1, loop: true, autoplay: true, autoplayTimeout: 5000,
+            nav: true, dots: false, rtl: true,
+            navText: ['<i class="fas fa-chevron-right"></i>', '<i class="fas fa-chevron-left"></i>']
+        });
+        
+        $(".amazing-slider").owlCarousel({
+            items: 4, loop: false, nav: true, dots: false, margin: 10, rtl: true,
+            navText: ['<i class="fas fa-chevron-right"></i>', '<i class="fas fa-chevron-left"></i>'],
+            responsive: { 0: { items: 1 }, 480: { items: 2 }, 768: { items: 3 }, 1024: { items: 4 } }
+        });
+        
+        $(".newest-slider").owlCarousel({
+            items: 5, loop: false, nav: true, dots: false, margin: 10, rtl: true,
+            navText: ['<i class="fas fa-chevron-right"></i>', '<i class="fas fa-chevron-left"></i>'],
+            responsive: { 0: { items: 1 }, 480: { items: 2 }, 768: { items: 3 }, 1024: { items: 4 }, 1280: { items: 5 } }
+        });
+        
+        $(".brands-slider").owlCarousel({
+            items: 6, loop: true, autoplay: true, autoplayTimeout: 3000,
+            nav: false, dots: false, margin: 10, rtl: true,
+            responsive: { 0: { items: 2 }, 480: { items: 3 }, 768: { items: 4 }, 1024: { items: 6 } }
+        });
+    });
+    
+    // Modal Functions
+    function openModal(id) {
+        document.getElementById(id).classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal(id) {
+        document.getElementById(id).classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Mobile Menu
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('mobileMenuOverlay');
+        menu.classList.toggle('active');
+        overlay.classList.toggle('hidden');
+    }
+    
+    // Accordion
+    function toggleAccordion(btn) {
+        btn.classList.toggle('open');
+        const content = btn.nextElementSibling;
+        content.classList.toggle('open');
+    }
+    
+    // Bottom Nav
+    function setActiveNav(btn) {
+        document.querySelectorAll('.bottom-nav-item').forEach(item => {
+            item.classList.remove('active');
+            item.classList.add('text-gray-500');
+        });
+        btn.classList.add('active');
+        btn.classList.remove('text-gray-500');
+    }
+    
+    function openMobileCategories() {
+        openModal('mobileCategoriesModal');
+    }
+    
+    // Add to Cart
+    function addToCart(name, price) {
+        showToast(`${name} به سبد خرید اضافه شد`, 'success');
+        updateCount('cartCount', 1);
+        updateCount('cartCountMobile', 1);
+    }
+    
+    // Toggle Wishlist
+    function toggleWishlistBtn(btn) {
+        const icon = btn.querySelector('i');
+        if (icon.classList.contains('far')) {
+            icon.classList.remove('far', 'text-gray-400');
+            icon.classList.add('fas', 'text-red-500');
+            showToast('به علاقه‌مندی‌ها اضافه شد', 'success');
+            updateCount('wishlistCount', 1);
+            updateCount('wishlistCountMobile', 1);
+        } else {
+            icon.classList.remove('fas', 'text-red-500');
+            icon.classList.add('far', 'text-gray-400');
+            showToast('از علاقه‌مندی‌ها حذف شد', 'info');
+            updateCount('wishlistCount', -1);
+            updateCount('wishlistCountMobile', -1);
+        }
+    }
+    
+    // Add to Compare
+    function addToCompare(name) {
+        showToast(`${name} به لیست مقایسه اضافه شد`, 'success');
+        updateCount('compareCount', 1);
+    }
+    
+    // Update Badge Count
+    function updateCount(id, change) {
+        const el = document.getElementById(id);
+        if (el) {
+            const current = parseInt(el.textContent);
+            el.textContent = Math.max(0, current + change);
+            el.style.animation = 'none';
+            setTimeout(() => el.style.animation = 'bounceIn 0.5s', 10);
+        }
+    }
+    
+    // Cart Functions
+    function changeQty(btn, change) {
+        const qtyEl = btn.parentElement.querySelector('.qty');
+        const toEnglish = s => s.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+        const toPersian = n => n.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+        let qty = parseInt(toEnglish(qtyEl.textContent));
+        qty = Math.max(1, qty + change);
+        qtyEl.textContent = toPersian(qty);
+    }
+    
+    function removeCartItem(btn) {
+        const item = btn.closest('.flex.gap-3');
+        item.style.animation = 'fadeOut 0.3s forwards';
+        setTimeout(() => {
+            item.remove();
+            updateCount('cartCount', -1);
+            updateCount('cartCountMobile', -1);
+            showToast('محصول از سبد حذف شد', 'info');
+        }, 300);
+    }
+    
+    // Toast
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        const colors = {
+            success: 'bg-green-500',
+            error: 'bg-red-500',
+            info: 'bg-blue-500',
+            warning: 'bg-yellow-500'
+        };
+        const icons = {
+            success: 'fa-check-circle',
+            error: 'fa-times-circle',
+            info: 'fa-info-circle',
+            warning: 'fa-exclamation-circle'
+        };
+        
+        toast.className = `toast ${colors[type]} text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 min-w-[280px]`;
+        toast.innerHTML = `<i class="fas ${icons[type]} text-xl"></i><span class="text-sm font-medium">${message}</span>`;
+        container.appendChild(toast);
+        
+        setTimeout(() => toast.remove(), 3000);
+    }
+    
+    // Countdown Timer
+    function updateCountdown() {
+        const toPersian = n => n.toString().padStart(2, '0').replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+        const toEnglish = s => s.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+        
+        let h = parseInt(toEnglish(document.getElementById('hours').textContent));
+        let m = parseInt(toEnglish(document.getElementById('minutes').textContent));
+        let s = parseInt(toEnglish(document.getElementById('seconds').textContent));
+        
+        s--;
+        if (s < 0) { s = 59; m--; }
+        if (m < 0) { m = 59; h--; }
+        if (h < 0) { h = 23; m = 59; s = 59; }
+        
+        document.getElementById('hours').textContent = toPersian(h);
+        document.getElementById('minutes').textContent = toPersian(m);
+        document.getElementById('seconds').textContent = toPersian(s);
+    }
+    setInterval(updateCountdown, 1000);
+    
+    // Scroll Reveal Animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    
+    // Scroll to Top
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('[id$="Modal"]').forEach(m => {
+                if (!m.classList.contains('hidden')) closeModal(m.id);
+            });
+            const menu = document.getElementById('mobileMenu');
+            if (menu.classList.contains('active')) toggleMobileMenu();
+        }
+    });
+    
+    // Close dropdowns on outside click
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+        }
+        if (!e.target.closest('.has-mega')) {
+            document.querySelectorAll('.has-mega').forEach(d => d.classList.remove('active'));
+        }
+    });
+    
+    // Welcome toast
+    setTimeout(() => {
+        showToast('به گهر کالا خوش آمدید! 🎉', 'success');
+    }, 1000);
+</script>
+
+</body>
+</html>
