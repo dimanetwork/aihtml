@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود یا ثبت‌نام | گهر کالا</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Vazir', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #ef394e 0%, #dc2626 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+
+<div class="w-full max-w-md">
+    <!-- Logo -->
+    <div class="text-center mb-8">
+        <a href="../index.html" class="inline-flex items-center gap-2">
+            <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center">
+                <i class="fas fa-shopping-bag text-white text-3xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800 mr-3">گهر کالا</h1>
+        </a>
+        <p class="text-gray-500 mt-2">خوش آمدید</p>
+    </div>
+    
+    <!-- Tabs -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="flex border-b">
+            <button onclick="showTab('login')" id="loginTab" class="flex-1 py-4 font-bold text-red-500 border-b-2 border-red-500 transition-colors">
+                ورود
+            </button>
+            <button onclick="showTab('register')" id="registerTab" class="flex-1 py-4 font-bold text-gray-400 hover:text-gray-600 transition-colors">
+                ثبت‌نام
+            </button>
+        </div>
+        
+        <!-- Login Form -->
+        <div id="loginForm" class="p-8">
+            <form>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">شماره موبایل</label>
+                    <div class="relative">
+                        <input type="tel" placeholder="09123456789" class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                        <i class="fas fa-mobile-alt absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">رمز عبور</label>
+                    <div class="relative">
+                        <input type="password" placeholder="********" class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                        <i class="fas fa-lock absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                    <div class="text-left mt-2">
+                        <a href="#" class="text-sm text-red-500 hover:text-red-600">رمز عبور را فراموش کرده‌اید؟</a>
+                    </div>
+                </div>
+                
+                <button type="submit" class="w-full py-3 gradient-bg text-white rounded-lg font-bold hover:opacity-90 transition-opacity mb-4">
+                    ورود به حساب کاربری
+                </button>
+                
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-4 bg-white text-gray-500">یا ورود با</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <button type="button" class="flex items-center justify-center gap-2 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fab fa-google text-red-500"></i>
+                        <span>گوگل</span>
+                    </button>
+                    <button type="button" class="flex items-center justify-center gap-2 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fab fa-apple text-gray-800"></i>
+                        <span>اپل</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Register Form -->
+        <div id="registerForm" class="p-8 hidden">
+            <form>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">نام و نام خانوادگی</label>
+                    <div class="relative">
+                        <input type="text" placeholder="علی محمدی" class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                        <i class="fas fa-user absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">شماره موبایل</label>
+                    <div class="relative">
+                        <input type="tel" placeholder="09123456789" class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                        <i class="fas fa-mobile-alt absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">رمز عبور</label>
+                    <div class="relative">
+                        <input type="password" placeholder="حداقل ۸ کاراکتر" class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                        <i class="fas fa-lock absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">تکرار رمز عبور</label>
+                    <div class="relative">
+                        <input type="password" placeholder="********" class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                        <i class="fas fa-lock absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="flex items-start gap-2">
+                        <input type="checkbox" class="mt-1 w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                        <span class="text-sm text-gray-600">
+                            <a href="#" class="text-red-500 hover:text-red-600">قوانین و مقررات</a> را مطالعه کرده و می‌پذیرم.
+                        </span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="w-full py-3 gradient-bg text-white rounded-lg font-bold hover:opacity-90 transition-opacity">
+                    ثبت‌نام رایگان
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Back to Home -->
+    <div class="text-center mt-6">
+        <a href="../index.html" class="text-gray-500 hover:text-red-500 transition-colors">
+            <i class="fas fa-arrow-right ml-1"></i>
+            بازگشت به صفحه اصلی
+        </a>
+    </div>
+</div>
+
+<script>
+    function showTab(tab) {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        
+        if (tab === 'login') {
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+            loginTab.classList.add('text-red-500', 'border-b-2', 'border-red-500');
+            loginTab.classList.remove('text-gray-400');
+            registerTab.classList.remove('text-red-500', 'border-b-2', 'border-red-500');
+            registerTab.classList.add('text-gray-400');
+        } else {
+            registerForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            registerTab.classList.add('text-red-500', 'border-b-2', 'border-red-500');
+            registerTab.classList.remove('text-gray-400');
+            loginTab.classList.remove('text-red-500', 'border-b-2', 'border-red-500');
+            loginTab.classList.add('text-gray-400');
+        }
+    }
+</script>
+
+</body>
+</html>
