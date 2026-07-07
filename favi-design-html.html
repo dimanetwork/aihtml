@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>گهر کالا — فروشگاه آنلاین</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{accent:'#D4A853','accent-light':'#E8C97A','accent-dark':'#B08A30',surface:'#0C0C12','surface-2':'#13131B','surface-3':'#1A1A24',border:'rgba(255,255,255,0.06)','border-h':'rgba(255,255,255,0.12)',t1:'#F0F0F2',t2:'#8A8A8F',t3:'#55555C',ok:'#30D158',no:'#FF453A',info:'#64D2FF'},fontFamily:{v:['Vazirmatn','sans-serif']}}}}
+</script>
+<style>
+*{font-family:'Vazirmatn',sans-serif;margin:0;padding:0;box-sizing:border-box}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:#0C0C12}
+::-webkit-scrollbar-thumb{background:#2A2A35;border-radius:3px}
+::selection{background:rgba(212,168,83,.3);color:#fff}
+body{background:#0C0C12;color:#F0F0F2;overflow-x:hidden}
+
+/* === پرلودر === */
+#preloader{position:fixed;inset:0;background:#0C0C12;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+#preloader.hide{opacity:0;visibility:hidden}
+#preloader .logo-anim{width:60px;height:60px;border:2px solid rgba(212,168,83,.2);border-top-color:#D4A853;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#preloader .bar{width:120px;height:2px;background:rgba(255,255,255,.06);border-radius:2px;margin-top:24px;overflow:hidden}
+#preloader .bar-fill{height:100%;background:linear-gradient(90deg,#D4A853,#E8C97A);border-radius:2px;animation:loadBar 1.5s ease forwards}
+@keyframes loadBar{from{width:0}to{width:100%}}
+
+/* === کرسر سفارشی === */
+.cursor-dot{position:fixed;width:6px;height:6px;background:#D4A853;border-radius:50%;pointer-events:none;z-index:9998;transition:transform .15s;transform:translate(-50%,-50%)}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(212,168,83,.4);border-radius:50%;pointer-events:none;z-index:9997;transition:all .2s ease;transform:translate(-50%,-50%)}
+.cursor-ring.hover{width:56px;height:56px;border-color:rgba(212,168,83,.7);background:rgba(212,168,83,.05)}
+@media(max-width:768px){.cursor-dot,.cursor-ring{display:none!important}}
+@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none!important}}
+
+/* === انیمیشن‌ها === */
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes slideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes slideL{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(212,168,83,.15)}50%{box-shadow:0 0 40px rgba(212,168,83,.3)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes heartPop{0%{transform:scale(1)}30%{transform:scale(1.35)}60%{transform:scale(.95)}100%{transform:scale(1)}}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes toastOut{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
+@keyframes countUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes textReveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0% 0 0)}}
+@keyframes borderGlow{0%,100%{border-color:rgba(212,168,83,.1)}50%{border-color:rgba(212,168,83,.35)}}
+
+.anim-fadeUp{animation:fadeUp .7s cubic-bezier(.22,1,.36,1) forwards}
+.anim-scaleIn{animation:scaleIn .5s cubic-bezier(.22,1,.36,1) forwards}
+.anim-slideDown{animation:slideDown .35s ease forwards}
+.anim-float{animation:float 4s ease-in-out infinite}
+.anim-glow{animation:glow 3s ease-in-out infinite}
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* === هدر === */
+.hdr-glass{background:rgba(12,12,18,.82);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.04)}
+
+/* === جستجو === */
+.search-wrap{position:relative}
+.search-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;transition:all .3s}
+.search-box:focus-within{border-color:rgba(212,168,83,.4);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(212,168,83,.08)}
+.search-drop{position:absolute;top:calc(100% + 8px);left:0;right:0;background:rgba(19,19,27,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.06);border-radius:16px;display:none;z-index:40;max-height:380px;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.search-drop.show{display:block;animation:slideDown .25s ease}
+
+/* === مگا منو === */
+.mm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:45;display:none}
+.mm-overlay.open{display:block}
+.mm-panel{position:fixed;top:0;right:0;bottom:0;width:780px;max-width:95vw;background:rgba(19,19,27,.98);backdrop-filter:blur(24px);border-left:1px solid rgba(255,255,255,.06);z-index:50;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);display:flex}
+.mm-panel.open{transform:translateX(0)}
+.mm-list{width:240px;overflow-y:auto;border-left:1px solid rgba(255,255,255,.04);flex-shrink:0}
+.mm-item{padding:13px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;color:#8A8A8F;border-bottom:1px solid rgba(255,255,255,.03);transition:all .2s}
+.mm-item:hover,.mm-item.active{color:#D4A853;background:rgba(212,168,83,.06)}
+.mm-item i.icon{width:22px;text-align:center;font-size:15px}
+.mm-subs{flex:1;overflow-y:auto;padding:24px}
+.mm-sub-group{display:none}
+.mm-sub-group.active{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 16px;animation:fadeIn .3s ease}
+.mm-sub-title{font-size:12px;font-weight:700;color:#D4A853;padding-bottom:8px;border-bottom:1px solid rgba(212,168,83,.15);margin-bottom:8px;display:inline-block}
+.mm-sub-link{display:block;font-size:12px;color:#8A8A8F;padding:3px 0;transition:color .2s;cursor:pointer}
+.mm-sub-link:hover{color:#F0F0F2}
+
+/* === منوی موبایل === */
+.mob-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:55;display:none}
+.mob-overlay.open{display:block}
+.mob-panel{position:fixed;top:0;right:0;bottom:0;width:300px;max-width:85vw;background:rgba(13,13,19,.98);backdrop-filter:blur(20px);z-index:60;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);overflow-y:auto}
+.mob-panel.open{transform:translateX(0)}
+.mob-cat-head{padding:13px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:13px;color:#8A8A8F;border-bottom:1px solid rgba(255,255,255,.03)}
+.mob-cat-head .fa-chevron-down{transition:transform .3s}
+.mob-cat-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.mob-cat-body.open{max-height:600px}
+.mob-cat-body a{display:block;padding:9px 16px 9px 44px;font-size:12px;color:#55555C}
+
+/* === هیرو === */
+.hero-section{position:relative;min-height:520px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(212,168,83,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(100,210,255,.04) 0%,transparent 50%),#0C0C12}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)}
+.hero-glow{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,83,.12) 0%,transparent 70%);left:10%;top:50%;transform:translate(-50%,-50%);filter:blur(40px);animation:glow 4s ease-in-out infinite}
+.hero-text{animation:textReveal 1s cubic-bezier(.22,1,.36,1) .5s both}
+.hero-sub{animation:fadeUp .8s ease 1s both}
+.hero-btns{animation:fadeUp .8s ease 1.3s both}
+.hero-img-wrap{animation:fadeUp 1s ease .8s both}
+.hero-product-float{animation:float 5s ease-in-out infinite}
+
+/* === بنتو گرید === */
+.bento-cell{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.04);border-radius:20px;padding:24px;cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
+.bento-cell::before{content:'';position:absolute;inset:0;border-radius:20px;border:1px solid transparent;transition:border-color .4s}
+.bento-cell:hover{background:rgba(255,255,255,.06);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.bento-cell:hover::before{border-color:rgba(212,168,83,.25)}
+.bento-cell .b-icon{transition:all .4s}
+.bento-cell:hover .b-icon{transform:scale(1.15);color:#D4A853}
+
+/* === تایمر فلپ === */
+.flip-card{background:rgba(255,255,255,.06);border-radius:10px;padding:6px 10px;min-width:44px;text-align:center;position:relative}
+.flip-card::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.3)}
+
+/* === کارت محصول === */
+.p-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.04);border-radius:20px;overflow:hidden;transition:all .4s cubic-bezier(.22,1,.36,1);position:relative}
+.p-card:hover{border-color:rgba(255,255,255,.1);box-shadow:0 16px 48px rgba(0,0,0,.35);transform:translateY(-6px)}
+.p-card .p-img{position:relative;overflow:hidden}
+.p-card .p-img img{transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.p-card:hover .p-img img{transform:scale(1.08)}
+.p-actions{position:absolute;bottom:-56px;left:0;right:0;display:flex;justify-content:center;gap:8px;padding:10px;transition:bottom .35s cubic-bezier(.22,1,.36,1);background:linear-gradient(transparent,rgba(12,12,18,.85))}
+.p-card:hover .p-actions{bottom:0}
+.pa-btn{width:38px;height:38px;border-radius:12px;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;font-size:14px;background:rgba(255,255,255,.08);color:#8A8A8F;backdrop-filter:blur(8px)}
+.pa-btn:hover,.pa-btn.on{background:rgba(212,168,83,.2);color:#D4A853}
+.pa-btn.hearted{background:rgba(255,69,58,.2);color:#FF453A}
+.color-dot{width:14px;height:14px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.color-dot:hover,.color-dot.active{border-color:#D4A853;transform:scale(1.2)}
+
+/* === پنل اسلاید === */
+.slide-panel{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:92vw;background:rgba(16,16,22,.98);backdrop-filter:blur(24px);border-left:1px solid rgba(255,255,255,.05);z-index:80;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column}
+.slide-panel.open{transform:translateX(0)}
+.sp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:75;display:none}
+.sp-overlay.open{display:block}
+
+/* === باتم ناو === */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(12,12,18,.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.05);z-index:65;padding:6px 0 env(safe-area-inset-bottom,6px);display:none;justify-content:space-around;align-items:center}
+@media(max-width:768px){.bnav{display:flex}body{padding-bottom:72px}}
+.bnav-item{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#55555C;cursor:pointer;padding:4px 14px;position:relative;transition:color .25s}
+.bnav-item.active{color:#D4A853}
+.bnav-item.active::before{content:'';position:absolute;top:-6px;width:24px;height:3px;background:#D4A853;border-radius:0 0 4px 4px;box-shadow:0 0 12px rgba(212,168,83,.5)}
+.bnav-item i{font-size:19px;transition:transform .2s}
+.bnav-item:active i{transform:scale(.85)}
+.bnav-badge{position:absolute;top:-3px;left:50%;transform:translateX(-50%);background:#D4A853;color:#0C0C12;font-size:9px;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800}
+
+/* === توست === */
+.toast-box{position:fixed;top:24px;left:24px;z-index:200;display:flex;flex-direction:column;gap:8px}
+.toast{background:rgba(26,26,36,.95);backdrop-filter:blur(16px);color:#F0F0F2;padding:14px 20px;border-radius:14px;font-size:13px;display:flex;align-items:center;gap:10px;animation:toastIn .35s cubic-bezier(.22,1,.36,1);min-width:260px;box-shadow:0 12px 40px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.05)}
+.toast.out{animation:toastOut .3s ease forwards}
+.toast .t-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px}
+.toast.ok .t-icon{background:rgba(48,209,88,.15);color:#30D158}
+.toast.no .t-icon{background:rgba(255,69,58,.15);color:#FF453A}
+.toast.inf .t-icon{background:rgba(100,210,255,.15);color:#64D2FF}
+
+/* === بک تو تاپ === */
+.btt{position:fixed;bottom:92px;left:20px;z-index:66;display:none;align-items:center;justify-content:center;cursor:pointer}
+@media(max-width:768px){.btt{bottom:92px}}
+.btt.show{display:flex}
+.btt-ring{width:48px;height:48px;position:relative}
+.btt-ring svg{transform:rotate(-90deg);width:48px;height:48px}
+.btt-ring circle{fill:none;stroke-width:3}
+.btt-ring .bg-c{stroke:rgba(255,255,255,.06)}
+.btt-ring .fg-c{stroke:#D4A853;stroke-linecap:round;transition:stroke-dashoffset .2s}
+.btt-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#D4A853;font-size:14px}
+
+/* === اوول سفارشی === */
+.owl-theme .owl-dots .owl-dot span{width:6px;height:6px;background:rgba(255,255,255,.15);border-radius:50%;transition:all .3s}
+.owl-theme .owl-dots .owl-dot.active span{background:#D4A853;width:22px;border-radius:4px;box-shadow:0 0 10px rgba(212,168,83,.4)}
+.owl-theme .owl-nav{display:none}
+
+/* === دکمه‌ها === */
+.btn-gold{background:linear-gradient(135deg,#D4A853,#B08A30);color:#0C0C12;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.btn-gold:hover{box-shadow:0 8px 30px rgba(212,168,83,.3);transform:translateY(-1px)}
+.btn-gold:active{transform:scale(.97)}
+.btn-outline{background:transparent;color:#D4A853;border:1px solid rgba(212,168,83,.3);border-radius:12px;cursor:pointer;transition:all .3s}
+.btn-outline:hover{border-color:#D4A853;background:rgba(212,168,83,.06)}
+
+/* === ریسپانسیو === */
+@media(max-width:768px){.hero-section{min-height:420px}.hero-glow{width:200px;height:200px;left:50%;top:30%}}
+</style>
+</head>
+<body>
+
+<!-- پرلودر -->
+<div id="preloader"><div class="logo-anim"></div><div class="bar"><div class="bar-fill"></div></div></div>
+
+<!-- کرسر سفارشی -->
+<div class="cursor-dot" id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
+
+<!-- توست -->
+<div class="toast-box" id="toastBox"></div>
+
+<!-- کنواس پارتیکل -->
+<canvas id="particleCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none"></canvas>
+
+<!-- نوار اعلان -->
+<div class="relative z-10 bg-surface-2 border-b border-border text-center py-2 text-[11px] text-t2 hidden md:block">
+  <span class="text-accent font-semibold">ارسال رایگان</span> برای سفارش‌های بالای ۵۰۰ هزار تومان &nbsp;·&nbsp;
+  <span class="text-ok font-semibold">ضمانت اصالت</span> کالا &nbsp;·&nbsp;
+  <span class="text-info font-semibold">پشتیبانی ۲۴/۷</span>
+</div>
+
+<!-- === هدر === -->
+<header class="hdr-glass sticky top-0 z-30" id="mainHeader">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
+    <!-- لوگو -->
+    <a href="#" class="flex-shrink-0 flex items-center gap-2.5 group">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center shadow-lg shadow-accent/20 group-hover:shadow-accent/40 transition-shadow">
+        <i class="fa-solid fa-gem text-surface text-lg"></i>
+      </div>
+      <div class="hidden sm:block"><div class="font-black text-t1 text-sm tracking-tight">گهر کالا</div><div class="text-[10px] text-t3 tracking-wider">GAHAR KALA</div></div>
+    </a>
+    <!-- جستجو -->
+    <div class="search-wrap flex-1 max-w-xl" id="searchWrap">
+      <div class="search-box flex items-center px-4 py-2.5">
+        <i class="fa-solid fa-magnifying-glass text-t3 text-sm ml-3"></i>
+        <input type="text" id="searchIn" placeholder="جستجو در گهر کالا ..." class="bg-transparent flex-1 text-sm text-t1 outline-none placeholder:text-t3">
+      </div>
+      <div class="search-drop" id="searchDrop"></div>
+    </div>
+    <!-- اکشن‌ها -->
+    <div class="flex items-center gap-1">
+      <button onclick="toast('inf','به زودی فعال می‌شود')" class="hidden md:flex items-center gap-2 text-xs text-t2 hover:text-accent transition-colors px-3 py-2 rounded-xl hover:bg-accent/5"><i class="fa-regular fa-user text-base"></i><span class="font-medium">ورود</span></button>
+      <button onclick="openPanel('compareP')" class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/5 transition-colors relative" title="مقایسه"><i class="fa-solid fa-code-compare text-t2"></i><span class="cmp-b absolute -top-1 -left-1 w-5 h-5 bg-info text-surface text-[10px] font-black rounded-full items-center justify-center" style="display:none">0</span></button>
+      <button onclick="openPanel('wishP')" class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/5 transition-colors relative" title="علاقه‌مندی"><i class="fa-regular fa-heart text-t2"></i><span class="wish-b absolute -top-1 -left-1 w-5 h-5 bg-no text-surface text-[10px] font-black rounded-full items-center justify-center" style="display:none">0</span></button>
+      <button onclick="openPanel('cartP')" class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/5 transition-colors relative" title="سبد خرید"><i class="fa-solid fa-bag-shopping text-t2"></i><span class="cart-b absolute -top-1 -left-1 w-5 h-5 bg-accent text-surface text-[10px] font-black rounded-full items-center justify-center" style="display:none">0</span></button>
+      <button onclick="toggleMob()" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/5"><i class="fa-solid fa-bars text-t2"></i></button>
+    </div>
+  </div>
+  <!-- ناو زیر هدر -->
+  <div class="hidden md:block border-t border-border">
+    <div class="max-w-7xl mx-auto px-4 flex items-center gap-1 py-2 text-[13px]">
+      <button onclick="toggleMM()" class="flex items-center gap-2 px-4 py-1.5 bg-accent/10 text-accent rounded-xl text-xs font-semibold hover:bg-accent/15 transition-colors"><i class="fa-solid fa-grid-2"></i>دسته‌بندی</button>
+      <a href="#deals" class="px-3 py-1.5 text-t2 hover:text-accent transition-colors rounded-lg hover:bg-accent/5">شگفت‌انگیز</a>
+      <a href="#products" class="px-3 py-1.5 text-t2 hover:text-accent transition-colors rounded-lg hover:bg-accent/5">محبوب‌ترین</a>
+      <a href="#supermarket" class="px-3 py-1.5 text-t2 hover:text-accent transition-colors rounded-lg hover:bg-accent/5">سوپرمارکت</a>
+      <a href="#" class="px-3 py-1.5 text-t2 hover:text-accent transition-colors rounded-lg hover:bg-accent/5">کارت هدیه</a>
+      <a href="#" class="ml-auto px-3 py-1.5 text-ok hover:text-ok/80 transition-colors font-semibold"><i class="fa-solid fa-bolt ml-1"></i>فروش ویژه</a>
+    </div>
+  </div>
+</header>
+
+<!-- مگا منو -->
+<div class="mm-overlay" id="mmOv" onclick="toggleMM()"></div>
+<div class="mm-panel" id="mmPanel"><div class="mm-list" id="mmList"></div><div class="mm-subs" id="mmSubs"><div class="flex items-center justify-center h-full text-t3"><div class="text-center"><i class="fa-solid fa-arrow-left text-3xl mb-3 block opacity-30"></i><p class="text-sm">دسته‌بندی را انتخاب کنید</p></div></div></div></div>
+
+<!-- منوی موبایل -->
+<div class="mob-overlay" id="mobOv" onclick="toggleMob()"></div>
+<div class="mob-panel" id="mobPanel">
+  <div class="p-4 border-b border-border flex items-center gap-3">
+    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center"><i class="fa-solid fa-user text-surface"></i></div>
+    <div class="flex-1"><div class="font-bold text-sm">وارد شوید</div><div class="text-[11px] text-t3">ثبت‌نام | ورود</div></div>
+    <button onclick="toggleMob()" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/5"><i class="fa-solid fa-xmark text-t3"></i></button>
+  </div>
+  <div id="mobCats"></div>
+  <div class="border-t border-border"><a href="#" class="flex items-center gap-3 px-4 py-3 text-[13px] text-t2"><i class="fa-solid fa-circle-info w-5 text-center text-t3"></i>درباره ما</a><a href="#" class="flex items-center gap-3 px-4 py-3 text-[13px] text-t2"><i class="fa-solid fa-phone w-5 text-center text-t3"></i>تماس با ما</a></div>
+</div>
+
+<!-- === هیرو === -->
+<section class="hero-section relative z-10">
+  <div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-glow"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10 flex items-center min-h-[520px] md:min-h-[520px]">
+    <div class="flex-1 py-16 md:py-0">
+      <div class="hero-text"><h1 class="text-3xl md:text-5xl lg:text-6xl font-black leading-tight">تجربه‌ای متفاوت<br>از <span class="text-accent">خرید آنلاین</span></h1></div>
+      <p class="hero-sub text-t2 text-sm md:text-base mt-5 max-w-md leading-7">هزاران کالا با ضمانت اصالت، ارسال سریع و بهترین قیمت. گهر کالا، انتخاب هوشمند شما.</p>
+      <div class="hero-btns flex flex-wrap gap-3 mt-8">
+        <a href="#products" class="btn-gold px-7 py-3 text-sm">مشاهده محصولات</a>
+        <a href="#deals" class="btn-outline px-7 py-3 text-sm">پیشنهاد ویژه</a>
+      </div>
+      <div class="hero-btns flex items-center gap-8 mt-10">
+        <div><div class="text-2xl font-black text-t1 counter" data-target="12500">0</div><div class="text-[11px] text-t3 mt-0.5">محصول متنوع</div></div>
+        <div class="w-px h-10 bg-border"></div>
+        <div><div class="text-2xl font-black text-t1 counter" data-target="98000">0</div><div class="text-[11px] text-t3 mt-0.5">مشتری راضی</div></div>
+        <div class="w-px h-10 bg-border"></div>
+        <div><div class="text-2xl font-black text-t1">۲۴/۷</div><div class="text-[11px] text-t3 mt-0.5">پشتیبانی</div></div>
+      </div>
+    </div>
+    <div class="hero-img-wrap hidden md:block flex-shrink-0 relative">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent rounded-3xl blur-3xl"></div>
+      <img src="https://picsum.photos/seed/herophone/380/460" class="relative hero-product-float rounded-3xl shadow-2xl shadow-black/40 w-64 lg:w-80" alt="product">
+    </div>
+  </div>
+</section>
+
+<!-- === بنتو دسته‌بندی === -->
+<section class="max-w-7xl mx-auto px-4 mt-12 relative z-10 reveal" id="categories">
+  <div class="flex items-center justify-between mb-6"><h2 class="text-lg font-black">دسته‌بندی‌ها</h2><a href="#" class="text-xs text-accent hover:underline">مشاهده همه <i class="fa-solid fa-chevron-left text-[10px] mr-1"></i></a></div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[100px] md:auto-rows-[120px]" id="bentoGrid"></div>
+</section>
+
+<!-- === پیشنهاد شگفت‌انگیز === -->
+<section class="max-w-7xl mx-auto px-4 mt-12 relative z-10 reveal" id="deals">
+  <div class="rounded-3xl overflow-hidden relative" style="background:linear-gradient(135deg,rgba(212,168,83,.1) 0%,rgba(212,168,83,.02) 100%);border:1px solid rgba(212,168,83,.12)">
+    <div class="p-5 md:p-6 flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center"><i class="fa-solid fa-bolt text-accent text-lg"></i></div><div><h2 class="font-black text-base md:text-lg">پیشنهاد شگفت‌انگیز</h2><p class="text-[11px] text-t3">تا پایان زمان</p></div></div>
+      <div class="flex items-center gap-2" id="flipTimer"><div class="flip-card text-accent font-black text-lg" id="fH">08</div><span class="text-t3 font-bold">:</span><div class="flip-card text-accent font-black text-lg" id="fM">45</div><span class="text-t3 font-bold">:</span><div class="flip-card text-accent font-black text-lg" id="fS">30</div></div>
+    </div>
+    <div class="deals-carousel owl-carousel owl-theme px-4 pb-5"></div>
+  </div>
+</section>
+
+<!-- === بنر دوتایی === -->
+<section class="max-w-7xl mx-auto px-4 mt-6 relative z-10 reveal">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="rounded-2xl overflow-hidden relative h-40 md:h-52 cursor-pointer group border border-border hover:border-accent/20 transition-colors">
+      <img src="https://picsum.photos/seed/banA/600/280" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="">
+      <div class="absolute inset-0 bg-gradient-to-l from-black/70 via-black/30 to-transparent flex items-center pr-6"><div><div class="text-accent text-[11px] font-semibold mb-1">تخفیف ویژه</div><div class="text-white font-black text-xl md:text-2xl">لوازم خانگی</div><div class="text-white/60 text-xs mt-1">تا ۴۵٪ تخفیف</div></div></div>
+    </div>
+    <div class="rounded-2xl overflow-hidden relative h-40 md:h-52 cursor-pointer group border border-border hover:border-info/20 transition-colors">
+      <img src="https://picsum.photos/seed/banB/600/280" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="">
+      <div class="absolute inset-0 bg-gradient-to-l from-black/70 via-black/30 to-transparent flex items-center pr-6"><div><div class="text-info text-[11px] font-semibold mb-1">جدیدترین‌ها</div><div class="text-white font-black text-xl md:text-2xl">گجت‌های هوشمند</div><div class="text-white/60 text-xs mt-1">محصولات ۲۰۲۴</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- === محصولات پریمیوم === -->
+<section class="max-w-7xl mx-auto px-4 mt-12 relative z-10 reveal" id="products">
+  <div class="flex items-center justify-between mb-6"><h2 class="text-lg font-black">محبوب‌ترین‌ها</h2><a href="#" class="text-xs text-accent hover:underline">مشاهده همه <i class="fa-solid fa-chevron-left text-[10px] mr-1"></i></a></div>
+  <div class="products-grid owl-carousel owl-theme"></div>
+</section>
+
+<!-- === سوپرمارکت === -->
+<section class="max-w-7xl mx-auto px-4 mt-12 relative z-10 reveal" id="supermarket">
+  <div class="rounded-3xl overflow-hidden border border-border bg-surface-2/50 p-5 md:p-6">
+    <div class="flex items-center justify-between mb-5">
+      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-ok/10 flex items-center justify-center"><i class="fa-solid fa-leaf text-ok text-lg"></i></div><h2 class="font-black text-base md:text-lg">سوپرمارکت</h2></div>
+      <a href="#" class="text-xs text-accent hover:underline">مشاهده همه <i class="fa-solid fa-chevron-left text-[10px] mr-1"></i></a>
+    </div>
+    <div class="super-carousel owl-carousel owl-theme"></div>
+  </div>
+</section>
+
+<!-- === برندها === -->
+<section class="max-w-7xl mx-auto px-4 mt-12 relative z-10 reveal">
+  <div class="flex items-center justify-between mb-6"><h2 class="text-lg font-black">برندهای محبوب</h2></div>
+  <div class="brands-carousel owl-carousel owl-theme"></div>
+</section>
+
+<!-- === نظرات === -->
+<section class="max-w-7xl mx-auto px-4 mt-12 relative z-10 reveal">
+  <div class="flex items-center justify-between mb-6"><h2 class="text-lg font-black">نظرات مشتریان</h2></div>
+  <div class="reviews-carousel owl-carousel owl-theme"></div>
+</section>
+
+<!-- === CTA === -->
+<section class="max-w-7xl mx-auto px-4 mt-12 mb-8 relative z-10 reveal">
+  <div class="rounded-3xl overflow-hidden relative p-8 md:p-12 text-center" style="background:linear-gradient(135deg,rgba(212,168,83,.08),rgba(212,168,83,.02));border:1px solid rgba(212,168,83,.1)">
+    <div class="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent"></div>
+    <div class="relative z-10">
+      <h2 class="text-2xl md:text-3xl font-black mb-3">از تخفیف‌ها باخبر شوید</h2>
+      <p class="text-t2 text-sm mb-6 max-w-md mx-auto">با عضویت در خبرنامه، اولین نفری باشید که از تخفیف‌های ویژه و محصولات جدید مطلع می‌شوید.</p>
+      <div class="flex gap-2 max-w-sm mx-auto">
+        <input type="email" id="nlEmail" placeholder="ایمیل شما..." class="flex-1 bg-surface-2 border border-border rounded-xl px-4 py-3 text-sm text-t1 outline-none focus:border-accent/40 transition-colors placeholder:text-t3">
+        <button onclick="if(document.getElementById('nlEmail').value.includes('@')){toast('ok','عضویت شما انجام شد');document.getElementById('nlEmail').value=''}else{toast('no','ایمیل معتبر وارد کنید')}" class="btn-gold px-6 py-3 text-sm">عضویت</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === فوتر === -->
+<footer class="relative z-10 border-t border-border bg-surface-2/50">
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex items-center gap-2.5 mb-4"><div class="w-9 h-9 rounded-lg bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center"><i class="fa-solid fa-gem text-surface text-sm"></i></div><div><div class="font-black text-sm">گهر کالا</div><div class="text-[9px] text-t3 tracking-wider">GAHAR KALA</div></div></div>
+        <p class="text-xs text-t3 leading-6 mb-4">فروشگاه آنلاین گهر کالا، مرجع خرید کالاهای دیجیتال و روزمره با تضمین کیفیت و قیمت.</p>
+        <div class="flex gap-2">
+          <a href="#" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-t3 hover:bg-accent/15 hover:text-accent transition-all text-sm"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-t3 hover:bg-accent/15 hover:text-accent transition-all text-sm"><i class="fa-brands fa-telegram"></i></a>
+          <a href="#" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-t3 hover:bg-accent/15 hover:text-accent transition-all text-sm"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-t3 hover:bg-accent/15 hover:text-accent transition-all text-sm"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div><h4 class="font-bold text-sm mb-4">خدمات مشتریان</h4><ul class="space-y-2.5"><li><a href="#" class="text-xs text-t3 hover:text-accent transition-colors">سوالات متداول</a></li><li><a href="#" class="text-xs text-t3 hover:text-accent transition-colors">بازگشت کالا</a></li><li><a href="#" class="text-xs text-t3 hover:text-accent transition-colors">شرایط استفاده</a></li><li><a href="#" class="text-xs text-t3 hover:text-accent transition-colors">حریم خصوصی</a></li></ul></div>
+      <div><h4 class="font-bold text-sm mb-4">راهنمای خرید</h4><ul class="space-y-2.5"><li><a href="#" class="text-xs text-t3 hover:text-accent transition-colors">ثبت سفارش</a></li><li><a href="#" class="text-xs text-t3 hover:text-accent transition-colors">ارسال سفارش</a></li><li><a href="#" class="text-xs text-t3 hover:text-accent transition-colors">روش‌های پرداخت</a></li><li><a href="#" class="text-xs text-t3 hover:text-accent transition-colors">پیگیری سفارش</a></li></ul></div>
+      <div><h4 class="font-bold text-sm mb-4">تماس با ما</h4><ul class="space-y-3"><li class="flex items-start gap-2"><i class="fa-solid fa-location-dot text-accent mt-0.5 text-xs"></i><span class="text-xs text-t3">تهران، خیابان ولیعصر</span></li><li class="flex items-center gap-2"><i class="fa-solid fa-phone text-accent text-xs"></i><span class="text-xs text-t3" dir="ltr">021-12345678</span></li><li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-accent text-xs"></i><span class="text-xs text-t3">info@gahar.ir</span></li></ul></div>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-5 py-6 border-t border-border">
+      <div class="w-16 h-16 rounded-xl bg-white/5 flex items-center justify-center"><i class="fa-solid fa-certificate text-2xl text-t3/30"></i></div>
+      <div class="w-16 h-16 rounded-xl bg-white/5 flex items-center justify-center"><i class="fa-solid fa-shield-halved text-2xl text-t3/30"></i></div>
+      <div class="w-16 h-16 rounded-xl bg-white/5 flex items-center justify-center"><i class="fa-solid fa-star text-2xl text-t3/30"></i></div>
+    </div>
+    <div class="text-center text-[11px] text-t3 pt-4 border-t border-border">تمامی حقوق متعلق به <strong class="text-t2">گهر کالا</strong> است &copy; ۱۴۰۳</div>
+  </div>
+</footer>
+
+<!-- === باتم ناو === -->
+<nav class="bnav" id="bNav">
+  <div class="bnav-item active" onclick="setBNav(this)"><i class="fa-solid fa-house"></i><span>خانه</span></div>
+  <div class="bnav-item" onclick="toggleMob();setBNav(this)"><i class="fa-solid fa-grid-2"></i><span>دسته‌بندی</span></div>
+  <div class="bnav-item" onclick="document.getElementById('searchIn').focus();setBNav(this)"><i class="fa-solid fa-magnifying-glass"></i><span>جستجو</span></div>
+  <div class="bnav-item" onclick="openPanel('cartP');setBNav(this)"><i class="fa-solid fa-bag-shopping"></i><span>سبد</span><span class="bnav-badge cart-bb" style="display:none">0</span></div>
+  <div class="bnav-item" onclick="toast('inf','به زودی');setBNav(this)"><i class="fa-regular fa-user"></i><span>پروفایل</span></div>
+</nav>
+
+<!-- === اسلاید پنل: سبد خرید === -->
+<div class="sp-overlay" id="cartOv" onclick="closePanel('cartP')"></div>
+<div class="slide-panel" id="cartP">
+  <div class="p-5 border-b border-border flex items-center justify-between flex-shrink-0">
+    <h3 class="font-bold text-base"><i class="fa-solid fa-bag-shopping ml-2 text-accent"></i>سبد خرید <span class="text-t3 text-xs font-normal" id="cartCountLabel"></span></h3>
+    <button onclick="closePanel('cartP')" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white/5"><i class="fa-solid fa-xmark text-t3"></i></button>
+  </div>
+  <div class="flex-1 overflow-y-auto p-5" id="cartBody"><div class="flex flex-col items-center justify-center h-full text-t3"><i class="fa-solid fa-bag-shopping text-4xl mb-3 opacity-20"></i><p class="text-sm">سبد خرید خالی است</p></div></div>
+  <div class="p-5 border-t border-border flex-shrink-0" id="cartFoot" style="display:none">
+    <div class="mb-2"><div class="flex justify-between text-xs text-t3 mb-1"><span>ارسال رایگان</span><span id="freeShipText">۵۰۰,۰۰۰ تومان</span></div><div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-l from-accent to-accent-light rounded-full transition-all duration-500" id="shipBar" style="width:0%"></div></div></div>
+    <div class="flex justify-between items-center mb-4"><span class="text-t2 text-sm">جمع کل:</span><span class="font-black text-xl text-t1" id="cartTotal">۰</span></div>
+    <button onclick="toast('ok','سفارش ثبت شد');clearCart()" class="btn-gold w-full py-3.5 text-sm">تکمیل سفارش</button>
+  </div>
+</div>
+
+<!-- === اسلاید پنل: علاقه‌مندی === -->
+<div class="sp-overlay" id="wishOv" onclick="closePanel('wishP')"></div>
+<div class="slide-panel" id="wishP">
+  <div class="p-5 border-b border-border flex items-center justify-between flex-shrink-0"><h3 class="font-bold text-base"><i class="fa-solid fa-heart ml-2 text-no"></i>علاقه‌مندی‌ها</h3><button onclick="closePanel('wishP')" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white/5"><i class="fa-solid fa-xmark text-t3"></i></button></div>
+  <div class="flex-1 overflow-y-auto p-5" id="wishBody"><div class="flex flex-col items-center justify-center h-full text-t3"><i class="fa-regular fa-heart text-4xl mb-3 opacity-20"></i><p class="text-sm">لیست خالی است</p></div></div>
+</div>
+
+<!-- === اسلاید پنل: مقایسه === -->
+<div class="sp-overlay" id="cmpOv" onclick="closePanel('compareP')"></div>
+<div class="slide-panel" id="compareP" style="width:560px">
+  <div class="p-5 border-b border-border flex items-center justify-between flex-shrink-0"><h3 class="font-bold text-base"><i class="fa-solid fa-code-compare ml-2 text-info"></i>مقایسه کالا</h3><button onclick="closePanel('compareP')" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white/5"><i class="fa-solid fa-xmark text-t3"></i></button></div>
+  <div class="flex-1 overflow-y-auto p-5" id="cmpBody"><div class="flex flex-col items-center justify-center h-full text-t3"><i class="fa-solid fa-code-compare text-4xl mb-3 opacity-20"></i><p class="text-sm">حداقل ۲ کالا اضافه کنید</p></div></div>
+</div>
+
+<!-- === مودال Quick View === -->
+<div class="fixed inset-0 z-90 flex items-center justify-center p-4" id="qvOverlay" style="display:none;background:rgba(0,0,0,.7);backdrop-filter:blur(4px)" onclick="if(event.target===this)closeQV()">
+  <div class="bg-surface-2 border border-border rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto anim-scaleIn" id="qvContent"></div>
+</div>
+
+<!-- === بک تو تاپ === -->
+<div class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <div class="btt-ring"><svg viewBox="0 0 48 48"><circle class="bg-c" cx="24" cy="24" r="21"/><circle class="fg-c" cx="24" cy="24" r="21" stroke-dasharray="132" stroke-dashoffset="132" id="bttCircle"/></svg></div>
+  <div class="btt-icon"><i class="fa-solid fa-chevron-up"></i></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+// ===== داده‌ها =====
+const CATS=[
+  {icon:'fa-mobile-screen',name:'موبایل و تبلت',color:'#FF6B6B',count:'۲,۳۴۰',span:'md:col-span-2 md:row-span-2',subs:[{t:'گوشی',l:['سامسونگ','اپل','شیائومی','هوآوی','نوکیا']},{t:'تبلت',l:['آیپد','گلکسی تب','میت‌پد']},{t:'لوازم جانبی',l:['قاب','گلس','شارژر','هندزفری']}]},
+  {icon:'fa-laptop',name:'لپ‌تاپ',color:'#4ECDC4',count:'۸۵۰',span:'',subs:[{t:'لپ‌تاپ',l:['ایسوس','لنوو','اچ‌پی','اپل']},{t:'قطعات',l:['CPU','RAM','SSD','GPU']}]},
+  {icon:'fa-tv',name:'صوتی تصویری',color:'#45B7D1',count:'۶۲۰',span:'',subs:[{t:'تلویزیون',l:['سامسونگ','ال‌جی','شیائومی']},{t:'سینمای خانگی',l:['ساندبار','پروژکتور']}]},
+  {icon:'fa-blender',name:'لوازم خانگی',color:'#F9CA24',count:'۱,۱۲۰',span:'',subs:[{t:'بزرگ',l:['یخچال','لباسشویی','ظرفشویی']},{t:'کوچک',l:['جاروبرقی','اتو','مخلوط‌کن']}]},
+  {icon:'fa-spray-can-sparkles',name:'آرایشی بهداشتی',color:'#E056A0',count:'۳,۴۵۰',span:'',subs:[{t:'پوست',l:['مرطوب‌کننده','ضد آفتاب','سرم']},{t:'آرایش',l:['رژ لب','ریمل','کرم پودر']}]},
+  {icon:'fa-shirt',name:'مد و پوشاک',color:'#A29BFE',count:'۴,۸۰۰',span:'md:col-span-2',subs:[{t:'مردانه',l:['پیراهن','شلوار','کفش']},{t:'زنانه',l:['مانتو','شال','کیف']}]},
+  {icon:'fa-gamepad',name:'گیمینگ',color:'#FD79A8',count:'۴۵۰',span:'',subs:[{t:'کنسول',l:['PS5','Xbox','Switch']},{t:'لوازم',l:['دسته','هدفون','صندلی']}]},
+  {icon:'fa-basket-shopping',name:'سوپرمارکت',color:'#00B894',count:'۵,۲۰۰',span:'',subs:[{t:'نوشیدنی',l:['آب','نوشابه','آبمیوه']},{t:'خوراکی',l:['تنقلات','لبنیات','گوشت']}]},
+  {icon:'fa-book',name:'کتاب و لوازم',color:'#6C5CE7',count:'۹,۰۰۰',span:'',subs:[{t:'کتاب',l:['رمان','علمی','کودک']},{t:'لوازم',l:['خودکار','دفتر','رنگ']}]},
+  {icon:'fa-futbol',name:'ورزش و سفر',color:'#E17055',count:'۷۸۰',span:'',subs:[{t:'ورزشی',l:['لباس','کفش','وزنه']},{t:'سفر',l:['چادر','کیسه خواب','قابلمه']}]},
+  {icon:'fa-couch',name:'خانه و دکور',color:'#81ECEC',count:'۱,۵۰۰',span:'',subs:[{t:'مبلمان',l:['مبل','صندلی','پاف']},{t:'دکور',l:['تابلو','گلدان','آباژور']}]}
+];
+
+const PRODUCTS=[
+  {id:'p1',name:'گوشی آیفون ۱۵ پرو مکس',price:62000000,oldPrice:68000000,img:'prod1',rating:4.8,reviews:1234,colors:['#1a1a2e','#e8d5b7','#f5f5f0']},
+  {id:'p2',name:'لپ‌تاپ گیمینگ ایسوس ROG',price:48500000,oldPrice:60625000,img:'prod2',rating:4.6,reviews:856,colors:['#1a1a2e','#c0c0c0']},
+  {id:'p3',name:'ساعت هوشمند سامسونگ Watch 6',price:8900000,oldPrice:null,img:'prod3',rating:4.4,reviews:423,colors:['#1a1a2e','#4a6741','#c0c0c0']},
+  {id:'p4',name:'ایرپاد پرو نسل دوم',price:9200000,oldPrice:10222000,img:'prod4',rating:4.9,reviews:2100,colors:['#f5f5f0']},
+  {id:'p5',name:'کنسول پلی‌استیشن ۵ اسلیم',price:28500000,oldPrice:null,img:'prod5',rating:4.7,reviews:3456,colors:['#f5f5f0','#1a1a2e']},
+  {id:'p6',name:'هدفون سونی WH-1000XM5',price:7350000,oldPrice:9800000,img:'prod6',rating:4.8,reviews:987,colors:['#1a1a2e','#c0c0c0','#4a3728']},
+  {id:'p7',name:'تبلت آیپد ایر M2',price:28000000,oldPrice:35000000,img:'prod7',rating:4.7,reviews:543,colors:['#c0c0c0','#4a6741','#3a4a7a']},
+  {id:'p8',name:'اسپیکر JBL Charge 5',price:3150000,oldPrice:4500000,img:'prod8',rating:4.5,reviews:678,colors:['#1a1a2e','#e74c3c','#3498db','#2ecc71']}
+];
+
+const DEALS=[
+  {name:'سامسونگ Galaxy A54',price:12025000,old:18500000,discount:35,img:'deal1'},
+  {name:'هدفون سونی XM5',price:7350000,old:9800000,discount:25,img:'deal2'},
+  {name:'اپل واچ سری ۹',price:18700000,old:22000000,discount:15,img:'deal3'},
+  {name:'آیپد ایر M2',price:28000000,old:35000000,discount:20,img:'deal4'},
+  {name:'JBL Charge 5',price:3150000,old:4500000,discount:30,img:'deal5'},
+  {name:'ایرپاد پرو ۲',price:7800000,old:10222000,discount:24,img:'deal6'}
+];
+
+const SUPERS=[
+  {name:'شیر کم‌چرب کاله ۱ لیتری',price:45000,img:'sup1'},
+  {name:'پنیر خامه‌ای صباح ۲۰۰ گرمی',price:78000,img:'sup2'},
+  {name:'نوشابه کوکا ۱.۵ لیتری',price:35000,img:'sup3'},
+  {name:'چیپس خلالی مزمز ۱۶۰ گرمی',price:42000,img:'sup4'},
+  {name:'آب معدنی دماوند ۱.۵ لیتری',price:15000,img:'sup5'},
+  {name:'ماست سون ۹۰۰ گرمی',price:52000,img:'sup6'}
+];
+
+const REVIEWS=[
+  {name:'علی محمدی',text:'کیفیت محصولات عالیه و ارسال خیلی سریع بود. بسته‌بندی هم فوق‌العاده مرتب بود.',rating:5,img:'rev1'},
+  {name:'سارا احمدی',text:'قیمت‌ها نسبت به بازار خیلی مناسب‌تره. ضمانت اصالت کالا هم خیال آدمو راحت می‌کنه.',rating:5,img:'rev2'},
+  {name:'رضا کریمی',text:'پشتیبانی عالی. مشکلی پیش اومد و خیلی سریع حلش کردن. حتماً دوباره خرید می‌کنم.',rating:4,img:'rev3'},
+  {name:'مریم حسینی',text:'تنوع محصولات خیلی بالاست. از موبایل تا مواد غذایی همه چیز دارن.',rating:5,img:'rev4'}
+];
+
+// ===== استیت =====
+let cart=[],wish=[],cmp=[];
+
+// ===== کمکی =====
+const fmt=n=>n.toLocaleString('fa-IR');
+function toast(type,msg){const b=document.getElementById('toastBox'),icons={ok:'fa-check',no:'fa-xmark',inf:'fa-info'},t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<div class="t-icon"><i class="fa-solid ${icons[type]}"></i></div><span>${msg}</span>`;b.appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),300)},3000)}
+function badge(cls,list){document.querySelectorAll(`.${cls}`).forEach(b=>{b.textContent=list.length;b.style.display=list.length>0?'flex':'none'})}
+function updBadges(){badge('cart-b',cart);badge('cart-bb',cart);badge('wish-b',wish);badge('cmp-b',cmp);document.getElementById('cartCountLabel').textContent=cart.length?`(${cart.length} کالا)`:''}
+
+// ===== سبد خرید =====
+function addCart(name,price,img){const e=cart.find(i=>i.name===name);if(e)e.qty++;else cart.push({name,price,img,qty:1});updBadges();renderCart();toast('ok',`${name} اضافه شد`)}
+function rmCart(i){cart.splice(i,1);updBadges();renderCart()}
+function chgQty(i,d){cart[i].qty+=d;if(cart[i].qty<1)cart.splice(i,1);updBadges();renderCart()}
+function clearCart(){cart=[];updBadges();renderCart();closePanel('cartP')}
+function renderCart(){
+  const b=document.getElementById('cartBody'),f=document.getElementById('cartFoot');
+  if(!cart.length){b.innerHTML='<div class="flex flex-col items-center justify-center h-full text-t3"><i class="fa-solid fa-bag-shopping text-4xl mb-3 opacity-20"></i><p class="text-sm">سبد خرید خالی است</p></div>';f.style.display='none';return}
+  let h='',tot=0;
+  cart.forEach((it,i)=>{tot+=it.price*it.qty;h+=`<div class="flex items-center gap-3 py-3 ${i?'border-t border-border':''}"><img src="https://picsum.photos/seed/${it.img}/80/80" class="w-14 h-14 rounded-xl object-cover flex-shrink-0"><div class="flex-1 min-w-0"><div class="text-sm font-medium truncate">${it.name}</div><div class="text-xs text-accent font-bold mt-0.5">${fmt(it.price)} تومان</div></div><div class="flex items-center gap-1"><button onclick="chgQty(${i},1)" class="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10 text-xs transition-colors"><i class="fa-solid fa-plus"></i></button><span class="w-7 text-center text-xs font-bold">${it.qty}</span><button onclick="chgQty(${i},-1)" class="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10 text-xs transition-colors"><i class="fa-solid fa-minus"></i></button></div><button onclick="rmCart(${i})" class="w-7 h-7 rounded-lg hover:bg-no/10 flex items-center justify-center text-t3 hover:text-no transition-colors"><i class="fa-solid fa-trash-can text-[11px]"></i></button></div>`});
+  b.innerHTML=h;
+  document.getElementById('cartTotal').textContent=fmt(tot)+' تومان';
+  const pct=Math.min(tot/500000*100,100);
+  document.getElementById('shipBar').style.width=pct+'%';
+  document.getElementById('freeShipText').textContent=tot>=500000?'رایگان!':fmt(500000-tot)+' تومان مانده';
+  f.style.display='block';
+}
+
+// ===== علاقه‌مندی =====
+function toggleWish(btn,name,price,img){
+  const i=wish.findIndex(w=>w.name===name);
+  if(i>-1){wish.splice(i,1);btn.classList.remove('hearted');btn.innerHTML='<i class="fa-regular fa-heart"></i>';toast('inf','حذف شد از علاقه‌مندی')}
+  else{wish.push({name,price,img});btn.classList.add('hearted');btn.innerHTML='<i class="fa-solid fa-heart"></i>';btn.style.animation='none';btn.offsetHeight;btn.style.animation='heartPop .5s ease';toast('ok','اضافه شد به علاقه‌مندی')}
+  updBadges();renderWish();
+}
+function rmWish(i){wish.splice(i,1);updBadges();renderWish()}
+function renderWish(){
+  const b=document.getElementById('wishBody');
+  if(!wish.length){b.innerHTML='<div class="flex flex-col items-center justify-center h-full text-t3"><i class="fa-regular fa-heart text-4xl mb-3 opacity-20"></i><p class="text-sm">لیست خالی است</p></div>';return}
+  let h='';wish.forEach((it,i)=>{h+=`<div class="flex items-center gap-3 py-3 ${i?'border-t border-border':''}"><img src="https://picsum.photos/seed/${it.img}/80/80" class="w-14 h-14 rounded-xl object-cover flex-shrink-0"><div class="flex-1 min-w-0"><div class="text-sm font-medium truncate">${it.name}</div><div class="text-xs text-accent font-bold mt-0.5">${fmt(it.price)} تومان</div></div><button onclick="addCart('${it.name}',${it.price},'${it.img}');rmWish(${i})" class="text-[11px] text-accent font-semibold hover:underline flex-shrink-0">افزودن به سبد</button><button onclick="rmWish(${i})" class="w-7 h-7 rounded-lg hover:bg-no/10 flex items-center justify-center text-t3 hover:text-no"><i class="fa-solid fa-trash-can text-[11px]"></i></button></div>`});b.innerHTML=h;
+}
+
+// ===== مقایسه =====
+function toggleCmp(btn,name,price,img){
+  const i=cmp.findIndex(c=>c.name===name);
+  if(i>-1){cmp.splice(i,1);btn.classList.remove('on');toast('inf','حذف شد از مقایسه')}
+  else{if(cmp.length>=4){toast('no','حداکثر ۴ کالا');return}cmp.push({name,price,img});btn.classList.add('on');toast('ok','اضافه شد به مقایسه')}
+  updBadges();renderCmp();
+}
+function rmCmp(i){cmp.splice(i,1);updBadges();renderCmp()}
+function renderCmp(){
+  const b=document.getElementById('cmpBody');
+  if(!cmp.length){b.innerHTML='<div class="flex flex-col items-center justify-center h-full text-t3"><i class="fa-solid fa-code-compare text-4xl mb-3 opacity-20"></i><p class="text-sm">حداقل ۲ کالا اضافه کنید</p></div>';return}
+  let h='<div class="overflow-x-auto"><table class="w-full text-sm min-w-[300px]"><thead><tr><th class="text-right p-2 text-t3 text-xs">ویژگی</th>';cmp.forEach(c=>{h+=`<th class="p-2 text-center"><img src="https://picsum.photos/seed/${c.img}/80/80" class="w-14 h-14 rounded-xl object-cover mx-auto mb-2"><div class="text-xs font-medium">${c.name.split(' ').slice(0,2).join(' ')}</div></th>`});h+='</tr></thead><tbody>';
+  ['برند','قیمت','وضعیت','گارانتی','ارسال'].forEach(f=>{h+=`<tr class="border-t border-border"><td class="p-2 text-t3 text-xs">${f}</td>`;cmp.forEach(c=>{h+=`<td class="p-2 text-center text-xs text-t2">${f==='قیمت'?fmt(c.price)+' تومان':'—'}</td>`});h+='</tr>'});
+  h+='</tbody></table></div><div class="flex flex-wrap gap-2 mt-4">';cmp.forEach((c,i)=>{h+=`<button onclick="rmCmp(${i})" class="text-[11px] text-no border border-no/30 rounded-lg px-3 py-1.5 hover:bg-no/10 transition-colors">حذف ${c.name.split(' ').slice(0,2).join(' ')}</button>`});h+='</div>';b.innerHTML=h;
+}
+
+// ===== Quick View =====
+function openQV(id){
+  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+  const disc=p.oldPrice?Math.round((1-p.price/p.oldPrice)*100):0;
+  let colorsH='';if(p.colors)p.colors.forEach((c,i)=>{colorsH+=`<div class="color-dot ${i===0?'active':''}" style="background:${c}" onclick="this.parentElement.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('active'));this.classList.add('active')"></div>`});
+  document.getElementById('qvContent').innerHTML=`<div class="md:flex"><div class="md:w-1/2 p-6"><img src="https://picsum.photos/seed/${p.img}/400/400" class="w-full aspect-square object-cover rounded-2xl"></div><div class="md:w-1/2 p-6"><button onclick="closeQV()" class="float-left w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white/5"><i class="fa-solid fa-xmark text-t3"></i></button><h2 class="font-bold text-lg mt-4 md:mt-0">${p.name}</h2><div class="flex items-center gap-2 mt-2"><div class="flex text-accent text-xs">${'<i class="fa-solid fa-star"></i>'.repeat(Math.floor(p.rating))}</div><span class="text-xs text-t3">${p.rating} (${fmt(p.reviews)} نظر)</span></div>${disc?`<div class="inline-block bg-no/15 text-no text-[11px] font-bold px-2 py-0.5 rounded-lg mt-3">${disc}٪ تخفیف</div>`:''}<div class="mt-3">${p.oldPrice?`<span class="text-t3 text-xs line-through ml-2">${fmt(p.oldPrice)}</span>`:''}<span class="font-black text-xl text-t1">${fmt(p.price)}</span><span class="text-xs text-t3 mr-1">تومان</span></div>${colorsH?`<div class="flex gap-2 mt-4">${colorsH}</div>`:''}<div class="flex gap-3 mt-6"><button onclick="addCart('${p.name}',${p.price},'${p.img}');closeQV()" class="btn-gold flex-1 py-3 text-sm"><i class="fa-solid fa-bag-shopping ml-2"></i>افزودن به سبد</button><button onclick="toggleWish(this,'${p.name}',${p.price},'${p.img}')" class="btn-outline w-12 h-12 flex items-center justify-center text-base"><i class="fa-regular fa-heart"></i></button></div><div class="mt-6 space-y-2 text-xs text-t3"><div class="flex items-center gap-2"><i class="fa-solid fa-truck-fast text-accent w-4 text-center"></i>ارسال سریع (۲ تا ۵ روز)</div><div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-ok w-4 text-center"></i>ضمانت ۱۸ ماهه شرکتی</div><div class="flex items-center gap-2"><i class="fa-solid fa-rotate-left text-info w-4 text-center"></i>۷ روز بازگشت بدون قید و شرط</div></div></div></div>`;
+  document.getElementById('qvOverlay').style.display='flex';document.body.style.overflow='hidden';
+}
+function closeQV(){document.getElementById('qvOverlay').style.display='none';document.body.style.overflow=''}
+
+// ===== پنل‌ها =====
+function openPanel(id){document.getElementById(id+'Ov').classList.add('open');document.getElementById(id).classList.add('open');document.body.style.overflow='hidden'}
+function closePanel(id){document.getElementById(id+'Ov').classList.remove('open');document.getElementById(id).classList.remove('open');document.body.style.overflow=''}
+
+// ===== مگا منو =====
+function toggleMM(){const p=document.getElementById('mmPanel'),o=document.getElementById('mmOv'),open=p.classList.contains('open');if(open){p.classList.remove('open');o.classList.remove('open')}else{p.classList.add('open');o.classList.add('open')}}
+function buildMM(){
+  let lh='<div class="p-3 border-b border-border"><div class="relative"><input type="text" placeholder="جستجو ..." class="w-full bg-white/5 rounded-xl py-2.5 px-4 pr-10 text-sm outline-none text-t1 placeholder:text-t3 border border-border focus:border-accent/30"><i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 -translate-y-1/2 text-t3 text-xs"></i></div></div>';
+  let sh='';
+  CATS.forEach((c,i)=>{lh+=`<div class="mm-item ${i===0?'active':''}" data-i="${i}" onmouseenter="showMMS(${i})"><i class="fa-solid ${c.icon} icon" style="color:${c.color}"></i><span>${c.name}</span><i class="fa-solid fa-chevron-left text-[10px] mr-auto text-t3/50"></i></div>`;
+    sh+=`<div class="mm-sub-group ${i===0?'active':''}" data-s="${i}">`;c.subs.forEach(s=>{sh+=`<div><div class="mm-sub-title">${s.t}</div>`;s.l.forEach(l=>{sh+=`<span class="mm-sub-link">${l}</span>`});sh+='</div>'});sh+='</div>'});
+  document.getElementById('mmList').innerHTML=lh;document.getElementById('mmSubs').innerHTML=sh;
+}
+function showMMS(i){document.querySelectorAll('.mm-item').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.mm-sub-group').forEach(e=>e.classList.remove('active'));document.querySelector(`.mm-item[data-i="${i}"]`).classList.add('active');document.querySelector(`.mm-sub-group[data-s="${i}"]`).classList.add('active')}
+
+// ===== منوی موبایل =====
+function toggleMob(){const p=document.getElementById('mobPanel'),o=document.getElementById('mobOv'),open=p.classList.contains('open');if(open){p.classList.remove('open');o.classList.remove('open');document.body.style.overflow=''}else{p.classList.add('open');o.classList.add('open');document.body.style.overflow='hidden'}}
+function buildMob(){
+  let h='';CATS.forEach(c=>{h+=`<div class="border-b border-border"><div class="mob-cat-head" onclick="toggleMC(this)"><span><i class="fa-solid ${c.icon} ml-2" style="color:${c.color}"></i>${c.name}</span><i class="fa-solid fa-chevron-down"></i></div><div class="mob-cat-body">`;c.subs.forEach(s=>{h+=`<div class="text-[11px] text-t2 font-semibold px-4 pt-2.5 pb-0.5">${s.t}</div>`;s.l.forEach(l=>{h+=`<a href="#">${l}</a>`})});h+='</div></div>'});document.getElementById('mobCats').innerHTML=h;
+}
+function toggleMC(hd){const bd=hd.nextElementSibling,ic=hd.querySelector('.fa-chevron-down'),open=bd.classList.contains('open');document.querySelectorAll('.mob-cat-body').forEach(b=>b.classList.remove('open'));document.querySelectorAll('.mob-cat-head .fa-chevron-down').forEach(i=>i.style.transform='');if(!open){bd.classList.add('open');ic.style.transform='rotate(180deg)'}}
+
+// ===== باتم ناو =====
+function setBNav(el){document.querySelectorAll('.bnav-item').forEach(i=>i.classList.remove('active'));el.classList.add('active')}
+
+// ===== جستجو =====
+const sIn=document.getElementById('searchIn'),sDrop=document.getElementById('searchDrop');
+const trends=['گوشی موبایل','لپ‌تاپ','هدفون بی‌سیم','ساعت هوشمند','تبلت','کنسول بازی','ایرپاد','تلویزیون'];
+function renderSearch(q){
+  let h=q?`<div class="p-3 text-[11px] text-t3">نتایج: "${q}"</div>`:`<div class="p-3 text-[11px] text-t3 font-semibold">جستجوهای پرطرفدار</div>`;
+  const src=q?[...PRODUCTS,...DEALS].filter(p=>p.name.includes(q)):trends.map(t=>({name:t,img:null}));
+  if(src.length){src.forEach(p=>{h+=`<div class="flex items-center gap-3 px-4 py-2.5 cursor-pointer hover:bg-white/5 transition-colors" onclick="sIn.value='${p.name}';sDrop.classList.remove('show');toast('inf','جستجو: ${p.name}')"><i class="fa-solid fa-magnifying-glass text-t3 text-xs"></i><span class="text-sm text-t2">${p.name}</span>${!q?'<i class="fa-solid fa-fire-flame-curved text-accent/50 text-[10px] mr-auto"></i>':''}</div>`})}
+  else h+=`<div class="px-4 py-3 text-sm text-t3">نتیجه‌ای یافت نشد</div>`;
+  sDrop.innerHTML=h;
+}
+sIn.addEventListener('focus',()=>{renderSearch(sIn.value.trim());sDrop.classList.add('show')});
+sIn.addEventListener('blur',()=>setTimeout(()=>sDrop.classList.remove('show'),200));
+sIn.addEventListener('input',e=>{renderSearch(e.target.value.trim());sDrop.classList.add('show')});
+
+// ===== تایمر =====
+let timer=8*3600+45*60+30;
+function tickTimer(){if(timer<=0)timer=24*3600;timer--;const h=Math.floor(timer/3600),m=Math.floor((timer%3600)/60),s=timer%60;document.getElementById('fH').textContent=String(h).padStart(2,'0');document.getElementById('fM').textContent=String(m).padStart(2,'0');document.getElementById('fS').textContent=String(s).padStart(2,'0')}
+setInterval(tickTimer,1000);
+
+// ===== بیلد سکشن‌ها =====
+function buildBento(){
+  const g=document.getElementById('bentoGrid');
+  g.innerHTML=CATS.map((c,i)=>`<div class="bento-cell ${c.span} flex flex-col justify-between" onclick="toast('inf','دسته‌بندی: ${c.name}')"><div><div class="b-icon w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:${c.color}15"><i class="fa-solid ${c.icon} text-lg" style="color:${c.color}"></i></div><h3 class="font-bold text-sm">${c.name}</h3></div><span class="text-[11px] text-t3">${c.count} کالا</span></div>`).join('');
+}
+
+function buildDeals(){
+  document.querySelector('.deals-carousel').innerHTML=DEALS.map(d=>`<div class="flex-shrink-0 w-44 md:w-48"><div class="bg-surface-2/80 border border-border rounded-2xl p-3 hover:border-accent/20 transition-colors"><img src="https://picsum.photos/seed/${d.img}/200/200" class="w-full aspect-square object-cover rounded-xl mb-3" loading="lazy"><div class="text-xs font-medium line-clamp-2 h-8 mb-2 text-t2">${d.name}</div><div class="flex items-center gap-2 mb-1.5"><span class="bg-no/15 text-no text-[10px] font-bold px-1.5 py-0.5 rounded-md">${d.discount}٪</span><span class="text-t3 text-[11px] line-through">${fmt(d.old)}</span></div><div class="text-accent font-black text-sm">${fmt(d.price)} <span class="text-[10px] font-normal text-t3">تومان</span></div><button onclick="addCart('${d.name}',${d.price},'${d.img}')" class="w-full mt-3 bg-accent/10 text-accent text-[11px] font-bold py-2 rounded-xl hover:bg-accent/20 transition-colors"><i class="fa-solid fa-plus ml-1"></i>افزودن</button></div></div>`).join('');
+}
+
+function productCard(p){
+  const disc=p.oldPrice?Math.round((1-p.price/p.oldPrice)*100):0;
+  let colorsH='';if(p.colors)p.colors.map((c,i)=>colorsH+=`<div class="color-dot ${i===0?'active':''}" style="background:${c}"></div>`).join('');
+  return `<div class="p-card" data-id="${p.id}"><div class="p-img p-4 pb-2"><img src="https://picsum.photos/seed/${p.img}/300/300" class="w-full aspect-square object-cover rounded-2xl" loading="lazy">${disc?`<div class="absolute top-6 right-6 bg-no/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-lg backdrop-blur-sm">${disc}٪</div>`:''}<div class="p-actions"><button class="pa-btn" onclick="toggleWish(this,'${p.name}',${p.price},'${p.img}')"><i class="fa-regular fa-heart"></i></button><button class="pa-btn" onclick="toggleCmp(this,'${p.name}',${p.price},'${p.img}')"><i class="fa-solid fa-code-compare"></i></button><button class="pa-btn" onclick="openQV('${p.id}')"><i class="fa-solid fa-eye"></i></button></div></div><div class="px-4 pb-4">${colorsH?`<div class="flex gap-1.5 mb-2">${colorsH}</div>`:''}<h3 class="text-[13px] font-medium line-clamp-2 h-10 mb-2 text-t2 hover:text-t1 transition-colors cursor-pointer" onclick="openQV('${p.id}')">${p.name}</h3><div class="flex items-center gap-1.5 mb-2"><div class="flex text-accent text-[10px]">${'<i class="fa-solid fa-star"></i>'.repeat(Math.floor(p.rating))}</div><span class="text-[11px] text-t3">${p.rating}</span><span class="text-[10px] text-t3">(${fmt(p.reviews)})</span></div><div class="flex items-center justify-between">${p.oldPrice?`<div><div class="text-t3 text-[11px] line-through">${fmt(p.oldPrice)}</div><div class="font-black text-sm text-t1">${fmt(p.price)} <span class="text-[10px] font-normal text-t3">تومان</span></div></div>`:`<div class="font-black text-sm text-t1">${fmt(p.price)} <span class="text-[10px] font-normal text-t3">تومان</span></div>`}<button onclick="addCart('${p.name}',${p.price},'${p.img}')" class="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center hover:bg-accent/20 transition-colors flex-shrink-0"><i class="fa-solid fa-plus text-sm"></i></button></div></div></div>`;
+}
+
+function buildProducts(){document.querySelector('.products-grid').innerHTML=PRODUCTS.map(productCard).join('')}
+
+function buildSuper(){
+  document.querySelector('.super-carousel').innerHTML=SUPERS.map(s=>`<div class="flex-shrink-0"><div class="p-card"><div class="p-img p-4 pb-2"><img src="https://picsum.photos/seed/${s.img}/300/300" class="w-full aspect-square object-cover rounded-2xl" loading="lazy"></div><div class="px-4 pb-4"><h3 class="text-[13px] font-medium line-clamp-2 h-10 mb-2 text-t2">${s.name}</h3><div class="flex items-center justify-between"><div class="font-black text-sm text-t1">${fmt(s.price)} <span class="text-[10px] font-normal text-t3">تومان</span></div><button onclick="addCart('${s.name}',${s.price},'${s.img}')" class="w-9 h-9 rounded-xl bg-ok/10 text-ok flex items-center justify-center hover:bg-ok/20 transition-colors flex-shrink-0"><i class="fa-solid fa-plus text-sm"></i></button></div></div></div></div>`).join('');
+}
+
+function buildBrands(){
+  document.querySelector('.brands-carousel').innerHTML=Array.from({length:8},(_, i)=>`<div class="flex-shrink-0"><div class="border border-border rounded-2xl p-4 flex items-center justify-center h-20 hover:border-accent/20 hover:bg-accent/5 transition-all cursor-pointer"><img src="https://picsum.photos/seed/brand${i+1}/120/50" class="max-h-full max-w-full object-contain opacity-40 hover:opacity-80 transition-opacity" loading="lazy"></div></div>`).join('');
+}
+
+function buildReviews(){
+  document.querySelector('.reviews-carousel').innerHTML=REVIEWS.map(r=>`<div class="flex-shrink-0"><div class="bg-surface-2/50 border border-border rounded-2xl p-5 hover:border-accent/15 transition-colors"><div class="flex items-center gap-3 mb-3"><img src="https://picsum.photos/seed/${r.img}/60/60" class="w-10 h-10 rounded-full object-cover"><div><div class="text-sm font-bold">${r.name}</div><div class="flex text-accent text-[10px] mt-0.5">${'<i class="fa-solid fa-star"></i>'.repeat(r.rating)}${'<i class="fa-regular fa-star text-t3/30"></i>'.repeat(5-r.rating)}</div></div></div><p class="text-xs text-t2 leading-6">${r.text}</p></div></div>`).join('');
+}
+
+// ===== پارتیکل =====
+function initParticles(){
+  const c=document.getElementById('particleCanvas'),ctx=c.getContext('2d');
+  let w,h,pts=[];
+  function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<50;i++)pts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+0.5,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,a:Math.random()*.3+.1});
+  function draw(){ctx.clearRect(0,0,w,h);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(212,168,83,${p.a})`;ctx.fill()});requestAnimationFrame(draw)}
+  draw();
+}
+
+// ===== کرسر سفارشی =====
+function initCursor(){
+  const dot=document.getElementById('cDot'),ring=document.getElementById('cRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)}
+  loop();
+  document.querySelectorAll('a,button,.p-card,.bento-cell,.color-dot,.pa-btn,.search-box,.mm-item,.mob-cat-head').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'))});
+}
+
+// ===== شمارنده آمار =====
+function initCounters(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,target=+el.dataset.target;let cur=0;const step=target/60;const timer=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(timer)}el.textContent=fmt(Math.floor(cur))},25);obs.unobserve(el)}})},{threshold:.5});
+  document.querySelectorAll('.counter').forEach(c=>obs.observe(c));
+}
+
+// ===== بک تو تاپ =====
+function initBTT(){
+  const el=document.getElementById('btt'),circle=document.getElementById('bttCircle');
+  const circ=2*Math.PI*21;circle.style.strokeDasharray=circ;circle.style.strokeDashoffset=circ;
+  window.addEventListener('scroll',()=>{const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight,pct=s/h;circle.style.strokeDashoffset=circ-pct*circ;if(s>400)el.classList.add('show');else el.classList.remove('show')});
+}
+
+// ===== اسکرول ریویل =====
+function initReveal(){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))}
+
+// ===== 3D تیلت =====
+function initTilt(){
+  document.querySelectorAll('.p-card,.bento-cell').forEach(card=>{
+    card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2,rx=(y-cy)/cy*-4,ry=(x-cx)/cx*4;card.style.transform=`translateY(-6px) perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`});
+    card.addEventListener('mouseleave',()=>{card.style.transform=''});
+  });
+}
+
+// ===== اوول =====
+function initOwl(){
+  $('.deals-carousel').owlCarousel({items:5,loop:true,autoplay:true,autoplayTimeout:3000,smartSpeed:500,dots:false,nav:false,rtl:true,margin:12,responsive:{0:{items:2,margin:8},480:{items:3,margin:8},768:{items:4,margin:10},1024:{items:5,margin:12}}});
+  $('.products-grid').owlCarousel({items:5,loop:true,autoplay:true,autoplayTimeout:4000,smartSpeed:500,dots:true,nav:false,rtl:true,margin:16,responsive:{0:{items:2,margin:8},480:{items:2,margin:10},768:{items:3,margin:12},1024:{items:4,margin:16},1200:{items:5,margin:16}}});
+  $('.super-carousel').owlCarousel({items:5,loop:true,autoplay:true,autoplayTimeout:3500,smartSpeed:500,dots:true,nav:false,rtl:true,margin:14,responsive:{0:{items:2,margin:8},480:{items:3,margin:8},768:{items:4,margin:10},1024:{items:5,margin:14}}});
+  $('.brands-carousel').owlCarousel({items:6,loop:true,autoplay:true,autoplayTimeout:2500,smartSpeed:400,dots:false,nav:false,rtl:true,margin:12,responsive:{0:{items:3,margin:8},480:{items:4,margin:8},768:{items:5,margin:10},1024:{items:6,margin:12}}});
+  $('.reviews-carousel').owlCarousel({items:3,loop:true,autoplay:true,autoplayTimeout:5000,smartSpeed:500,dots:true,nav:false,rtl:true,margin:16,responsive:{0:{items:1,margin:8},640:{items:2,margin:10},1024:{items:3,margin:16}}});
+}
+
+// ===== اسکرول بستن مگا منو =====
+window.addEventListener('scroll',()=>{const p=document.getElementById('mmPanel');if(p.classList.contains('open'))toggleMM()});
+
+// ===== Escape =====
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){['cartP','wishP','compareP'].forEach(id=>{const p=document.getElementById(id);if(p.classList.contains('open'))closePanel(id)});closeQV();const mm=document.getElementById('mmPanel');if(mm.classList.contains('open'))toggleMM();const mob=document.getElementById('mobPanel');if(mob.classList.contains('open'))toggleMob();sDrop.classList.remove('show')}});
+
+// ===== اینیت =====
+window.addEventListener('load',()=>{
+  setTimeout(()=>document.getElementById('preloader').classList.add('hide'),1600);
+  buildMM();buildMob();buildBento();buildDeals();buildProducts();buildSuper();buildBrands();buildReviews();
+  initParticles();initCursor();initCounters();initBTT();initReveal();initOwl();
+  setTimeout(initTilt,500);
+  // ریلود تیلت بعد از تغییر اوول
+  $('.products-grid').on('changed.owl.carousel',()=>setTimeout(initTilt,100));
+});
+</script>
+</body>
+</html>
