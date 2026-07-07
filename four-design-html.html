@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گهر کالا خدمات - فروشگاه اینترنتی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ef4056',
+                        primaryDark: '#d63348',
+                        secondary: '#00bfd6',
+                        dark: '#3f4064',
+                        lightBg: '#f0f0f1',
+                        offerGreen: '#00a049',
+                        textDark: '#0c0c0c',
+                        textGray: '#81858b',
+                    },
+                    fontFamily: {
+                        vazir: ['Vazirmatn', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Vazirmatn', sans-serif; box-sizing: border-box; }
+        body { background: #f0f0f1; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f0f0f1; }
+        ::-webkit-scrollbar-thumb { background: #c0c0c0; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
+
+        /* انیمیشن‌ها */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        @keyframes slideInLeft { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes pulse-badge { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        @keyframes shake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes toastIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes toastOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+        @keyframes heartBeat { 0% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(1); } 45% { transform: scale(1.2); } 60% { transform: scale(1); } }
+
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease forwards; }
+        .animate-fadeIn { animation: fadeIn 0.4s ease forwards; }
+        .animate-scaleIn { animation: scaleIn 0.4s ease forwards; }
+        .animate-slideDown { animation: slideDown 0.3s ease forwards; }
+        .animate-heartBeat { animation: heartBeat 0.8s ease; }
+
+        .scroll-animate { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .scroll-animate.visible { opacity: 1; transform: translateY(0); }
+
+        /* مگا منو */
+        .mega-menu-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 40; }
+        .mega-menu-overlay.active { display: block; }
+        .mega-menu-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 820px; max-width: 95vw; background: #fff; z-index: 50; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); display: flex; }
+        .mega-menu-panel.active { transform: translateX(0); }
+        .mega-cats { width: 260px; overflow-y: auto; border-left: 1px solid #eee; flex-shrink: 0; }
+        .mega-cats-item { padding: 12px 16px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; font-size: 14px; color: #3f4064; border-bottom: 1px solid #f5f5f5; }
+        .mega-cats-item:hover, .mega-cats-item.active { background: #f0f0f1; color: #ef4056; }
+        .mega-cats-item i { width: 24px; text-align: center; font-size: 16px; }
+        .mega-subcats { flex: 1; overflow-y: auto; padding: 20px; }
+        .mega-subcats-inner { display: none; }
+        .mega-subcats-inner.active { display: block; animation: fadeIn 0.3s ease; }
+        .mega-subcat-col { display: inline-block; vertical-align: top; width: 33.33%; padding: 0 10px 20px; }
+        .mega-subcat-title { font-weight: 700; font-size: 13px; color: #3f4064; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid #ef4056; display: inline-block; }
+        .mega-subcat-link { display: block; font-size: 13px; color: #767790; padding: 4px 0; transition: color 0.2s; cursor: pointer; }
+        .mega-subcat-link:hover { color: #ef4056; }
+
+        /* موبایل منو */
+        .mobile-menu-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 60; }
+        .mobile-menu-overlay.active { display: block; }
+        .mobile-menu-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 300px; max-width: 85vw; background: #fff; z-index: 70; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; }
+        .mobile-menu-panel.active { transform: translateX(0); }
+        .mobile-cat-item { border-bottom: 1px solid #f5f5f5; }
+        .mobile-cat-header { padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-size: 14px; color: #3f4064; font-weight: 500; }
+        .mobile-cat-header i:first-child { margin-left: 10px; color: #81858b; }
+        .mobile-cat-sub { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #fafafa; }
+        .mobile-cat-sub.open { max-height: 500px; }
+        .mobile-cat-sub a { display: block; padding: 10px 16px 10px 42px; font-size: 13px; color: #767790; }
+
+        /* مودال */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 80; justify-content: center; align-items: flex-start; padding-top: 60px; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: #fff; border-radius: 12px; width: 480px; max-width: 95vw; max-height: 80vh; overflow: hidden; animation: scaleIn 0.3s ease; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .modal-header { padding: 16px 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+        .modal-body { overflow-y: auto; flex: 1; padding: 16px 20px; }
+        .modal-footer { padding: 16px 20px; border-top: 1px solid #eee; flex-shrink: 0; }
+
+        /* باتم ناو */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #e0e0e0; z-index: 55; padding: 6px 0 env(safe-area-inset-bottom, 6px); display: none; }
+        @media (max-width: 768px) { .bottom-nav { display: flex; justify-content: space-around; align-items: center; } body { padding-bottom: 70px; } }
+        .bottom-nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10px; color: #81858b; cursor: pointer; padding: 4px 12px; position: relative; transition: color 0.2s; }
+        .bottom-nav-item.active { color: #ef4056; }
+        .bottom-nav-item.active::before { content: ''; position: absolute; top: -6px; width: 30px; height: 3px; background: #ef4056; border-radius: 0 0 3px 3px; }
+        .bottom-nav-item i { font-size: 20px; }
+        .bottom-nav-badge { position: absolute; top: -2px; left: 50%; transform: translateX(-50%); background: #ef4056; color: #fff; font-size: 10px; min-width: 16px; height: 16px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+
+        /* کارت محصول */
+        .product-card { background: #fff; border-radius: 12px; overflow: hidden; transition: all 0.3s ease; border: 1px solid transparent; }
+        .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-color: #f0f0f1; transform: translateY(-2px); }
+        .product-card .img-wrapper { position: relative; overflow: hidden; }
+        .product-card .img-wrapper img { transition: transform 0.4s ease; }
+        .product-card:hover .img-wrapper img { transform: scale(1.05); }
+        .product-actions { position: absolute; bottom: -50px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; padding: 10px; transition: bottom 0.3s ease; background: linear-gradient(transparent, rgba(255,255,255,0.9)); }
+        .product-card:hover .product-actions { bottom: 0; }
+        .product-action-btn { width: 36px; height: 36px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+        .product-action-btn.wishlist-btn { background: #fff; color: #81858b; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+        .product-action-btn.wishlist-btn:hover, .product-action-btn.wishlist-btn.active { background: #ef4056; color: #fff; }
+        .product-action-btn.compare-btn { background: #fff; color: #81858b; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+        .product-action-btn.compare-btn:hover, .product-action-btn.compare-btn.active { background: #3f4064; color: #fff; }
+
+        /* اسلایدر Owl سفارشی */
+        .owl-theme .owl-dots .owl-dot span { width: 8px; height: 8px; background: #ccc; border-radius: 50%; transition: all 0.3s; }
+        .owl-theme .owl-dots .owl-dot.active span { background: #ef4056; width: 24px; border-radius: 4px; }
+        .owl-theme .owl-nav { display: none; }
+        .hero-slider .owl-dots { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); }
+        .hero-slider .owl-theme .owl-dots .owl-dot span { background: rgba(255,255,255,0.5); }
+        .hero-slider .owl-theme .owl-dots .owl-dot.active span { background: #fff; }
+
+        /* تایمر */
+        .timer-box { background: #3f4064; color: #fff; border-radius: 6px; padding: 4px 8px; font-size: 16px; font-weight: 700; min-width: 36px; text-align: center; font-variant-numeric: tabular-nums; }
+
+        /* جستجو */
+        .search-suggestions { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-radius: 0 0 12px 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12); display: none; z-index: 30; max-height: 350px; overflow-y: auto; }
+        .search-suggestions.active { display: block; animation: slideDown 0.2s ease; }
+        .search-suggestion-item { padding: 10px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: background 0.2s; font-size: 13px; }
+        .search-suggestion-item:hover { background: #f5f5f5; }
+        .search-suggestion-item i { color: #c0c0c0; }
+
+        /* توست */
+        .toast-container { position: fixed; top: 20px; left: 20px; z-index: 100; display: flex; flex-direction: column; gap: 8px; }
+        .toast { background: #323232; color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 13px; display: flex; align-items: center; gap: 10px; animation: toastIn 0.3s ease; min-width: 250px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .toast.removing { animation: toastOut 0.3s ease forwards; }
+        .toast i { font-size: 16px; }
+        .toast.success i { color: #00c853; }
+        .toast.error i { color: #ef4056; }
+        .toast.info i { color: #00bfd6; }
+
+        /* پیشنهاد شگفت‌انگیز */
+        .amazing-offer-item { background: #ef4056; border-radius: 12px; padding: 12px; min-width: 180px; margin-left: 12px; flex-shrink: 0; }
+        .amazing-offer-item img { border-radius: 8px; margin: 0 auto; display: block; }
+
+        /* بک تو تاپ */
+        .back-to-top { position: fixed; bottom: 90px; left: 20px; width: 44px; height: 44px; background: #fff; border: 1px solid #e0e0e0; border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 50; transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.1); color: #3f4064; }
+        .back-to-top:hover { background: #ef4056; color: #fff; border-color: #ef4056; }
+        .back-to-top.visible { display: flex; }
+        @media (max-width: 768px) { .back-to-top { bottom: 90px; } }
+
+        /* اسکرول افقی */
+        .horizontal-scroll { overflow-x: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .horizontal-scroll::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="font-vazir text-textDark">
+
+    <!-- توست کنتینر -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- بالای صفحه - نوار اطلاع‌رسانی -->
+    <div class="bg-dark text-white text-xs py-2 text-center hidden md:block">
+        <div class="container mx-auto px-4 flex items-center justify-center gap-6">
+            <span><i class="fa-solid fa-truck-fast ml-1 text-secondary"></i> ارسال رایگان برای سفارش‌های بالای ۵۰۰ هزار تومان</span>
+            <span class="text-gray-500">|</span>
+            <span><i class="fa-solid fa-shield-halved ml-1 text-secondary"></i> ضمانت اصالت کالا</span>
+            <span class="text-gray-500">|</span>
+            <span><i class="fa-solid fa-rotate-left ml-1 text-secondary"></i> ۷ روز بازگشت کالا</span>
+            <span class="text-gray-500">|</span>
+            <span><i class="fa-solid fa-headset ml-1 text-secondary"></i> پشتیبانی ۲۴ ساعته</span>
+        </div>
+    </div>
+
+    <!-- هدر اصلی -->
+    <header class="bg-white sticky top-0 z-30 shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center gap-4">
+                <!-- لوگو -->
+                <a href="#" class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-gem text-white text-lg"></i>
+                    </div>
+                    <div class="hidden sm:block">
+                        <div class="font-extrabold text-dark text-sm leading-tight">گهر کالا</div>
+                        <div class="text-[10px] text-textGray leading-tight">خدمات</div>
+                    </div>
+                </a>
+
+                <!-- جستجو -->
+                <div class="flex-1 max-w-2xl relative" id="searchWrapper">
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="جستجو در گهر کالا ..." class="w-full bg-lightBg rounded-xl py-3 pr-4 pl-12 text-sm outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-textGray"></i>
+                    </div>
+                    <div class="search-suggestions" id="searchSuggestions">
+                        <div class="p-3 text-xs text-textGray font-medium">جستجوهای پرطرفدار</div>
+                        <div class="search-suggestion-item" data-term="گوشی موبایل"><i class="fa-solid fa-fire-flame-curved"></i> گوشی موبایل</div>
+                        <div class="search-suggestion-item" data-term="لپ‌تاپ"><i class="fa-solid fa-fire-flame-curved"></i> لپ‌تاپ</div>
+                        <div class="search-suggestion-item" data-term="هدفون"><i class="fa-solid fa-fire-flame-curved"></i> هدفون بی‌سیم</div>
+                        <div class="search-suggestion-item" data-term="ساعت هوشمند"><i class="fa-solid fa-fire-flame-curved"></i> ساعت هوشمند</div>
+                        <div class="search-suggestion-item" data-term="تبلت"><i class="fa-solid fa-chart-line"></i> تبلت</div>
+                        <div class="search-suggestion-item" data-term="کنسول بازی"><i class="fa-solid fa-chart-line"></i> کنسول بازی</div>
+                    </div>
+                </div>
+
+                <!-- آیکون‌های هدر -->
+                <div class="flex items-center gap-1 md:gap-3">
+                    <!-- ورود -->
+                    <button onclick="showToast('info','به زودی فعال می‌شود')" class="hidden md:flex items-center gap-2 text-xs text-dark hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-primary/5">
+                        <i class="fa-regular fa-user text-base"></i>
+                        <span class="font-medium">ورود | ثبت‌نام</span>
+                    </button>
+
+                    <!-- مقایسه -->
+                    <button onclick="openModal('compareModal')" class="relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-lightBg transition-colors" title="مقایسه کالا">
+                        <i class="fa-solid fa-code-compare text-lg text-dark"></i>
+                        <span class="absolute -top-1 -left-1 w-5 h-5 bg-secondary text-white text-[10px] font-bold rounded-full flex items-center justify-center compare-badge" style="display:none;">0</span>
+                    </button>
+
+                    <!-- علاقه‌مندی -->
+                    <button onclick="openModal('wishlistModal')" class="relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-lightBg transition-colors" title="علاقه‌مندی‌ها">
+                        <i class="fa-regular fa-heart text-lg text-dark"></i>
+                        <span class="absolute -top-1 -left-1 w-5 h-5 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center wishlist-badge" style="display:none;">0</span>
+                    </button>
+
+                    <!-- سبد خرید -->
+                    <button onclick="openModal('cartModal')" class="relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-lightBg transition-colors" title="سبد خرید">
+                        <i class="fa-solid fa-cart-shopping text-lg text-dark"></i>
+                        <span class="absolute -top-1 -left-1 w-5 h-5 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center cart-badge" style="display:none;">0</span>
+                    </button>
+
+                    <!-- همبرگر منو (موبایل) -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-lightBg transition-colors">
+                        <i class="fa-solid fa-bars text-lg text-dark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- نوار دسته‌بندی (دسکتاپ) -->
+        <div class="hidden md:block border-t border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center gap-1 py-2 text-sm">
+                    <button onclick="toggleMegaMenu()" class="flex items-center gap-2 px-4 py-1.5 bg-dark text-white rounded-lg text-xs font-medium hover:bg-dark/90 transition-colors" id="megaMenuBtn">
+                        <i class="fa-solid fa-bars"></i>
+                        دسته‌بندی کالاها
+                    </button>
+                    <a href="#" class="px-3 py-1.5 text-textGray hover:text-primary transition-colors rounded-lg hover:bg-primary/5">پیشنهاد شگفت‌انگیز</a>
+                    <a href="#" class="px-3 py-1.5 text-textGray hover:text-primary transition-colors rounded-lg hover:bg-primary/5">پرفروش‌ترین‌ها</a>
+                    <a href="#" class="px-3 py-1.5 text-textGray hover:text-primary transition-colors rounded-lg hover:bg-primary/5">سوپرمارکت</a>
+                    <a href="#" class="px-3 py-1.5 text-textGray hover:text-primary transition-colors rounded-lg hover:bg-primary/5کارت هدیه</a>
+                    <a href="#" class="px-3 py-1.5 text-textGray hover:text-primary transition-colors rounded-lg hover:bg-primary/5">سوالات متداول</a>
+                    <a href="#" class="px-3 py-1.5 text-secondary hover:text-secondary/80 transition-colors font-medium"><i class="fa-solid fa-percent ml-1"></i>حراج استایل</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- مگا منو -->
+    <div class="mega-menu-overlay" id="megaMenuOverlay" onclick="toggleMegaMenu()"></div>
+    <div class="mega-menu-panel" id="megaMenuPanel">
+        <div class="mega-cats" id="megaCats">
+            <div class="p-4 border-b border-gray-200">
+                <div class="relative">
+                    <input type="text" placeholder="جستجو در دسته‌بندی‌ها..." class="w-full bg-lightBg rounded-lg py-2.5 px-4 pr-10 text-sm outline-none">
+                    <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 -translate-y-1/2 text-textGray text-xs"></i>
+                </div>
+            </div>
+            <!-- آیتم‌های دسته‌بندی توسط JS پر می‌شود -->
+        </div>
+        <div class="mega-subcats" id="megaSubcats">
+            <div class="text-center text-textGray py-20">
+                <i class="fa-solid fa-arrow-left text-4xl mb-4 block text-gray-300"></i>
+                <p>دسته‌بندی را انتخاب کنید</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- منوی موبایل -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+        <div class="p-4 border-b border-gray-200 flex items-center gap-3">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-user text-white"></i>
+            </div>
+            <div>
+                <div class="font-bold text-sm">وارد شوید</div>
+                <div class="text-xs text-textGray">ثبت‌نام | ورود</div>
+            </div>
+            <button onclick="toggleMobileMenu()" class="mr-auto w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+                <i class="fa-solid fa-xmark text-textGray"></i>
+            </button>
+        </div>
+        <div id="mobileCats"></div>
+        <div class="border-t border-gray-200">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 text-sm text-dark"><i class="fa-solid fa-circle-info w-5 text-center text-textGray"></i> درباره گهر کالا</a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 text-sm text-dark"><i class="fa-solid fa-phone w-5 text-center text-textGray"></i> تماس با ما</a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 text-sm text-dark"><i class="fa-solid fa-blog w-5 text-center text-textGray"></i> بلاگ</a>
+        </div>
+    </div>
+
+    <!-- اسلایدر اصلی -->
+    <section class="container mx-auto px-4 mt-4">
+        <div class="hero-slider owl-carousel owl-theme rounded-2xl overflow-hidden">
+            <div class="item">
+                <div class="relative h-48 md:h-80 bg-gradient-to-l from-primary to-pink-600 flex items-center">
+                    <div class="pr-8 md:pr-16 text-white">
+                        <div class="text-xs md:text-sm font-medium opacity-90 mb-2">فروش ویژه</div>
+                        <h2 class="text-xl md:text-4xl font-extrabold mb-2 md:mb-4">جشنواره موبایل</h2>
+                        <p class="text-xs md:text-sm opacity-80 mb-4 hidden md:block">تا ۴۰٪ تخفیف روی گوشی‌های پرفروش</p>
+                        <span class="bg-white text-primary text-xs md:text-sm font-bold px-4 md:px-6 py-2 rounded-lg inline-block cursor-pointer hover:shadow-lg transition-shadow">مشاهده کنید</span>
+                    </div>
+                    <img src="https://picsum.photos/seed/slider1phone/400/300" alt="" class="absolute left-8 md:left-20 bottom-0 w-32 md:w-56 rounded-lg shadow-2xl" loading="lazy">
+                </div>
+            </div>
+            <div class="item">
+                <div class="relative h-48 md:h-80 bg-gradient-to-l from-dark to-indigo-800 flex items-center">
+                    <div class="pr-8 md:pr-16 text-white">
+                        <div class="text-xs md:text-sm font-medium opacity-90 mb-2">جدیدترین‌ها</div>
+                        <h2 class="text-xl md:text-4xl font-extrabold mb-2 md:mb-4">لپ‌تاپ‌های گیمینگ</h2>
+                        <p class="text-xs md:text-sm opacity-80 mb-4 hidden md:block">با قدرت بی‌نظیر و طراحی خیره‌کننده</p>
+                        <span class="bg-white text-dark text-xs md:text-sm font-bold px-4 md:px-6 py-2 rounded-lg inline-block cursor-pointer hover:shadow-lg transition-shadow">خرید کنید</span>
+                    </div>
+                    <img src="https://picsum.photos/seed/slider2laptop/400/300" alt="" class="absolute left-8 md:left-20 bottom-0 w-32 md:w-56 rounded-lg shadow-2xl" loading="lazy">
+                </div>
+            </div>
+            <div class="item">
+                <div class="relative h-48 md:h-80 bg-gradient-to-l from-emerald-600 to-teal-700 flex items-center">
+                    <div class="pr-8 md:pr-16 text-white">
+                        <div class="text-xs md:text-sm font-medium opacity-90 mb-2">تازه‌ها</div>
+                        <h2 class="text-xl md:text-4xl font-extrabold mb-2 md:mb-4">سوپرمارکت آنلاین</h2>
+                        <p class="text-xs md:text-sm opacity-80 mb-4 hidden md:block">خرید آسان مواد غذایی و روزمره</p>
+                        <span class="bg-white text-emerald-600 text-xs md:text-sm font-bold px-4 md:px-6 py-2 rounded-lg inline-block cursor-pointer hover:shadow-lg transition-shadow">سفارش دهید</span>
+                    </div>
+                    <img src="https://picsum.photos/seed/slider3food/400/300" alt="" class="absolute left-8 md:left-20 bottom-0 w-32 md:w-56 rounded-lg shadow-2xl" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- سرویس‌ها -->
+    <section class="container mx-auto px-4 mt-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-white rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition-shadow scroll-animate">
+                <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-truck-fast text-primary text-xl"></i></div>
+                <div><div class="font-bold text-sm">ارسال سریع</div><div class="text-xs text-textGray mt-0.5">تحویل اکسپرس</div></div>
+            </div>
+            <div class="bg-white rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition-shadow scroll-animate">
+                <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-shield-halved text-offerGreen text-xl"></i></div>
+                <div><div class="font-bold text-sm">ضمانت اصالت</div><div class="text-xs text-textGray mt-0.5">کیفیت تضمینی</div></div>
+            </div>
+            <div class="bg-white rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition-shadow scroll-animate">
+                <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-rotate-left text-blue-500 text-xl"></i></div>
+                <div><div class="font-bold text-sm">بازگشت آسان</div><div class="text-xs text-textGray mt-0.5">۷ روز ضمانت</div></div>
+            </div>
+            <div class="bg-white rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition-shadow scroll-animate">
+                <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-wallet text-purple-500 text-xl"></i></div>
+                <div><div class="font-bold text-sm">پرداخت امن</div><div class="text-xs text-textGray mt-0.5">درگاه مطمئن</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- آیکون دسته‌بندی‌ها -->
+    <section class="container mx-auto px-4 mt-8 scroll-animate">
+        <div class="bg-white rounded-2xl p-6">
+            <div class="grid grid-cols-4 md:grid-cols-8 gap-4 md:gap-6">
+                <a href="#" class="flex flex-col items-center gap-2 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-red-50 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300"><i class="fa-solid fa-mobile-screen text-xl md:text-2xl text-primary group-hover:text-white transition-colors"></i></div>
+                    <span class="text-xs text-textGray group-hover:text-primary transition-colors text-center">موبایل</span>
+                </a>
+                <a href="#" class="flex flex-col items-center gap-2 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:bg-blue-500 group-hover:scale-110 transition-all duration-300"><i class="fa-solid fa-laptop text-xl md:text-2xl text-blue-500 group-hover:text-white transition-colors"></i></div>
+                    <span class="text-xs text-textGray group-hover:text-blue-500 transition-colors text-center">لپ‌تاپ</span>
+                </a>
+                <a href="#" class="flex flex-col items-center gap-2 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-purple-50 flex items-center justify-center group-hover:bg-purple-500 group-hover:scale-110 transition-all duration-300"><i class="fa-solid fa-tv text-xl md:text-2xl text-purple-500 group-hover:text-white transition-colors"></i></div>
+                    <span class="text-xs text-textGray group-hover:text-purple-500 transition-colors text-center">تلویزیون</span>
+                </a>
+                <a href="#" class="flex flex-col items-center gap-2 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-orange-50 flex items-center justify-center group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-300"><i class="fa-solid fa-blender text-xl md:text-2xl text-orange-500 group-hover:text-white transition-colors"></i></div>
+                    <span class="text-xs text-textGray group-hover:text-orange-500 transition-colors text-center">لوازم خانگی</span>
+                </a>
+                <a href="#" class="flex flex-col items-center gap-2 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-pink-50 flex items-center justify-center group-hover:bg-pink-500 group-hover:scale-110 transition-all duration-300"><i class="fa-solid fa-spray-can-sparkles text-xl md:text-2xl text-pink-500 group-hover:text-white transition-colors"></i></div>
+                    <span class="text-xs text-textGray group-hover:text-pink-500 transition-colors text-center">آرایشی</span>
+                </a>
+                <a href="#" class="flex flex-col items-center gap-2 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-teal-50 flex items-center justify-center group-hover:bg-teal-500 group-hover:scale-110 transition-all duration-300"><i class="fa-solid fa-shirt text-xl md:text-2xl text-teal-500 group-hover:text-white transition-colors"></i></div>
+                    <span class="text-xs text-textGray group-hover:text-teal-500 transition-colors text-center">مد و پوشاک</span>
+                </a>
+                <a href="#" class="flex flex-col items-center gap-2 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-green-50 flex items-center justify-center group-hover:bg-green-500 group-hover:scale-110 transition-all duration-300"><i class="fa-solid fa-basket-shopping text-xl md:text-2xl text-green-500 group-hover:text-white transition-colors"></i></div>
+                    <span class="text-xs text-textGray group-hover:text-green-500 transition-colors text-center">سوپرمارکت</span>
+                </a>
+                <a href="#" class="flex flex-col items-center gap-2 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-yellow-50 flex items-center justify-center group-hover:bg-yellow-500 group-hover:scale-110 transition-all duration-300"><i class="fa-solid fa-gamepad text-xl md:text-2xl text-yellow-500 group-hover:text-white transition-colors"></i></div>
+                    <span class="text-xs text-textGray group-hover:text-yellow-500 transition-colors text-center">گیمینگ</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- پیشنهاد شگفت‌انگیز -->
+    <section class="container mx-auto px-4 mt-8 scroll-animate">
+        <div class="bg-primary rounded-2xl p-4 md:p-6">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-bolt text-yellow-400 text-2xl"></i>
+                    <div>
+                        <h2 class="text-white font-extrabold text-lg md:text-xl">پیشنهاد شگفت‌انگیز</h2>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="timer-box" id="timerH">08</div>
+                    <span class="text-white font-bold">:</span>
+                    <div class="timer-box" id="timerM">45</div>
+                    <span class="text-white font-bold">:</span>
+                    <div class="timer-box" id="timerS">30</div>
+                </div>
+            </div>
+            <div class="amazing-offers-carousel owl-carousel owl-theme">
+                <div class="amazing-offer-item">
+                    <img src="https://picsum.photos/seed/amz1/160/160" alt="" class="w-32 h-32 object-cover mb-3" loading="lazy">
+                    <div class="text-white text-xs font-medium line-clamp-2 h-8 mb-2">گوشی سامسونگ Galaxy A54</div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-yellow-400 text-dark text-[10px] font-bold px-1.5 py-0.5 rounded">۳۵٪</span>
+                        <span class="text-white/60 text-xs line-through">۱۸,۵۰۰,۰۰۰</span>
+                    </div>
+                    <div class="text-white font-extrabold text-sm">۱۲,۰۲۵,۰۰۰ <span class="text-xs font-normal">تومان</span></div>
+                    <button onclick="addToCart('گوشی سامسونگ Galaxy A54',12025000,'amz1')" class="w-full mt-3 bg-white text-primary text-xs font-bold py-2 rounded-lg hover:bg-gray-100 transition-colors"><i class="fa-solid fa-cart-plus ml-1"></i> افزودن</button>
+                </div>
+                <div class="amazing-offer-item">
+                    <img src="https://picsum.photos/seed/amz2/160/160" alt="" class="w-32 h-32 object-cover mb-3" loading="lazy">
+                    <div class="text-white text-xs font-medium line-clamp-2 h-8 mb-2">هدفون سونی WH-1000XM5</div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-yellow-400 text-dark text-[10px] font-bold px-1.5 py-0.5 rounded">۲۵٪</span>
+                        <span class="text-white/60 text-xs line-through">۹,۸۰۰,۰۰۰</span>
+                    </div>
+                    <div class="text-white font-extrabold text-sm">۷,۳۵۰,۰۰۰ <span class="text-xs font-normal">تومان</span></div>
+                    <button onclick="addToCart('هدفون سونی WH-1000XM5',7350000,'amz2')" class="w-full mt-3 bg-white text-primary text-xs font-bold py-2 rounded-lg hover:bg-gray-100 transition-colors"><i class="fa-solid fa-cart-plus ml-1"></i> افزودن</button>
+                </div>
+                <div class="amazing-offer-item">
+                    <img src="https://picsum.photos/seed/amz3/160/160" alt="" class="w-32 h-32 object-cover mb-3" loading="lazy">
+                    <div class="text-white text-xs font-medium line-clamp-2 h-8 mb-2">ساعت هوشمند اپل واچ سری ۹</div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-yellow-400 text-dark text-[10px] font-bold px-1.5 py-0.5 rounded">۱۵٪</span>
+                        <span class="text-white/60 text-xs line-through">۲۲,۰۰۰,۰۰۰</span>
+                    </div>
+                    <div class="text-white font-extrabold text-sm">۱۸,۷۰۰,۰۰۰ <span class="text-xs font-normal">تومان</span></div>
+                    <button onclick="addToCart('اپل واچ سری ۹',18700000,'amz3')" class="w-full mt-3 bg-white text-primary text-xs font-bold py-2 rounded-lg hover:bg-gray-100 transition-colors"><i class="fa-solid fa-cart-plus ml-1"></i> افزودن</button>
+                </div>
+                <div class="amazing-offer-item">
+                    <img src="https://picsum.photos/seed/amz4/160/160" alt="" class="w-32 h-32 object-cover mb-3" loading="lazy">
+                    <div class="text-white text-xs font-medium line-clamp-2 h-8 mb-2">تبلت اپل آیپد ایر M2</div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-yellow-400 text-dark text-[10px] font-bold px-1.5 py-0.5 rounded">۲۰٪</span>
+                        <span class="text-white/60 text-xs line-through">۳۵,۰۰۰,۰۰۰</span>
+                    </div>
+                    <div class="text-white font-extrabold text-sm">۲۸,۰۰۰,۰۰۰ <span class="text-xs font-normal">تومان</span></div>
+                    <button onclick="addToCart('آیپد ایر M2',28000000,'amz4')" class="w-full mt-3 bg-white text-primary text-xs font-bold py-2 rounded-lg hover:bg-gray-100 transition-colors"><i class="fa-solid fa-cart-plus ml-1"></i> افزودن</button>
+                </div>
+                <div class="amazing-offer-item">
+                    <img src="https://picsum.photos/seed/amz5/160/160" alt="" class="w-32 h-32 object-cover mb-3" loading="lazy">
+                    <div class="text-white text-xs font-medium line-clamp-2 h-8 mb-2">اسپیکر JBL Charge 5</div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-yellow-400 text-dark text-[10px] font-bold px-1.5 py-0.5 rounded">۳۰٪</span>
+                        <span class="text-white/60 text-xs line-through">۴,۵۰۰,۰۰۰</span>
+                    </div>
+                    <div class="text-white font-extrabold text-sm">۳,۱۵۰,۰۰۰ <span class="text-xs font-normal">تومان</span></div>
+                    <button onclick="addToCart('اسپیکر JBL Charge 5',3150000,'amz5')" class="w-full mt-3 bg-white text-primary text-xs font-bold py-2 rounded-lg hover:bg-gray-100 transition-colors"><i class="fa-solid fa-cart-plus ml-1"></i> افزودن</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بنرهای تبلیغاتی -->
+    <section class="container mx-auto px-4 mt-6 scroll-animate">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="rounded-2xl overflow-hidden relative h-36 md:h-48 cursor-pointer group">
+                <img src="https://picsum.photos/seed/bannerA/600/250" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                <div class="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent flex items-center pr-6">
+                    <div class="text-white"><div class="text-xs opacity-80 mb-1">فروش ویژه</div><div class="font-extrabold text-lg md:text-2xl">لوازم خانگی</div></div>
+                </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden relative h-36 md:h-48 cursor-pointer group">
+                <img src="https://picsum.photos/seed/bannerB/600/250" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                <div class="absolute inset-0 bg-gradient-to-l from-indigo-900/70 to-transparent flex items-center pr-6">
+                    <div class="text-white"><div class="text-xs opacity-80 mb-1">جدیدترین</div><div class="font-extrabold text-lg md:text-2xl">گجت‌های هوشمند</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- پرفروش‌ترین‌ها -->
+    <section class="container mx-auto px-4 mt-8 scroll-animate">
+        <div class="bg-white rounded-2xl p-4 md:p-6">
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="font-extrabold text-lg md:text-xl text-dark">پرفروش‌ترین‌ها</h2>
+                <a href="#" class="text-secondary text-xs font-medium hover:underline">مشاهده همه <i class="fa-solid fa-chevron-left text-[10px] mr-1"></i></a>
+            </div>
+            <div class="bestsellers-carousel owl-carousel owl-theme">
+                <div class="product-card" data-id="p1" data-name="گوشی آیفون ۱۵ پرو مکس" data-price="62000000" data-img="best1">
+                    <div class="img-wrapper p-4">
+                        <img src="https://picsum.photos/seed/best1/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="product-actions">
+                            <button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'گوشی آیفون ۱۵ پرو مکس',62000000,'best1')"><i class="fa-regular fa-heart"></i></button>
+                            <button class="product-action-btn compare-btn" onclick="toggleCompare(this,'گوشی آیفون ۱۵ پرو مکس',62000000,'best1')"><i class="fa-solid fa-code-compare"></i></button>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">گوشی آیفون ۱۵ پرو مکس ۲۵۶ گیگابایت</h3>
+                        <div class="flex items-center gap-1 mb-2">
+                            <i class="fa-solid fa-star text-yellow-400 text-[10px]"></i>
+                            <span class="text-xs text-textGray">۴.۸</span>
+                            <span class="text-xs text-textGray"> (۱,۲۳۴)</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-extrabold text-sm">۶۲,۰۰۰,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div>
+                            </div>
+                            <button onclick="addToCart('گوشی آیفون ۱۵ پرو مکس',62000000,'best1')" class="w-9 h-9 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-primaryDark transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-id="p2" data-name="لپ‌تاپ ایسوس ROG Strix" data-price="48500000" data-img="best2">
+                    <div class="img-wrapper p-4">
+                        <img src="https://picsum.photos/seed/best2/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="absolute top-2 right-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-lg">۲۰٪</div>
+                        <div class="product-actions">
+                            <button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'لپ‌تاپ ایسوس ROG Strix',48500000,'best2')"><i class="fa-regular fa-heart"></i></button>
+                            <button class="product-action-btn compare-btn" onclick="toggleCompare(this,'لپ‌تاپ ایسوس ROG Strix',48500000,'best2')"><i class="fa-solid fa-code-compare"></i></button>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">لپ‌تاپ گیمینگ ایسوس ROG Strix G16</h3>
+                        <div class="flex items-center gap-1 mb-2"><i class="fa-solid fa-star text-yellow-400 text-[10px]"></i><span class="text-xs text-textGray">۴.۶</span><span class="text-xs text-textGray"> (۸۵۶)</span></div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-xs text-textGray line-through">۶۰,۶۲۵,۰۰۰</div>
+                                <div class="font-extrabold text-sm">۴۸,۵۰۰,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div>
+                            </div>
+                            <button onclick="addToCart('لپ‌تاپ ایسوس ROG Strix',48500000,'best2')" class="w-9 h-9 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-primaryDark transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-id="p3" data-name="ساعت هوشمند سامسونگ Galaxy Watch 6" data-price="8900000" data-img="best3">
+                    <div class="img-wrapper p-4">
+                        <img src="https://picsum.photos/seed/best3/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="product-actions">
+                            <button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'ساعت هوشمند سامسونگ Galaxy Watch 6',8900000,'best3')"><i class="fa-regular fa-heart"></i></button>
+                            <button class="product-action-btn compare-btn" onclick="toggleCompare(this,'ساعت هوشمند سامسونگ Galaxy Watch 6',8900000,'best3')"><i class="fa-solid fa-code-compare"></i></button>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">ساعت هوشمند سامسونگ Galaxy Watch 6 Classic</h3>
+                        <div class="flex items-center gap-1 mb-2"><i class="fa-solid fa-star text-yellow-400 text-[10px]"></i><span class="text-xs text-textGray">۴.۴</span><span class="text-xs text-textGray"> (۴۲۳)</span></div>
+                        <div class="flex items-center justify-between">
+                            <div><div class="font-extrabold text-sm">۸,۹۰۰,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div></div>
+                            <button onclick="addToCart('ساعت هوشمند سامسونگ Galaxy Watch 6',8900000,'best3')" class="w-9 h-9 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-primaryDark transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-id="p4" data-name="ایرپاد پرو ۲" data-price="9200000" data-img="best4">
+                    <div class="img-wrapper p-4">
+                        <img src="https://picsum.photos/seed/best4/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="absolute top-2 right-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-lg">۱۰٪</div>
+                        <div class="product-actions">
+                            <button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'ایرپاد پرو ۲',9200000,'best4')"><i class="fa-regular fa-heart"></i></button>
+                            <button class="product-action-btn compare-btn" onclick="toggleCompare(this,'ایرپاد پرو ۲',9200000,'best4')"><i class="fa-solid fa-code-compare"></i></button>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">هدفون بی‌سیم اپل ایرپاد پرو نسل دوم</h3>
+                        <div class="flex items-center gap-1 mb-2"><i class="fa-solid fa-star text-yellow-400 text-[10px]"></i><span class="text-xs text-textGray">۴.۹</span><span class="text-xs text-textGray"> (۲,۱۰۰)</span></div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-xs text-textGray line-through">۱۰,۲۲۲,۰۰۰</div>
+                                <div class="font-extrabold text-sm">۹,۲۰۰,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div>
+                            </div>
+                            <button onclick="addToCart('ایرپاد پرو ۲',9200000,'best4')" class="w-9 h-9 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-primaryDark transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-id="p5" data-name="کنسول بازی PS5" data-price="28500000" data-img="best5">
+                    <div class="img-wrapper p-4">
+                        <img src="https://picsum.photos/seed/best5/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="product-actions">
+                            <button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'کنسول بازی PS5',28500000,'best5')"><i class="fa-regular fa-heart"></i></button>
+                            <button class="product-action-btn compare-btn" onclick="toggleCompare(this,'کنسول بازی PS5',28500000,'best5')"><i class="fa-solid fa-code-compare"></i></button>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">کنسول بازی سونی پلی‌استیشن ۵ اسلیم</h3>
+                        <div class="flex items-center gap-1 mb-2"><i class="fa-solid fa-star text-yellow-400 text-[10px]"></i><span class="text-xs text-textGray">۴.۷</span><span class="text-xs text-textGray"> (۳,۴۵۶)</span></div>
+                        <div class="flex items-center justify-between">
+                            <div><div class="font-extrabold text-sm">۲۸,۵۰۰,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div></div>
+                            <button onclick="addToCart('کنسول بازی PS5',28500000,'best5')" class="w-9 h-9 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-primaryDark transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- سوپرمارکت -->
+    <section class="container mx-auto px-4 mt-8 scroll-animate">
+        <div class="bg-white rounded-2xl p-4 md:p-6">
+            <div class="flex items-center justify-between mb-5">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-offerGreen/10 rounded-xl flex items-center justify-center"><i class="fa-solid fa-leaf text-offerGreen text-lg"></i></div>
+                    <h2 class="font-extrabold text-lg md:text-xl text-dark">سوپرمارکت</h2>
+                </div>
+                <a href="#" class="text-secondary text-xs font-medium hover:underline">مشاهده همه <i class="fa-solid fa-chevron-left text-[10px] mr-1"></i></a>
+            </div>
+            <div class="supermarket-carousel owl-carousel owl-theme">
+                <div class="product-card" data-id="s1" data-name="شیر کم‌چرب ۱ لیتری" data-price="45000" data-img="sup1">
+                    <div class="img-wrapper p-4"><img src="https://picsum.photos/seed/sup1/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="product-actions"><button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'شیر کم‌چرب ۱ لیتری',45000,'sup1')"><i class="fa-regular fa-heart"></i></button></div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">شیر کم‌چرب کاله ۱ لیتری</h3>
+                        <div class="flex items-center justify-between">
+                            <div class="font-extrabold text-sm">۴۵,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div>
+                            <button onclick="addToCart('شیر کم‌چرب ۱ لیتری',45000,'sup1')" class="w-9 h-9 bg-offerGreen text-white rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-id="s2" data-name="پنیر خامه‌ای ۲۰۰ گرمی" data-price="78000" data-img="sup2">
+                    <div class="img-wrapper p-4"><img src="https://picsum.photos/seed/sup2/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="product-actions"><button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'پنیر خامه‌ای ۲۰۰ گرمی',78000,'sup2')"><i class="fa-regular fa-heart"></i></button></div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">پنیر خامه‌ای صباح ۲۰۰ گرمی</h3>
+                        <div class="flex items-center justify-between">
+                            <div class="font-extrabold text-sm">۷۸,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div>
+                            <button onclick="addToCart('پنیر خامه‌ای ۲۰۰ گرمی',78000,'sup2')" class="w-9 h-9 bg-offerGreen text-white rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-id="s3" data-name="نوشابه کوکا ۱.۵ لیتری" data-price="35000" data-img="sup3">
+                    <div class="img-wrapper p-4"><img src="https://picsum.photos/seed/sup3/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="product-actions"><button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'نوشابه کوکا ۱.۵ لیتری',35000,'sup3')"><i class="fa-regular fa-heart"></i></button></div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">نوشابه کوکاکولا ۱.۵ لیتری</h3>
+                        <div class="flex items-center justify-between">
+                            <div class="font-extrabold text-sm">۳۵,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div>
+                            <button onclick="addToCart('نوشابه کوکا ۱.۵ لیتری',35000,'sup3')" class="w-9 h-9 bg-offerGreen text-white rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-id="s4" data-name="چیپس خلالی مزمز" data-price="42000" data-img="sup4">
+                    <div class="img-wrapper p-4"><img src="https://picsum.photos/seed/sup4/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="product-actions"><button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'چیپس خلالی مزمز',42000,'sup4')"><i class="fa-regular fa-heart"></i></button></div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">چیپس خلالی مزمز ۱۶۰ گرمی</h3>
+                        <div class="flex items-center justify-between">
+                            <div class="font-extrabold text-sm">۴۲,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div>
+                            <button onclick="addToCart('چیپس خلالی مزمز',42000,'sup4')" class="w-9 h-9 bg-offerGreen text-white rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-id="s5" data-name="آب معدنی دماوند" data-price="15000" data-img="sup5">
+                    <div class="img-wrapper p-4"><img src="https://picsum.photos/seed/sup5/300/300" alt="" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
+                        <div class="product-actions"><button class="product-action-btn wishlist-btn" onclick="toggleWishlist(this,'آب معدنی دماوند',15000,'sup5')"><i class="fa-regular fa-heart"></i></button></div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h3 class="text-sm font-medium line-clamp-2 h-10 mb-2">آب معدنی دماوند ۱.۵ لیتری</h3>
+                        <div class="flex items-center justify-between">
+                            <div class="font-extrabold text-sm">۱۵,۰۰۰ <span class="text-xs font-normal text-textGray">تومان</span></div>
+                            <button onclick="addToCart('آب معدنی دماوند',15000,'sup5')" class="w-9 h-9 bg-offerGreen text-white rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- برندهای محبوب -->
+    <section class="container mx-auto px-4 mt-8 scroll-animate">
+        <div class="bg-white rounded-2xl p-4 md:p-6">
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="font-extrabold text-lg md:text-xl text-dark">برندهای محبوب</h2>
+            </div>
+            <div class="brands-carousel owl-carousel owl-theme">
+                <div class="border border-gray-200 rounded-xl p-4 flex items-center justify-center h-24 hover:shadow-md transition-shadow cursor-pointer"><img src="https://picsum.photos/seed/brand1/120/60" alt="" class="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" loading="lazy"></div>
+                <div class="border border-gray-200 rounded-xl p-4 flex items-center justify-center h-24 hover:shadow-md transition-shadow cursor-pointer"><img src="https://picsum.photos/seed/brand2/120/60" alt="" class="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" loading="lazy"></div>
+                <div class="border border-gray-200 rounded-xl p-4 flex items-center justify-center h-24 hover:shadow-md transition-shadow cursor-pointer"><img src="https://picsum.photos/seed/brand3/120/60" alt="" class="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" loading="lazy"></div>
+                <div class="border border-gray-200 rounded-xl p-4 flex items-center justify-center h-24 hover:shadow-md transition-shadow cursor-pointer"><img src="https://picsum.photos/seed/brand4/120/60" alt="" class="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" loading="lazy"></div>
+                <div class="border border-gray-200 rounded-xl p-4 flex items-center justify-center h-24 hover:shadow-md transition-shadow cursor-pointer"><img src="https://picsum.photos/seed/brand5/120/60" alt="" class="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" loading="lazy"></div>
+                <div class="border border-gray-200 rounded-xl p-4 flex items-center justify-center h-24 hover:shadow-md transition-shadow cursor-pointer"><img src="https://picsum.photos/seed/brand6/120/60" alt="" class="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" loading="lazy"></div>
+                <div class="border border-gray-200 rounded-xl p-4 flex items-center justify-center h-24 hover:shadow-md transition-shadow cursor-pointer"><img src="https://picsum.photos/seed/brand7/120/60" alt="" class="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" loading="lazy"></div>
+                <div class="border border-gray-200 rounded-xl p-4 flex items-center justify-center h-24 hover:shadow-md transition-shadow cursor-pointer"><img src="https://picsum.photos/seed/brand8/120/60" alt="" class="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- مقالات بلاگ -->
+    <section class="container mx-auto px-4 mt-8 mb-8 scroll-animate">
+        <div class="bg-white rounded-2xl p-4 md:p-6">
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="font-extrabold text-lg md:text-xl text-dark">خواندنی‌ها</h2>
+                <a href="#" class="text-secondary text-xs font-medium hover:underline">مشاهده همه <i class="fa-solid fa-chevron-left text-[10px] mr-1"></i></a>
+            </div>
+            <div class="blog-carousel owl-carousel owl-theme">
+                <div class="cursor-pointer group">
+                    <div class="rounded-xl overflow-hidden mb-3"><img src="https://picsum.photos/seed/blog1/400/250" alt="" class="w-full h-40 md:h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"></div>
+                    <h3 class="font-bold text-sm line-clamp-2 mb-2 group-hover:text-primary transition-colors">راهنمای خرید گوشی موبایل: نکاتی که باید بدانید</h3>
+                    <p class="text-xs text-textGray line-clamp-2">در این مقاله به بررسی مهم‌ترین فاکتورها در خرید گوشی موبایل می‌پردازیم...</p>
+                </div>
+                <div class="cursor-pointer group">
+                    <div class="rounded-xl overflow-hidden mb-3"><img src="https://picsum.photos/seed/blog2/400/250" alt="" class="w-full h-40 md:h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"></div>
+                    <h3 class="font-bold text-sm line-clamp-2 mb-2 group-hover:text-primary transition-colors">مقایسه بهترین لپ‌تاپ‌های ۱۴۰۳</h3>
+                    <p class="text-xs text-textGray line-clamp-2">بهترین لپ‌تاپ‌های موجود در بازار ایران را از نظر قیمت و کیفیت بررسی می‌کنیم...</p>
+                </div>
+                <div class="cursor-pointer group">
+                    <div class="rounded-xl overflow-hidden mb-3"><img src="https://picsum.photos/seed/blog3/400/250" alt="" class="w-full h-40 md:h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"></div>
+                    <h3 class="font-bold text-sm line-clamp-2 mb-2 group-hover:text-primary transition-colors">تکنولوژی‌های جدید در تلویزیون‌های ۲۰۲۴</h3>
+                    <p class="text-xs text-textGray line-clamp-2">از OLED تا Mini LED، آشنایی با جدیدترین تکنولوژی‌های نمایشگر...</p>
+                </div>
+                <div class="cursor-pointer group">
+                    <div class="rounded-xl overflow-hidden mb-3"><img src="https://picsum.photos/seed/blog4/400/250" alt="" class="w-full h-40 md:h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"></div>
+                    <h3 class="font-bold text-sm line-clamp-2 mb-2 group-hover:text-primary transition-colors">۱۰ گجت هوشمند که زندگی‌تان را تغییر می‌دهند</h3>
+                    <p class="text-xs text-textGray line-clamp-2">از خانه هوشمند تا Wearable، معرفی برترین گجت‌های سال...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer class="bg-white mt-8 border-t border-gray-200">
+        <div class="container mx-auto px-4 py-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+                <div>
+                    <h4 class="font-bold text-sm mb-4 text-dark">گهر کالا خدمات</h4>
+                    <p class="text-xs text-textGray leading-6">فروشگاه اینترنتی گهر کالا خدمات، عرضه‌کننده انواع کالاهای دیجیتال، لوازم خانگی و سوپرمارکت با ضمانت اصالت و قیمت مناسب.</p>
+                    <div class="flex items-center gap-3 mt-4">
+                        <a href="#" class="w-9 h-9 bg-lightBg rounded-lg flex items-center justify-center text-textGray hover:bg-primary hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 bg-lightBg rounded-lg flex items-center justify-center text-textGray hover:bg-primary hover:text-white transition-all"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="w-9 h-9 bg-lightBg rounded-lg flex items-center justify-center text-textGray hover:bg-primary hover:text-white transition-all"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="w-9 h-9 bg-lightBg rounded-lg flex items-center justify-center text-textGray hover:bg-primary hover:text-white transition-all"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm mb-4 text-dark">خدمات مشتریان</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#" class="text-xs text-textGray hover:text-primary transition-colors">پاسخ به سوالات متداول</a></li>
+                        <li><a href="#" class="text-xs text-textGray hover:text-primary transition-colors">رویه‌های بازگرداندن کالا</a></li>
+                        <li><a href="#" class="text-xs text-textGray hover:text-primary transition-colors">شرایط استفاده</a></li>
+                        <li><a href="#" class="text-xs text-textGray hover:text-primary transition-colors">حریم خصوصی</a></li>
+                        <li><a href="#" class="text-xs text-textGray hover:text-primary transition-colors">گزارش باگ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm mb-4 text-dark">راهنمای خرید</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#" class="text-xs text-textGray hover:text-primary transition-colors">نحوه ثبت سفارش</a></li>
+                        <li><a href="#" class="text-xs text-textGray hover:text-primary transition-colors">رویه ارسال سفارش</a></li>
+                        <li><a href="#" class="text-xs text-textGray hover:text-primary transition-colors">شیوه‌های پرداخت</a></li>
+                        <li><a href="#" class="text-xs text-textGray hover:text-primary transition-colors">پیگیری سفارش</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm mb-4 text-dark">تماس با ما</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-location-dot text-primary mt-0.5"></i><span class="text-xs text-textGray">تهران، خیابان ولیعصر، پلاک ۱۲۳</span></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-primary"></i><span class="text-xs text-textGray" dir="ltr">021-12345678</span></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-primary"></i><span class="text-xs text-textGray">info@gaharkala.ir</span></li>
+                    </ul>
+                    <div class="mt-4">
+                        <h5 class="text-xs font-medium mb-2">عضویت در خبرنامه</h5>
+                        <div class="flex gap-2">
+                            <input type="email" placeholder="ایمیل شما..." class="flex-1 bg-lightBg rounded-lg px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-primary">
+                            <button onclick="showToast('success','با موفقیت عضو خبرنامه شدید')" class="bg-primary text-white px-4 py-2 rounded-lg text-xs font-medium hover:bg-primaryDark transition-colors">عضویت</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- نماد اعتماد -->
+            <div class="flex flex-wrap items-center justify-center gap-6 py-6 border-t border-gray-200">
+                <div class="w-20 h-20 bg-lightBg rounded-xl flex items-center justify-center"><i class="fa-solid fa-certificate text-3xl text-textGray/40"></i></div>
+                <div class="w-20 h-20 bg-lightBg rounded-xl flex items-center justify-center"><i class="fa-solid fa-shield-halved text-3xl text-textGray/40"></i></div>
+                <div class="w-20 h-20 bg-lightBg rounded-xl flex items-center justify-center"><i class="fa-solid fa-star text-3xl text-textGray/40"></i></div>
+            </div>
+            <div class="text-center text-xs text-textGray pt-4 border-t border-gray-200">
+                تمامی حقوق مادی و معنوی این سایت متعلق به فروشگاه اینترنتی <strong class="text-dark">گهر کالا خدمات</strong> می‌باشد. © ۱۴۰۳
+            </div>
+        </div>
+    </footer>
+
+    <!-- باتم ناو موبایل -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-item active" onclick="setBottomNav(this)" data-section="home">
+            <i class="fa-solid fa-house"></i>
+            <span>خانه</span>
+        </div>
+        <div class="bottom-nav-item" onclick="toggleMobileMenu(); setBottomNav(this)" data-section="categories">
+            <i class="fa-solid fa-grid-2"></i>
+            <span>دسته‌بندی</span>
+        </div>
+        <div class="bottom-nav-item" onclick="document.getElementById('searchInput').focus(); setBottomNav(this)" data-section="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>جستجو</span>
+        </div>
+        <div class="bottom-nav-item" onclick="openModal('cartModal'); setBottomNav(this)" data-section="cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>سبد خرید</span>
+            <span class="bottom-nav-badge cart-badge-bottom" style="display:none;">0</span>
+        </div>
+        <div class="bottom-nav-item" onclick="showToast('info','به زودی فعال می‌شود'); setBottomNav(this)" data-section="profile">
+            <i class="fa-regular fa-user"></i>
+            <span>پروفایل</span>
+        </div>
+    </nav>
+
+    <!-- مودال سبد خرید -->
+    <div class="modal-overlay" id="cartModal" onclick="if(event.target===this)closeModal('cartModal')">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="font-bold text-base"><i class="fa-solid fa-cart-shopping ml-2 text-primary"></i>سبد خرید</h3>
+                <button onclick="closeModal('cartModal')" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"><i class="fa-solid fa-xmark text-textGray"></i></button>
+            </div>
+            <div class="modal-body" id="cartBody">
+                <div class="text-center py-12 text-textGray">
+                    <i class="fa-solid fa-cart-shopping text-5xl mb-4 text-gray-300"></i>
+                    <p class="text-sm">سبد خرید شما خالی است</p>
+                </div>
+            </div>
+            <div class="modal-footer" id="cartFooter" style="display:none;">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-sm text-textGray">جمع کل:</span>
+                    <span class="font-extrabold text-lg text-dark" id="cartTotal">۰ تومان</span>
+                </div>
+                <button onclick="showToast('success','سفارش شما با موفقیت ثبت شد'); clearCart();" class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm hover:bg-primaryDark transition-colors">ثبت سفارش</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال علاقه‌مندی -->
+    <div class="modal-overlay" id="wishlistModal" onclick="if(event.target===this)closeModal('wishlistModal')">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="font-bold text-base"><i class="fa-solid fa-heart ml-2 text-primary"></i>علاقه‌مندی‌ها</h3>
+                <button onclick="closeModal('wishlistModal')" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"><i class="fa-solid fa-xmark text-textGray"></i></button>
+            </div>
+            <div class="modal-body" id="wishlistBody">
+                <div class="text-center py-12 text-textGray">
+                    <i class="fa-regular fa-heart text-5xl mb-4 text-gray-300"></i>
+                    <p class="text-sm">لیست علاقه‌مندی شما خالی است</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال مقایسه -->
+    <div class="modal-overlay" id="compareModal" onclick="if(event.target===this)closeModal('compareModal')">
+        <div class="modal-content" style="width:600px;">
+            <div class="modal-header">
+                <h3 class="font-bold text-base"><i class="fa-solid fa-code-compare ml-2 text-secondary"></i>مقایسه کالا</h3>
+                <button onclick="closeModal('compareModal')" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"><i class="fa-solid fa-xmark text-textGray"></i></button>
+            </div>
+            <div class="modal-body" id="compareBody">
+                <div class="text-center py-12 text-textGray">
+                    <i class="fa-solid fa-code-compare text-5xl mb-4 text-gray-300"></i>
+                    <p class="text-sm">لیست مقایسه خالی است</p>
+                    <p class="text-xs mt-1">حداقل ۲ کالا برای مقایسه اضافه کنید</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- بک تو تاپ -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- اسکریپت‌ها -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        // ===== داده‌های دسته‌بندی =====
+        const categories = [
+            { icon: 'fa-mobile-screen', name: 'موبایل و تبلت', subs: [
+                { title: 'گوشی موبایل', links: ['سامسونگ','اپل','شیائومی','هوآوی','نوکیا','رئال‌می'] },
+                { title: 'تبلت', links: ['اپل آیپد','سامسونگ گلکسی تب','هوآوی میت‌پد','لنوو'] },
+                { title: 'لوازم جانبی', links: ['قاب و کاور','گلس محافظ','شارژر','کیبورد','استند'] },
+                { title: 'سیم‌کارت', links: ['ایرانسل','همراه اول','رایتل'] }
+            ]},
+            { icon: 'fa-laptop', name: 'لپ‌تاپ و کامپیوتر', subs: [
+                { title: 'لپ‌تاپ', links: ['ایسوس','لنوو','اچ‌پی','ایسر','اپل مک‌بوک','میسرو'] },
+                { title: 'کامپیوتر رومیزی', links: ['همه‌کاره','گیمینگ','مینی کامپیوتر'] },
+                { title: 'قطعات کامپیوتر', links: ['پردازنده','رم','هارد','کارت گرافیک','مادربرد'] },
+                { title: 'مانیتور', links: ['گیمینگ','ادیت','طراحی','عمومی'] }
+            ]},
+            { icon: 'fa-tv', name: 'صوتی و تصویری', subs: [
+                { title: 'تلویزیون', links: ['سامسونگ','ال‌جی','شیائومی','توسعی','جی‌پلاس'] },
+                { title: 'سینمای خانگی', links: ['ساندبار','سینمای خانگی','پروژکتور'] },
+                { title: 'پخش‌کننده', links: ['ردیو','پخش‌کننده CD','پخش‌کننده بلوتوثی'] }
+            ]},
+            { icon: 'fa-blender', name: 'لوازم خانگی', subs: [
+                { title: 'لوازم بزرگ', links: ['یخچال','لباسشویی','ماشین ظرفشویی','اجاق گاز','مکروویو'] },
+                { title: 'لوازم کوچک', links: ['جاروبرقی','اتو','بخارشوی','آب‌میوه‌گیری','مخلوط‌کن'] },
+                { title: 'آشپزخانه', links: ['مایکروویو','توستر','ساندویچ‌ساز','قهوه‌ساز'] }
+            ]},
+            { icon: 'fa-spray-can-sparkles', name: 'آرایشی و بهداشتی', subs: [
+                { title: 'مراقبت پوست', links: ['مرطوب‌کننده','ضد آفتاب','سرم','ماسک','پاک‌کننده'] },
+                { title: 'آرایش', links: ['رژ لب','ریمل','کرم پودر','رژ گونه','خط چشم'] },
+                { title: 'عطر و ادکلن', links: ['زنانه','مردانه','یونیسکس'] },
+                { title: 'مراقبت مو', links: ['شامپو','نرم‌کننده','ماسک مو','روغن مو'] }
+            ]},
+            { icon: 'fa-shirt', name: 'مد و پوشاک', subs: [
+                { title: 'مردانه', links: ['پیراهن','شلوار','تی‌شرت','کفش','کتی'] },
+                { title: 'زنانه', links: ['مانتو','شلوار','بلوز','شال و روسری','کفش'] },
+                { title: 'بچگانه', links: ['پسرانه','دخترانه','نوزادی'] },
+                { title: 'کیف و کفش', links: ['کیف زنانه','کیف مردانه','کفش ورزشی','صندل'] }
+            ]},
+            { icon: 'fa-book', name: 'کتاب و لوازم‌التحریر', subs: [
+                { title: 'کتاب', links: ['رمان','تاریخی','علمی','کودک','مذهبی'] },
+                { title: 'لوازم‌التحریر', links: ['خودکار','رنگ','دفتر','کاغذ','مداد'] }
+            ]},
+            { icon: 'fa-futbol', name: 'ورزش و سفر', subs: [
+                { title: 'ورزشی', links: ['لباس ورزشی','کفش ورزشی','لوازم بدنسازی','توپ'] },
+                { title: 'کمپینگ', links: ['چادر','کیسه خواب','ظرف کمپینگ','فلاسک'] },
+                { title: 'دوچرخه', links: ['کوهستان','شهری','برقی'] }
+            ]},
+            { icon: 'fa-basket-shopping', name: 'خوراکی و نوشیدنی', subs: [
+                { title: 'نوشیدنی', links: ['آب معدنی','نوشابه','آبمیوه','چای و قهوه'] },
+                { title: 'تنقلات', links: ['چیپس','شکلات','بیسکویت','آجیل'] },
+                { title: 'مواد غذایی', links: ['برنج','روغن','کنسرو','رب و سس'] }
+            ]},
+            { icon: 'fa-baby', name: 'کودک و نوزاد', subs: [
+                { title: 'لباس کودک', links: ['نوزادی','بچگانه','پسرانه','دخترانه'] },
+                { title: 'بهداشت کودک', links: ['پوشک','شامپو','کرم','لوازم حمام'] },
+                { title: 'اسباب‌بازی', links: ['آموزشی','فکری','عروسک','ماشین'] }
+            ]},
+            { icon: 'fa-wrench', name: 'ابزار و تجهیزات', subs: [
+                { title: 'ابزار برقی', links: ['دریل','مغزه‌کن','سنباده','اره برقی'] },
+                { title: 'ابزار دستی', links: ['آچار','پیچ‌گوشتی','انبر','چکش'] },
+                { title: 'ایمنی', links: ['کفش ایمنی','کلاه','عینک','دستکش'] }
+            ]},
+            { icon: 'fa-couch', name: 'خانه و دکوراسیون', subs: [
+                { title: 'مبلمان', links: ['مبل راحتی','مبل استیل','کاناپه','صندلی'] },
+                { title: 'فرش', links: ['ماشینی','دستباف','کودک'] },
+                { title: 'دکوراسیون', links: ['تابلو','گلدان','آباژور','ساعت دیواری'] }
+            ]}
+        ];
+
+        // ===== استیت‌ها =====
+        let cart = [];
+        let wishlist = [];
+        let compareList = [];
+
+        // ===== توابع کمکی =====
+        function formatPrice(n) {
+            return n.toLocaleString('fa-IR');
+        }
+
+        function showToast(type, message) {
+            const container = document.getElementById('toastContainer');
+            const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', info: 'fa-circle-info' };
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<i class="fa-solid ${icons[type]}"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.add('removing'); setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+
+        function updateBadges() {
+            const cb = document.querySelectorAll('.cart-badge');
+            const wb = document.querySelectorAll('.wishlist-badge');
+            const cpb = document.querySelectorAll('.compare-badge');
+            const cbb = document.querySelectorAll('.cart-badge-bottom');
+            cb.forEach(b => { b.textContent = cart.length; b.style.display = cart.length > 0 ? 'flex' : 'none'; });
+            wb.forEach(b => { b.textContent = wishlist.length; b.style.display = wishlist.length > 0 ? 'flex' : 'none'; });
+            cpb.forEach(b => { b.textContent = compareList.length; b.style.display = compareList.length > 0 ? 'flex' : 'none'; });
+            cbb.forEach(b => { b.textContent = cart.length; b.style.display = cart.length > 0 ? 'flex' : 'none'; });
+        }
+
+        // ===== سبد خرید =====
+        function addToCart(name, price, img) {
+            const existing = cart.find(i => i.name === name);
+            if (existing) { existing.qty++; } else { cart.push({ name, price, img, qty: 1 }); }
+            updateBadges();
+            renderCart();
+            showToast('success', `${name} به سبد خرید اضافه شد`);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateBadges();
+            renderCart();
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) cart.splice(index, 1);
+            updateBadges();
+            renderCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateBadges();
+            renderCart();
+            closeModal('cartModal');
+        }
+
+        function renderCart() {
+            const body = document.getElementById('cartBody');
+            const footer = document.getElementById('cartFooter');
+            if (cart.length === 0) {
+                body.innerHTML = '<div class="text-center py-12 text-textGray"><i class="fa-solid fa-cart-shopping text-5xl mb-4 text-gray-300"></i><p class="text-sm">سبد خرید شما خالی است</p></div>';
+                footer.style.display = 'none';
+                return;
+            }
+            let html = '';
+            let total = 0;
+            cart.forEach((item, i) => {
+                total += item.price * item.qty;
+                html += `<div class="flex items-center gap-3 py-3 ${i > 0 ? 'border-t border-gray-100' : ''} animate-fadeIn">
+                    <img src="https://picsum.photos/seed/${item.img}/80/80" class="w-16 h-16 rounded-lg object-cover flex-shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-sm font-medium line-clamp-1">${item.name}</h4>
+                        <div class="text-sm font-bold mt-1">${formatPrice(item.price)} <span class="text-xs font-normal text-textGray">تومان</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 flex-shrink-0">
+                        <button onclick="changeQty(${i},1)" class="w-7 h-7 rounded-lg bg-lightBg flex items-center justify-center hover:bg-gray-200 transition-colors text-xs"><i class="fa-solid fa-plus"></i></button>
+                        <span class="w-8 text-center text-sm font-bold">${item.qty}</span>
+                        <button onclick="changeQty(${i},-1)" class="w-7 h-7 rounded-lg bg-lightBg flex items-center justify-center hover:bg-gray-200 transition-colors text-xs"><i class="fa-solid fa-minus"></i></button>
+                    </div>
+                    <button onclick="removeFromCart(${i})" class="w-7 h-7 rounded-lg hover:bg-red-50 flex items-center justify-center text-textGray hover:text-primary transition-colors flex-shrink-0"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                </div>`;
+            });
+            body.innerHTML = html;
+            document.getElementById('cartTotal').textContent = formatPrice(total) + ' تومان';
+            footer.style.display = 'block';
+        }
+
+        // ===== علاقه‌مندی =====
+        function toggleWishlist(btn, name, price, img) {
+            const idx = wishlist.findIndex(i => i.name === name);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+                btn.classList.remove('active');
+                btn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+                showToast('info', `${name} از علاقه‌مندی‌ها حذف شد`);
+            } else {
+                wishlist.push({ name, price, img });
+                btn.classList.add('active');
+                btn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+                btn.classList.add('animate-heartBeat');
+                setTimeout(() => btn.classList.remove('animate-heartBeat'), 800);
+                showToast('success', `${name} به علاقه‌مندی‌ها اضافه شد`);
+            }
+            updateBadges();
+            renderWishlist();
+        }
+
+        function removeFromWishlist(index) {
+            wishlist.splice(index, 1);
+            updateBadges();
+            renderWishlist();
+            // همگام‌سازی دکمه‌ها در صفحه
+            document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                const card = btn.closest('.product-card');
+                if (card && !wishlist.find(w => w.name === card.dataset.name)) {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+                }
+            });
+        }
+
+        function renderWishlist() {
+            const body = document.getElementById('wishlistBody');
+            if (wishlist.length === 0) {
+                body.innerHTML = '<div class="text-center py-12 text-textGray"><i class="fa-regular fa-heart text-5xl mb-4 text-gray-300"></i><p class="text-sm">لیست علاقه‌مندی شما خالی است</p></div>';
+                return;
+            }
+            let html = '';
+            wishlist.forEach((item, i) => {
+                html += `<div class="flex items-center gap-3 py-3 ${i > 0 ? 'border-t border-gray-100' : ''} animate-fadeIn">
+                    <img src="https://picsum.photos/seed/${item.img}/80/80" class="w-16 h-16 rounded-lg object-cover flex-shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-sm font-medium line-clamp-1">${item.name}</h4>
+                        <div class="text-sm font-bold mt-1">${formatPrice(item.price)} <span class="text-xs font-normal text-textGray">تومان</span></div>
+                    </div>
+                    <button onclick="addToCart('${item.name}',${item.price},'${item.img}')" class="text-xs text-primary font-medium hover:underline flex-shrink-0">افزودن به سبد</button>
+                    <button onclick="removeFromWishlist(${i})" class="w-7 h-7 rounded-lg hover:bg-red-50 flex items-center justify-center text-textGray hover:text-primary transition-colors flex-shrink-0"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                </div>`;
+            });
+            body.innerHTML = html;
+        }
+
+        // ===== مقایسه =====
+        function toggleCompare(btn, name, price, img) {
+            const idx = compareList.findIndex(i => i.name === name);
+            if (idx > -1) {
+                compareList.splice(idx, 1);
+                btn.classList.remove('active');
+                showToast('info', `${name} از مقایسه حذف شد`);
+            } else {
+                if (compareList.length >= 4) { showToast('error', 'حداکثر ۴ کالا قابل مقایسه است'); return; }
+                compareList.push({ name, price, img });
+                btn.classList.add('active');
+                showToast('success', `${name} به لیست مقایسه اضافه شد`);
+            }
+            updateBadges();
+            renderCompare();
+        }
+
+        function removeFromCompare(index) {
+            compareList.splice(index, 1);
+            updateBadges();
+            renderCompare();
+            document.querySelectorAll('.compare-btn').forEach(btn => {
+                const card = btn.closest('.product-card');
+                if (card && !compareList.find(c => c.name === card.dataset.name)) {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function renderCompare() {
+            const body = document.getElementById('compareBody');
+            if (compareList.length === 0) {
+                body.innerHTML = '<div class="text-center py-12 text-textGray"><i class="fa-solid fa-code-compare text-5xl mb-4 text-gray-300"></i><p class="text-sm">لیست مقایسه خالی است</p><p class="text-xs mt-1">حداقل ۲ کالا برای مقایسه اضافه کنید</p></div>';
+                return;
+            }
+            let html = '<div class="overflow-x-auto">';
+            html += '<table class="w-full text-sm"><thead><tr><th class="text-right p-2 text-textGray font-medium text-xs">ویژگی</th>';
+            compareList.forEach(item => {
+                html += `<th class="p-2 text-center"><img src="https://picsum.photos/seed/${item.img}/100/100" class="w-16 h-16 rounded-lg object-cover mx-auto mb-2"><div class="font-medium text-xs">${item.name}</div></th>`;
+            });
+            html += '</tr></thead><tbody>';
+            const features = ['برند', 'قیمت', 'وضعیت', 'ارسال', 'گارانتی'];
+            features.forEach(f => {
+                html += `<tr class="border-t border-gray-100"><td class="p-2 text-textGray text-xs">${f}</td>`;
+                compareList.forEach(() => { html += `<td class="p-2 text-center text-xs">—</td>`; });
+                html += '</tr>';
+            });
+            html += '</tbody></table></div>';
+            html += `<div class="flex gap-2 mt-4">`;
+            compareList.forEach((item, i) => {
+                html += `<button onclick="removeFromCompare(${i})" class="flex-1 text-xs text-primary border border-primary rounded-lg py-2 hover:bg-primary/5 transition-colors">حذف ${item.name.split(' ').slice(0,2).join(' ')}</button>`;
+            });
+            html += '</div>';
+            body.innerHTML = html;
+        }
+
+        // ===== مودال‌ها =====
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ===== مگا منو =====
+        function toggleMegaMenu() {
+            const overlay = document.getElementById('megaMenuOverlay');
+            const panel = document.getElementById('megaMenuPanel');
+            const isActive = panel.classList.contains('active');
+            if (isActive) { panel.classList.remove('active'); overlay.classList.remove('active'); }
+            else { panel.classList.add('active'); overlay.classList.add('active'); }
+        }
+
+        function buildMegaMenu() {
+            const catsContainer = document.getElementById('megaCats');
+            const subcatsContainer = document.getElementById('megaSubcats');
+            let catsHtml = '<div class="p-4 border-b border-gray-200"><div class="relative"><input type="text" placeholder="جستجو در دسته‌بندی‌ها..." class="w-full bg-lightBg rounded-lg py-2.5 px-4 pr-10 text-sm outline-none"><i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 -translate-y-1/2 text-textGray text-xs"></i></div></div>';
+            let subcatsHtml = '<div class="text-center text-textGray py-20"><i class="fa-solid fa-arrow-left text-4xl mb-4 block text-gray-300"></i><p>دسته‌بندی را انتخاب کنید</p></div>';
+
+            categories.forEach((cat, i) => {
+                catsHtml += `<div class="mega-cats-item ${i===0?'active':''}" data-cat="${i}" onmouseenter="showMegaSubcat(${i})"><i class="fa-solid ${cat.icon}"></i><span>${cat.name}</span><i class="fa-solid fa-chevron-left text-[10px] mr-auto text-gray-400"></i></div>`;
+            });
+
+            categories.forEach((cat, i) => {
+                subcatsHtml += `<div class="mega-subcats-inner ${i===0?'active':''}" data-subcat="${i}">`;
+                cat.subs.forEach(sub => {
+                    subcatsHtml += `<div class="mega-subcat-col"><div class="mega-subcat-title">${sub.title}</div>`;
+                    sub.links.forEach(link => { subcatsHtml += `<span class="mega-subcat-link">${link}</span>`; });
+                    subcatsHtml += '</div>';
+                });
+                subcatsHtml += '</div>';
+            });
+
+            catsContainer.innerHTML = catsHtml;
+            subcatsContainer.innerHTML = subcatsHtml;
+        }
+
+        function showMegaSubcat(index) {
+            document.querySelectorAll('.mega-cats-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.mega-subcats-inner').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.mega-cats-item[data-cat="${index}"]`).classList.add('active');
+            document.querySelector(`.mega-subcats-inner[data-subcat="${index}"]`).classList.add('active');
+        }
+
+        // ===== منوی موبایل =====
+        function toggleMobileMenu() {
+            const overlay = document.getElementById('mobileMenuOverlay');
+            const panel = document.getElementById('mobileMenuPanel');
+            const isActive = panel.classList.contains('active');
+            if (isActive) { panel.classList.remove('active'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+            else { panel.classList.add('active'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        }
+
+        function buildMobileMenu() {
+            const container = document.getElementById('mobileCats');
+            let html = '';
+            categories.forEach((cat, i) => {
+                html += `<div class="mobile-cat-item">
+                    <div class="mobile-cat-header" onclick="toggleMobileCat(this)">
+                        <span><i class="fa-solid ${cat.icon}"></i>${cat.name}</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-textGray transition-transform duration-300"></i>
+                    </div>
+                    <div class="mobile-cat-sub">`;
+                cat.subs.forEach(sub => {
+                    html += `<div class="font-medium text-xs text-dark px-4 pt-3 pb-1">${sub.title}</div>`;
+                    sub.links.forEach(link => { html += `<a href="#">${link}</a>`; });
+                });
+                html += '</div></div>';
+            });
+            container.innerHTML = html;
+        }
+
+        function toggleMobileCat(header) {
+            const sub = header.nextElementSibling;
+            const icon = header.querySelector('.fa-chevron-down');
+            const isOpen = sub.classList.contains('open');
+            // بستن همه
+            document.querySelectorAll('.mobile-cat-sub').forEach(s => s.classList.remove('open'));
+            document.querySelectorAll('.mobile-cat-header .fa-chevron-down').forEach(ic => ic.style.transform = '');
+            if (!isOpen) { sub.classList.add('open'); icon.style.transform = 'rotate(180deg)'; }
+        }
+
+        // ===== باتم ناو =====
+        function setBottomNav(el) {
+            document.querySelectorAll('.bottom-nav-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        // ===== جستجو =====
+        const searchInput = document.getElementById('searchInput');
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        searchInput.addEventListener('focus', () => { searchSuggestions.classList.add('active'); });
+        searchInput.addEventListener('blur', () => { setTimeout(() => searchSuggestions.classList.remove('active'), 200); });
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            if (val.length === 0) { searchSuggestions.classList.add('active'); return; }
+            // جستجوی ساده
+            const allProducts = [...cart, ...wishlist, ...compareList];
+            const found = allProducts.filter(p => p.name.includes(val));
+            let html = val ? `<div class="p-3 text-xs text-textGray">نتایج جستجو برای "${val}"</div>` : `<div class="p-3 text-xs text-textGray font-medium">جستجوهای پرطرفدار</div>`;
+            if (found.length > 0) {
+                found.forEach(p => { html += `<div class="search-suggestion-item"><i class="fa-solid fa-magnifying-glass"></i>${p.name}</div>`; });
+            } else if (val) {
+                html += `<div class="search-suggestion-item"><i class="fa-solid fa-magnifying-glass"></i>${val}</div>`;
+            } else {
+                ['گوشی موبایل','لپ‌تاپ','هدفون','ساعت هوشمند','تبلت','کنسول بازی'].forEach(t => {
+                    html += `<div class="search-suggestion-item" data-term="${t}"><i class="fa-solid fa-fire-flame-curved"></i>${t}</div>`;
+                });
+            }
+            searchSuggestions.innerHTML = html;
+            searchSuggestions.classList.add('active');
+        });
+        document.querySelectorAll('.search-suggestion-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const term = item.dataset.term || item.textContent.trim();
+                searchInput.value = term;
+                searchSuggestions.classList.remove('active');
+                showToast('info', `جستجو برای: ${term}`);
+            });
+        });
+
+        // ===== تایمر شمارش معکوس =====
+        let timerTotal = 8 * 3600 + 45 * 60 + 30;
+        function updateTimer() {
+            if (timerTotal <= 0) timerTotal = 24 * 3600;
+            timerTotal--;
+            const h = Math.floor(timerTotal / 3600);
+            const m = Math.floor((timerTotal % 3600) / 60);
+            const s = timerTotal % 60;
+            document.getElementById('timerH').textContent = String(h).padStart(2, '0');
+            document.getElementById('timerM').textContent = String(m).padStart(2, '0');
+            document.getElementById('timerS').textContent = String(s).padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+
+        // ===== بک تو تاپ =====
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTop');
+            if (window.scrollY > 400) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
+
+        // ===== اسکرول انیمیشن =====
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.scroll-animate').forEach(el => scrollObserver.observe(el));
+
+        // ===== اوول کاروسل =====
+        $(document).ready(function () {
+            // اسلایدر اصلی
+            $('.hero-slider').owlCarousel({
+                items: 1, loop: true, autoplay: true, autoplayTimeout: 5000, autoplayHoverPause: true, smartSpeed: 600, dots: true, nav: false, rtl: true
+            });
+            // پیشنهاد شگفت‌انگیز
+            $('.amazing-offers-carousel').owlCarousel({
+                items: 5, loop: true, autoplay: true, autoplayTimeout: 3000, smartSpeed: 500, dots: false, nav: false, rtl: true, margin: 0,
+                responsive: { 0: { items: 2 }, 480: { items: 3 }, 768: { items: 4 }, 1024: { items: 5 } }
+            });
+            // پرفروش‌ترین‌ها
+            $('.bestsellers-carousel').owlCarousel({
+                items: 5, loop: true, autoplay: true, autoplayTimeout: 4000, smartSpeed: 500, dots: true, nav: false, rtl: true, margin: 16,
+                responsive: { 0: { items: 2, margin: 8 }, 480: { items: 3, margin: 8 }, 768: { items: 4, margin: 12 }, 1024: { items: 5, margin: 16 } }
+            });
+            // سوپرمارکت
+            $('.supermarket-carousel').owlCarousel({
+                items: 5, loop: true, autoplay: true, autoplayTimeout: 3500, smartSpeed: 500, dots: true, nav: false, rtl: true, margin: 16,
+                responsive: { 0: { items: 2, margin: 8 }, 480: { items: 3, margin: 8 }, 768: { items: 4, margin: 12 }, 1024: { items: 5, margin: 16 } }
+            });
+            // برندها
+            $('.brands-carousel').owlCarousel({
+                items: 6, loop: true, autoplay: true, autoplayTimeout: 2500, smartSpeed: 400, dots: false, nav: false, rtl: true, margin: 12,
+                responsive: { 0: { items: 3, margin: 8 }, 480: { items: 4, margin: 8 }, 768: { items: 5, margin: 10 }, 1024: { items: 6, margin: 12 } }
+            });
+            // بلاگ
+            $('.blog-carousel').owlCarousel({
+                items: 4, loop: true, autoplay: true, autoplayTimeout: 4500, smartSpeed: 500, dots: true, nav: false, rtl: true, margin: 16,
+                responsive: { 0: { items: 1, margin: 8 }, 480: { items: 2, margin: 8 }, 768: { items: 3, margin: 12 }, 1024: { items: 4, margin: 16 } }
+            });
+        });
+
+        // ===== بیلد اولیه =====
+        buildMegaMenu();
+        buildMobileMenu();
+
+        // بستن مگا منو با اسکرول
+        window.addEventListener('scroll', () => {
+            const panel = document.getElementById('megaMenuPanel');
+            if (panel.classList.contains('active')) toggleMegaMenu();
+        });
+
+        // کلید Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(m => { m.classList.remove('active'); });
+                document.body.style.overflow = '';
+                const panel = document.getElementById('megaMenuPanel');
+                if (panel.classList.contains('active')) toggleMegaMenu();
+                const mPanel = document.getElementById('mobileMenuPanel');
+                if (mPanel.classList.contains('active')) toggleMobileMenu();
+                searchSuggestions.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
