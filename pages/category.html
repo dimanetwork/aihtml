@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دسته‌بندی محصولات | گهر کالا</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Vazir', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #ef394e 0%, #dc2626 100%); }
+        .active-filter { bg-red-50 text-red-500 border-red-500; }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- Header -->
+<header class="bg-white shadow-sm sticky top-0 z-30">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between gap-4">
+            <a href="../index.html" class="flex items-center gap-2">
+                <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center">
+                    <i class="fas fa-shopping-bag text-white text-2xl"></i>
+                </div>
+                <div class="hidden sm:block">
+                    <h1 class="text-2xl font-bold text-gray-800">گهر کالا</h1>
+                </div>
+            </a>
+            <div class="hidden md:flex flex-1 max-w-2xl mx-8">
+                <div class="relative w-full">
+                    <input type="text" placeholder="جستجو..." class="w-full pl-4 pr-12 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <button class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="login.html" class="px-4 py-2 border rounded-lg hover:border-red-500">ورود</a>
+                <button class="relative p-3 hover:bg-gray-100 rounded-lg"><i class="fas fa-shopping-cart"></i><span class="absolute -top-1 -left-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">۳</span></button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-gray-500 mb-6">
+        <a href="../index.html" class="hover:text-red-500">خانه</a> /
+        <span class="text-gray-800">موبایل و تبلت</span>
+    </nav>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- Sidebar Filters -->
+        <aside class="lg:col-span-1">
+            <div class="bg-white rounded-xl shadow-sm p-6 sticky top-24">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-bold text-gray-800">فیلترها</h2>
+                    <button class="text-red-500 text-sm hover:text-red-600">حذف همه</button>
+                </div>
+                
+                <!-- Price Range -->
+                <div class="mb-6 pb-6 border-b">
+                    <h3 class="font-bold text-gray-800 mb-4">محدوده قیمت</h3>
+                    <div class="flex items-center gap-2">
+                        <input type="text" placeholder="از" class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <span class="text-gray-400">-</span>
+                        <input type="text" placeholder="تا" class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+                    </div>
+                    <button class="w-full mt-3 py-2 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition-colors">اعمال</button>
+                </div>
+                
+                <!-- Brands -->
+                <div class="mb-6 pb-6 border-b">
+                    <h3 class="font-bold text-gray-800 mb-4">برند</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                            <span class="text-sm text-gray-700">سامسونگ (۴۵)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                            <span class="text-sm text-gray-700">شیائومی (۳۸)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                            <span class="text-sm text-gray-700">اپل (۲۲)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                            <span class="text-sm text-gray-700">هوآوی (۱۵)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                            <span class="text-sm text-gray-700">نوکیا (۱۰)</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Features -->
+                <div class="mb-6 pb-6 border-b">
+                    <h3 class="font-bold text-gray-800 mb-4">ویژگی‌ها</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                            <span class="text-sm text-gray-700">۵G</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                            <span class="text-sm text-gray-700">دو سیم کارت</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                            <span class="text-sm text-gray-700">شارژ سریع</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-red-500 rounded focus:ring-red-500">
+                            <span class="text-sm text-gray-700">ضد آب</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- RAM -->
+                <div class="mb-6">
+                    <h3 class="font-bold text-gray-800 mb-4">حافظه رم</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="px-4 py-2 border rounded-lg text-sm hover:border-red-500 hover:text-red-500">4 GB</button>
+                        <button class="px-4 py-2 border rounded-lg text-sm hover:border-red-500 hover:text-red-500">6 GB</button>
+                        <button class="px-4 py-2 border-2 border-red-500 text-red-500 rounded-lg text-sm">8 GB</button>
+                        <button class="px-4 py-2 border rounded-lg text-sm hover:border-red-500 hover:text-red-500">12 GB</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Products Grid -->
+        <main class="lg:col-span-3">
+            <!-- Sort & View -->
+            <div class="bg-white rounded-xl shadow-sm p-4 mb-6 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <select class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <option>مرتب‌سازی: پیش‌فرض</option>
+                        <option>ارزان‌ترین</option>
+                        <option>گران‌ترین</option>
+                        <option>پرفروش‌ترین</option>
+                        <option>جدیدترین</option>
+                    </select>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="p-2 bg-red-500 text-white rounded-lg"><i class="fas fa-th-large"></i></button>
+                    <button class="p-2 hover:bg-gray-100 rounded-lg"><i class="fas fa-list"></i></button>
+                </div>
+            </div>
+            
+            <!-- Products -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Product Card -->
+                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow group">
+                    <div class="relative mb-4">
+                        <img src="https://via.placeholder.com/300x300/f3f4f6/9ca3af?text=S24+Ultra" alt="Product" class="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform">
+                        <span class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">۱۵٪</span>
+                        <button class="absolute top-2 left-2 p-2 bg-white rounded-full shadow-md hover:text-red-500 transition-colors"><i class="far fa-heart"></i></button>
+                    </div>
+                    <h3 class="font-medium text-gray-800 mb-2 line-clamp-2">گوشی موبایل سامسونگ Galaxy S24 Ultra ظرفیت 512 گیگابایت</h3>
+                    <div class="flex items-center gap-1 mb-2">
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">(۸۹)</span>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 line-through">۶۰,۰۰۰,۰۰۰</span>
+                            <div class="text-lg font-bold text-gray-800">۵۱,۰۰۰,۰۰۰ <span class="text-sm">تومان</span></div>
+                        </div>
+                        <a href="product.html" class="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Repeat for more products -->
+                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow group">
+                    <div class="relative mb-4">
+                        <img src="https://via.placeholder.com/300x300/f3f4f6/9ca3af?text=iPhone+15" alt="Product" class="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform">
+                        <button class="absolute top-2 left-2 p-2 bg-white rounded-full shadow-md hover:text-red-500 transition-colors"><i class="far fa-heart"></i></button>
+                    </div>
+                    <h3 class="font-medium text-gray-800 mb-2 line-clamp-2">گوشی موبایل اپل iPhone 15 Pro Max ظرفیت 256 گیگابایت</h3>
+                    <div class="flex items-center gap-1 mb-2">
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">(۱۵۶)</span>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="text-lg font-bold text-gray-800">۷۵,۰۰۰,۰۰۰ <span class="text-sm">تومان</span></div>
+                        </div>
+                        <a href="product.html" class="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow group">
+                    <div class="relative mb-4">
+                        <img src="https://via.placeholder.com/300x300/f3f4f6/9ca3af?text=Xiaomi+14" alt="Product" class="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform">
+                        <span class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">۲۰٪</span>
+                        <button class="absolute top-2 left-2 p-2 bg-white rounded-full shadow-md hover:text-red-500 transition-colors"><i class="far fa-heart"></i></button>
+                    </div>
+                    <h3 class="font-medium text-gray-800 mb-2 line-clamp-2">گوشی موبایل شیائومی 14 Ultra ظرفیت 512 گیگابایت</h3>
+                    <div class="flex items-center gap-1 mb-2">
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">(۶۷)</span>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 line-through">۵۵,۰۰۰,۰۰۰</span>
+                            <div class="text-lg font-bold text-gray-800">۴۴,۰۰۰,۰۰۰ <span class="text-sm">تومان</span></div>
+                        </div>
+                        <a href="product.html" class="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow group">
+                    <div class="relative mb-4">
+                        <img src="https://via.placeholder.com/300x300/f3f4f6/9ca3af?text=A54" alt="Product" class="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform">
+                        <span class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">۲۵٪</span>
+                        <button class="absolute top-2 left-2 p-2 bg-white rounded-full shadow-md hover:text-red-500 transition-colors"><i class="far fa-heart"></i></button>
+                    </div>
+                    <h3 class="font-medium text-gray-800 mb-2 line-clamp-2">گوشی موبایل سامسونگ Galaxy A54 5G ظرفیت 256 گیگابایت</h3>
+                    <div class="flex items-center gap-1 mb-2">
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">(۲۳۴)</span>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 line-through">۱۵,۰۰۰,۰۰۰</span>
+                            <div class="text-lg font-bold text-gray-800">۱۱,۲۵۰,۰۰۰ <span class="text-sm">تومان</span></div>
+                        </div>
+                        <a href="product.html" class="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow group">
+                    <div class="relative mb-4">
+                        <img src="https://via.placeholder.com/300x300/f3f4f6/9ca3af?text=Note+13" alt="Product" class="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform">
+                        <button class="absolute top-2 left-2 p-2 bg-white rounded-full shadow-md hover:text-red-500 transition-colors"><i class="far fa-heart"></i></button>
+                    </div>
+                    <h3 class="font-medium text-gray-800 mb-2 line-clamp-2">گوشی موبایل شیائومی Redmi Note 13 Pro 5G</h3>
+                    <div class="flex items-center gap-1 mb-2">
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">(۴۴۵)</span>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="text-lg font-bold text-gray-800">۱۴,۵۰۰,۰۰۰ <span class="text-sm">تومان</span></div>
+                        </div>
+                        <a href="product.html" class="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow group">
+                    <div class="relative mb-4">
+                        <img src="https://via.placeholder.com/300x300/f3f4f6/9ca3af?text=P60+Pro" alt="Product" class="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform">
+                        <button class="absolute top-2 left-2 p-2 bg-white rounded-full shadow-md hover:text-red-500 transition-colors"><i class="far fa-heart"></i></button>
+                    </div>
+                    <h3 class="font-medium text-gray-800 mb-2 line-clamp-2">گوشی موبایل هوآوی P60 Pro ظرفیت 256 گیگابایت</h3>
+                    <div class="flex items-center gap-1 mb-2">
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">(۳۲)</span>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="text-lg font-bold text-gray-800">۳۸,۰۰۰,۰۰۰ <span class="text-sm">تومان</span></div>
+                        </div>
+                        <a href="product.html" class="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="mt-8 flex items-center justify-center gap-2">
+                <button class="px-4 py-2 border rounded-lg hover:bg-gray-50"><i class="fas fa-chevron-right"></i></button>
+                <button class="px-4 py-2 bg-red-500 text-white rounded-lg">۱</button>
+                <button class="px-4 py-2 border rounded-lg hover:bg-gray-50">۲</button>
+                <button class="px-4 py-2 border rounded-lg hover:bg-gray-50">۳</button>
+                <span class="px-2">...</span>
+                <button class="px-4 py-2 border rounded-lg hover:bg-gray-50">۱۲</button>
+                <button class="px-4 py-2 border rounded-lg hover:bg-gray-50"><i class="fas fa-chevron-left"></i></button>
+            </div>
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

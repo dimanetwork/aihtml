@@ -83,7 +83,7 @@
         }
         
         .sidebar-menu {
-            transform: translateX(-100%);
+            transform: translateX(100%); /* RTL: Start from right */
             transition: transform 0.3s ease-in-out;
         }
         
@@ -1378,7 +1378,8 @@
             autoplay: true,
             autoplayTimeout: 5000,
             items: 1,
-            navText: ['<i class="fas fa-chevron-right"></i>', '<i class="fas fa-chevron-left"></i>']
+            rtl: true,
+            navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>']
         });
         
         // Amazing Offers Slider
@@ -1389,6 +1390,7 @@
             dots: false,
             autoplay: true,
             autoplayTimeout: 3000,
+            rtl: true,
             responsive: {
                 0: {
                     items: 1
@@ -1406,7 +1408,7 @@
                     items: 5
                 }
             },
-            navText: ['<i class="fas fa-chevron-right"></i>', '<i class="fas fa-chevron-left"></i>']
+            navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>']
         });
         
         // Brands Slider
@@ -1417,6 +1419,7 @@
             dots: false,
             autoplay: true,
             autoplayTimeout: 2000,
+            rtl: true,
             responsive: {
                 0: {
                     items: 2
